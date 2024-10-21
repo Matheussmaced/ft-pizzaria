@@ -69,8 +69,30 @@
   }
 
   .main-container{
+    h1{
+      font-size: 3rem;
+      height: 4rem;
+    }
+
     h3{
       margin-bottom: 2rem;
+      width: 100%;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 340px){
+  .main-container{
+    h1{
+      font-size: 2rem;
+      height: 3rem;
+    }
+
+    h3{
+      margin-bottom: 2rem;
+      width: 100%;
+      font-size: 1.2rem;
     }
   }
 }
