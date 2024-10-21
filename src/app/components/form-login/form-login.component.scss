@@ -21,7 +21,6 @@
 
     margin: 1.9rem 0 1rem 0;
   }
-
 }
 
 .forgot-password-and-send{
@@ -32,6 +31,9 @@
     display: flex;
     justify-content: end;
     margin: 1rem 0;
+    font-family: $font-josefin;
+    font-weight: 400;
+    text-underline-offset: 10px;
 
     color: $color-secondary-orange;
     font-size: 1.2rem;
@@ -53,3 +55,23 @@
     }
   }
 }
+
+@media (max-width: 770px){
+  .forgot-password-and-send{
+    input{
+      padding: 1rem;
+    }
+
+    a{
+      margin: 3rem 0;
+      font-size: 1.5rem;
+    }
+  }
+
+  .main-container{
+    h3{
+      margin-bottom: 2rem;
+    }
+  }
+}
+

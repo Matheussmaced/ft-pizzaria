@@ -1,15 +1,41 @@
 .main-container{
   display: flex;
   align-items: center;
+
 }
 
 .login-container{
   margin: 0 auto;
 }
+.mobile-logo{
+  display: none;
+}
 
-img{
+.background-img{
   width: 50%;
   height: 100vh;
   object-fit: cover;
   display: block;
+}
+
+// mobile
+
+@media (max-width: 770px){
+  .main-container{
+    flex-direction: column;
+  }
+
+  .background-img {
+    display: none;
+  }
+
+  .login-container{
+    width: 80%;
+  }
+
+  .mobile-logo{
+    display: block;
+    width: 20%;
+    margin: 1rem auto 1.2rem auto;
+  }
 }
