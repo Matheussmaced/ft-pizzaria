@@ -37,5 +37,36 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 54%;
+  width: 55%;
+}
+
+.buttons-container {
+  margin: 4rem auto 0 auto;
+  display: grid;
+  gap: 2rem;
+  width: 50%;
+  justify-content: center;
+
+
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+//mobile
+
+@media (max-width: 900px) {
+  .buttons-container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  .buttons-container {
+    width: 90%;              // Ajusta a largura do container para telas muito pequenas
+  }
+}
+
+@media (max-width: 400px) {
+  .buttons-container {
+    width: 100%;             // Em telas muito pequenas, ocupa toda a largura
+  }
 }

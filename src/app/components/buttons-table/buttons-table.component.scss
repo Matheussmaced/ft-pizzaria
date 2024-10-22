@@ -1,0 +1,19 @@
+@import "../../../theme/variables.scss";
+
+button{
+  font-size: 4rem;
+  font-family: $font-konkhmer;
+
+  background-color: transparent;
+  border: none;
+  color: $color-white;
+
+  cursor: pointer;
+
+  transition: 0.4s;
+
+  &:hover{
+    transform: scale(1.08);
+    color: $color-secondary-orange;
+  }
+}
