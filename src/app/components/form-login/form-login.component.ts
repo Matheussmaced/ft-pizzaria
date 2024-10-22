@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { InputsLoginComponent } from "../inputs-login/inputs-login.component";
+import { InputsLoginComponent } from '../inputs-login/inputs-login.component';
 
 @Component({
   selector: 'app-form-login',
