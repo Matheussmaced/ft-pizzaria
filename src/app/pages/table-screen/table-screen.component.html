@@ -1,19 +1,51 @@
-<div>
-  <header>
-    <div class="information-container">
-      <h1> Mesas </h1>
-      <button class="button-header-container"> ADICIONAR MESA + </button>
+<div class="main-container">
+  <div class="test">
+    <app-side-menu></app-side-menu>
+  </div>
+
+  <div class="container-body">
+    <header>
+      <div class="information-container">
+        <h1> Mesas </h1>
+        <button class="button-header-container"> ADICIONAR MESA + </button>
+      </div>
+    </header>
+
+    <div class="buttons-container">
+
+      <app-buttons-table *ngIf="visibleTables >= 1" [numberTable]="'1'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 2" [numberTable]="'2'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 3" [numberTable]="'3'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 4" [numberTable]="'4'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 5" [numberTable]="'5'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 6" [numberTable]="'6'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 7" [numberTable]="'7'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 8" [numberTable]="'8'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 9" [numberTable]="'9'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 10" [numberTable]="'10'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 11" [numberTable]="'11'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 12" [numberTable]="'12'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 13" [numberTable]="'13'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 14" [numberTable]="'14'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 15" [numberTable]="'15'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 16" [numberTable]="'16'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 17" [numberTable]="'17'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 18" [numberTable]="'18'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 19" [numberTable]="'19'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 20" [numberTable]="'20'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 21" [numberTable]="'21'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 22" [numberTable]="'22'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 23" [numberTable]="'23'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 24" [numberTable]="'24'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 25" [numberTable]="'25'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 26" [numberTable]="'26'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 27" [numberTable]="'27'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 28" [numberTable]="'28'"></app-buttons-table>
+      <app-buttons-table *ngIf="visibleTables >= 29" [numberTable]="'29'"></app-buttons-table>
     </div>
-  </header>
 
-  <div class="buttons-container">
-    <app-buttons-table [numberTable]="'1'" ></app-buttons-table>
-    <app-buttons-table [numberTable]="'2'" ></app-buttons-table>
-    <app-buttons-table [numberTable]="'3'" ></app-buttons-table>
-    <app-buttons-table [numberTable]="'4'" ></app-buttons-table>
-    <app-buttons-table [numberTable]="'5'" ></app-buttons-table>
-    <app-buttons-table [numberTable]="'6'" ></app-buttons-table>
-    <app-buttons-table [numberTable]="'7'" ></app-buttons-table>
-
+    <div class="button-see-more" *ngIf="visibleTables < totalTables">
+      <button (click)="showMoreTables()">VER MAIS +</button>
+    </div>
   </div>
 </div>
