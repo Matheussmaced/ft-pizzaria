@@ -10,53 +10,14 @@
 
 .container-body{
   display: block;
-  width: 100%;
   flex-grow: 1;
 }
 
 .container-side-bar-base{
-  width: 7rem;
+  width: 12rem;
 }
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  padding: 0 2rem;
-  margin-top: 1rem;
 
-  h1 {
-    font-size: 3.5rem;
-    color: $color-white;
-    font-family: $font-rubik;
-    text-align: center;
-    margin: 0;
-  }
-
-  .button-header-container {
-    padding: 0.4rem 1.12rem;
-    background-color: $color-secondary-green;
-    color: $color-white;
-    border: none;
-
-    font-family: $font-konkhmer;
-
-    cursor: pointer;
-
-    transition: 0.5s;
-
-    &:hover{
-      transform: scale(1.05);
-    }
-  }
-}
-
-.information-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 60%;
-}
 
 .buttons-container {
   margin: 4rem auto 0 auto;
