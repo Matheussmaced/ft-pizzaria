@@ -10,15 +10,12 @@
 
 .container-body{
   display: block;
+  width: 100%;
   flex-grow: 1;
 }
 
-app-side-menu{
-  width: 20%;
-}
-
-.test{
-  min-height: 100vh;
+.container-side-bar-base{
+  width: 7rem;
 }
 
 header {
@@ -73,10 +70,10 @@ header {
 }
 
 .button-see-more{
-  width: 100%;
+  width: 92%;
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin: 1rem 0;
 
   button{
     padding: 0.4rem 1.12rem;
@@ -98,6 +95,15 @@ header {
 
 //mobile
 
+@media (max-width: 1366px) {
+  .buttons-container {
+    width: 60%;
+  }
+  .information-container {
+    width: 62%;
+  }
+}
+
 @media (max-width: 1100px){
   .information-container {
     width: 65%;
@@ -106,10 +112,16 @@ header {
 
 @media (max-width: 900px) {
   .buttons-container {
-    width: 80%;
+    width: 60%;
   }
   .information-container {
-    width: 75%;
+    width: 70%;
+  }
+}
+
+@media (max-width: 780px){
+  .container-side-bar-base{
+    display: none;
   }
 }
 
