@@ -11,6 +11,7 @@ import { AddTableDialogComponent } from '../add-table-dialog/add-table-dialog.co
 })
 export class HeaderPagesComponent {
   @Input() nameButton:string = "";
+  @Input() title:string = "";
 
   constructor(private dialog: MatDialog){}
 
