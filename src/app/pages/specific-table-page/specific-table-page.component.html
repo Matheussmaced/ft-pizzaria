@@ -4,7 +4,7 @@
       <app-side-menu></app-side-menu>
     </div>
 
-    <div class="container-side-bar-base" ></div>
+    <div class="container-side-bar-base"></div>
 
     <div class="container-body">
       <app-header-pages nameButton="RELATÓRIO" title="MESA 1"></app-header-pages>
@@ -17,36 +17,19 @@
       <lucide-icon name="circle-chevron-down" size="24"></lucide-icon>
     </div>
 
-    <div class="product">
+    <div *ngFor="let product of products; let i = index" class="product">
       <span class="informations-product">
-        <h3>HAMBURGUER 1</h3>
-        <p>PÃO, ALFACE, CARNE DE HAMBURGUER, MOLHO</p>
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
       </span>
 
       <div class="value-and-buttons">
-        <span>R$ 10,00</span>
+        <span>R$ {{ product.price }},00</span>
 
         <div class="buttons">
-          <button class="plus"> + </button>
-          <span class="value"> 0 </span>
-          <button class="minus"> - </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product">
-      <span class="informations-product">
-        <h3>HAMBURGUER 1</h3>
-        <p>PÃO, ALFACE, CARNE DE HAMBURGUER, MOLHO</p>
-      </span>
-
-      <div class="value-and-buttons">
-        <span>R$ 10,00</span>
-
-        <div class="buttons">
-          <button class="plus"> + </button>
-          <span class="value"> 0 </span>
-          <button class="minus"> - </button>
+          <button class="plus" (click)="plusValue(i)"> + </button>
+          <span class="value"> {{ product.value }} </span>
+          <button class="minus" (click)="minusValue(i)"> - </button>
         </div>
       </div>
     </div>
