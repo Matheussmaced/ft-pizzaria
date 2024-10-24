@@ -10,3 +10,20 @@
 html{
   background-color: $color-background;
 }
+
+.custom-dialog-container {
+  background-color: $color-background;
+  position: fixed;
+  border: solid 2px $color-white;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  overflow: auto;
+}
+
+
+.custom-backdrop {
+  background-color: rgba(0, 0, 0, 0.7) !important; // Fundo escuro com 70% de opacidade
+}
