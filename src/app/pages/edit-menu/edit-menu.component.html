@@ -1,0 +1,39 @@
+<div class="main-container">
+  <div class="container-header">
+    <div>
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="container-side-bar-base"></div>
+
+    <div class="container-body">
+      <app-header-pages nameButton="ADICIONAR +" title="EDITAR CARDÁPIO"></app-header-pages>
+    </div>
+  </div>
+
+  <div class="menu">
+    <div class="container-title">
+      <span>HAMBURGUERS</span>
+      <lucide-icon name="circle-chevron-down" size="24" (click)="toggleMenu()" class="icon-toggle"></lucide-icon>
+    </div>
+
+    <div *ngIf="visibleMenu">
+      <div *ngFor="let product of products; let i = index" class="product">
+        <span class="informations-product">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+        </span>
+
+        <div class="value-and-buttons">
+          <span>R$ {{ product.price }},00</span>
+
+          <div class="buttons">
+            <button class="edit" > <lucide-icon name="pencil"></lucide-icon> </button>
+            <button class="trash"> <lucide-icon name="trash-2"></lucide-icon> </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

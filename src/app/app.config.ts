@@ -7,6 +7,8 @@ import { TableScreenComponent } from './pages/table-screen/table-screen.componen
 import { SpecificTablePageComponent } from './pages/specific-table-page/specific-table-page.component';
 import { TableReportComponent } from './pages/table-report/table-report.component';
 import { SpecificDeskReportComponent } from './pages/specific-desk-report/specific-desk-report.component';
+import { EditMenuComponent } from './pages/edit-menu/edit-menu.component';
+import { StockComponent } from './pages/stock/stock.component';
 
 const routes = [
   { path: 'login', component: LoginComponent },
@@ -14,7 +16,9 @@ const routes = [
   { path: 'table-screen', component: TableScreenComponent },
   { path: 'specific-table-screen', component: SpecificTablePageComponent },
   { path: 'table-report', component: TableReportComponent },
-  { path: 'specific-desk-report', component: SpecificDeskReportComponent }
+  { path: 'specific-desk-report', component: SpecificDeskReportComponent },
+  { path: 'edit-menu' , component: EditMenuComponent},
+  { path: 'stock', component: StockComponent }
 ];
 
 export const appConfig: ApplicationConfig = {
