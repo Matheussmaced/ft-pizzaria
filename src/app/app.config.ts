@@ -10,7 +10,7 @@ const routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'table-screen', component: TableScreenComponent },
-  { path: 'especific-table-page', component: SpecificTablePageComponent}
+  { path: 'especific-table-screen', component: SpecificTablePageComponent }
 ];
 
 export const appConfig: ApplicationConfig = {

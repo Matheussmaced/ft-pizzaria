@@ -25,6 +25,20 @@
   border: $color-white solid 1px;
   font-family: $font-konkhmer;
 
+  transition: 0.5s;
+
+
+  .icon-toggle{
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    &:hover{
+      color: $color-secondary-orange;
+      transform: scale(1.03);
+    }
+  }
+
   .container-title{
     display: flex;
     align-items: center;

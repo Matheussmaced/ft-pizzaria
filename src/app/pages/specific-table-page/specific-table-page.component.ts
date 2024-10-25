@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class SpecificTablePageComponent {
 
+  visibleMenu:boolean = false;
+
   products = [
     {
       name: 'HAMBURGUER 1',
@@ -27,6 +29,11 @@ export class SpecificTablePageComponent {
       value: 0
     }
   ];
+
+  toggleMenu(): void {
+    this.visibleMenu = !this.visibleMenu;
+    console.log(this.visibleMenu);
+  }
 
    plusValue(index: number): void {
     this.products[index].value += 1;

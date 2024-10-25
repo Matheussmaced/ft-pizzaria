@@ -14,22 +14,24 @@
   <div class="menu">
     <div class="container-title">
       <span>HAMBURGUERS</span>
-      <lucide-icon name="circle-chevron-down" size="24"></lucide-icon>
+      <lucide-icon name="circle-chevron-down" size="24" (click)="toggleMenu()" class="icon-toggle"></lucide-icon>
     </div>
 
-    <div *ngFor="let product of products; let i = index" class="product">
-      <span class="informations-product">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-      </span>
+    <div *ngIf="visibleMenu">
+      <div *ngFor="let product of products; let i = index" class="product">
+        <span class="informations-product">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+        </span>
 
-      <div class="value-and-buttons">
-        <span>R$ {{ product.price }},00</span>
+        <div class="value-and-buttons">
+          <span>R$ {{ product.price }},00</span>
 
-        <div class="buttons">
-          <button class="plus" (click)="plusValue(i)"> + </button>
-          <span class="value"> {{ product.value }} </span>
-          <button class="minus" (click)="minusValue(i)"> - </button>
+          <div class="buttons">
+            <button class="plus" (click)="plusValue(i)"> + </button>
+            <span class="value"> {{ product.value }} </span>
+            <button class="minus" (click)="minusValue(i)"> - </button>
+          </div>
         </div>
       </div>
     </div>
