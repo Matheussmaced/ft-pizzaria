@@ -3,11 +3,12 @@ import { ButtonsTableComponent } from '../../components/buttons-table/buttons-ta
 import { SideMenuComponent } from "../../components/side-menu/side-menu.component";
 import { CommonModule } from '@angular/common';
 import { HeaderPagesComponent } from '../../components/header-pages/header-pages.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-table-screen',
   standalone: true,
-  imports: [ButtonsTableComponent, SideMenuComponent, CommonModule, HeaderPagesComponent],
+  imports: [ButtonsTableComponent, SideMenuComponent, CommonModule, HeaderPagesComponent, RouterModule],
   templateUrl: './table-screen.component.html',
   styleUrl: './table-screen.component.scss'
 })
