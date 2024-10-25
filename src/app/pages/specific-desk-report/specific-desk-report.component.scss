@@ -118,5 +118,52 @@
       }
     }
   }
+
+  .summary-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin-top: 5rem;
+
+    span{
+      display: flex;
+      justify-content: end;
+      gap: 1rem;
+
+      font-size: 1.5rem;
+    }
+
+    .btn-container{
+      display: flex;
+      justify-content: end;
+
+      margin: 1rem 0;
+    }
+
+    .value-container{
+      margin-top: auto;
+      color: $color-secondary-orange;
+    }
+
+    .btn-export{
+      display: flex;
+      background-color: $color-secondary-green;
+      color: $color-white;
+      align-items: center;
+      justify-content: center;
+      padding: 0.2rem 0.3rem;
+
+      width: 12rem;
+      border: none;
+      gap: 0.3rem;
+
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover{
+        transform: scale(1.03);
+      }
+    }
+  }
 }
 
