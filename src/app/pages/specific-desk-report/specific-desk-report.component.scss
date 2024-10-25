@@ -45,13 +45,18 @@
     justify-content: space-between;
   }
 
+  .product:first-child{
+    margin-top: 2rem;
+  }
+
   .product{
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
+    margin-top: 0.8rem;
     border: $color-white solid 1px;
     padding: 0.5rem;
     border-radius: 3px;
+
 
     .informations-product{
       display: flex;
