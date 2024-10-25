@@ -3,11 +3,12 @@ import { SideMenuComponent } from "../../components/side-menu/side-menu.componen
 import { HeaderPagesComponent } from "../../components/header-pages/header-pages.component";
 import { ButtonsTableComponent } from "../../components/buttons-table/buttons-table.component";
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-table-report',
   standalone: true,
-  imports: [SideMenuComponent, HeaderPagesComponent, ButtonsTableComponent, CommonModule],
+  imports: [SideMenuComponent, HeaderPagesComponent, ButtonsTableComponent, CommonModule, RouterLink],
   templateUrl: './table-report.component.html',
   styleUrl: './table-report.component.scss'
 })

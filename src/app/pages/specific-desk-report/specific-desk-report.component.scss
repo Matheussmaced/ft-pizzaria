@@ -1,0 +1,122 @@
+@import "../../../theme/variables.scss";
+
+.container-header{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 100vh;
+  align-items: stretch;
+}
+
+.container-body{
+  display: block;
+  flex-grow: 1;
+}
+
+.container-side-bar-base{
+  width: 6rem;
+}
+
+.menu{
+  width: 60%;
+  margin: 2rem auto;
+  color: $color-white;
+  padding: 1rem;
+  border: $color-white solid 1px;
+  font-family: $font-konkhmer;
+
+  transition: 0.5s;
+
+
+  .icon-toggle{
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    &:hover{
+      color: $color-secondary-orange;
+      transform: scale(1.03);
+    }
+  }
+
+  .container-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    border: $color-white solid 1px;
+    padding: 0.5rem;
+    border-radius: 3px;
+
+    .informations-product{
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      font-family: $font-konkhmer;
+
+      p{
+        font-size: 0.75rem;
+      }
+    }
+
+    .value-and-buttons{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .buttons{
+        display: flex;
+        align-items: center;
+
+        gap: 0.8rem;
+
+        .plus{
+          background-color: $color-secondary-green;
+          color: $color-white;
+          text-align: center;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .minus{
+          background-color: $color-white;
+          color: $color-black;
+          text-align: center;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .trash{
+          background-color: $color-secondary-red;
+          color: $color-black;
+          text-align: center;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      button{
+        padding: 0 0.3rem;
+        width: 2.2rem;
+        height: 2.1rem;
+        border: none;
+        cursor: pointer;
+        font-size: 2rem;
+
+        border-radius: 3px;
+      }
+    }
+  }
+}
+
