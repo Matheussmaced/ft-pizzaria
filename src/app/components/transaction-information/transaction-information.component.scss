@@ -1,0 +1,33 @@
+@import "../../../styles.scss";
+
+.main-container{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+
+  border-radius: 7px;
+
+  background-color: $color-secondary-gray;
+
+  padding: 0.9rem 1.87rem;
+}
+
+
+.buttons{
+  display: flex;
+  align-items: center;
+
+  gap: 0.8rem;
+
+  button{
+    padding: 0.2rem;
+    border: none;
+    border-radius: 3px;
+  }
+
+  .trash{
+    background-color: $color-secondary-red;
+    color: $color-black;
+  }
+}

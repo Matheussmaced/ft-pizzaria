@@ -1,0 +1,45 @@
+@import "../../../theme/variables.scss";
+
+.container-header{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 100vh;
+  align-items: stretch;
+}
+
+.container-body{
+  display: block;
+  flex-grow: 1;
+}
+
+.container-side-bar-base{
+  width: 6rem;
+}
+
+.menu{
+  width: 70%;
+  margin: 2rem 2rem 0rem 17rem;
+  color: $color-white;
+  padding: 1rem;
+  font-family: $font-konkhmer;
+
+}
+
+.body-summary{
+  width: 54rem;
+  margin: 0 auto;
+}
+
+.containers-summary{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.containers-transactions{
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  margin-top: 3rem;
+}

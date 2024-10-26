@@ -9,6 +9,7 @@ import { TableReportComponent } from './pages/table-report/table-report.componen
 import { SpecificDeskReportComponent } from './pages/specific-desk-report/specific-desk-report.component';
 import { EditMenuComponent } from './pages/edit-menu/edit-menu.component';
 import { StockComponent } from './pages/stock/stock.component';
+import { FinancialComponent } from './pages/financial/financial.component';
 
 const routes = [
   { path: 'login', component: LoginComponent },
@@ -18,7 +19,8 @@ const routes = [
   { path: 'table-report', component: TableReportComponent },
   { path: 'specific-desk-report', component: SpecificDeskReportComponent },
   { path: 'edit-menu' , component: EditMenuComponent},
-  { path: 'stock', component: StockComponent }
+  { path: 'stock', component: StockComponent },
+  { path: 'financial', component: FinancialComponent }
 ];
 
 export const appConfig: ApplicationConfig = {
