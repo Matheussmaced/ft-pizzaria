@@ -39,4 +39,8 @@ header {
   align-items: center;
 
   width: 100%;
+
+  &.centered {
+    justify-content: center;
+  }
 }

@@ -7,7 +7,7 @@
     <div class="container-side-bar-base"></div>
 
     <div class="container-body">
-      <app-header-pages nameButton="" title="GESTÃO DE FINANÇAS"></app-header-pages>
+      <app-header-pages nameButton="" title="GESTÃO DE FINANÇAS" [showButton]="false" ></app-header-pages>
     </div>
   </div>
 
@@ -24,6 +24,16 @@
       <app-transaction-information></app-transaction-information>
       <app-transaction-information></app-transaction-information>
       <app-transaction-information></app-transaction-information>
+    </div>
+
+    <div class="navigation">
+      <span class="back"> < </span>
+
+      <button> 1 </button>
+      <button> 2 </button>
+      <button> 3 </button>
+
+      <span class="front"> > </span>
     </div>
 
   </div>

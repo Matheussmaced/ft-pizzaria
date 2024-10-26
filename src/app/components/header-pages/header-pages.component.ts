@@ -1,17 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddTableDialogComponent } from '../add-table-dialog/add-table-dialog.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header-pages',
   standalone: true,
-  imports: [MatDialogModule],
+  imports: [MatDialogModule, CommonModule],
   templateUrl: './header-pages.component.html',
   styleUrl: './header-pages.component.scss'
 })
 export class HeaderPagesComponent {
   @Input() nameButton:string = "";
   @Input() title:string = "";
+  @Input() showButton:boolean = true;
 
   constructor(private dialog: MatDialog){}
 
