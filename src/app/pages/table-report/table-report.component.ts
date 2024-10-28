@@ -4,11 +4,12 @@ import { HeaderPagesComponent } from "../../components/header-pages/header-pages
 import { ButtonsTableComponent } from "../../components/buttons-table/buttons-table.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
 
 @Component({
   selector: 'app-table-report',
   standalone: true,
-  imports: [SideMenuComponent, HeaderPagesComponent, ButtonsTableComponent, CommonModule, RouterLink],
+  imports: [SideMenuComponent, HeaderPagesComponent, ButtonsTableComponent, CommonModule, RouterLink, ButtonHeaderComponent],
   templateUrl: './table-report.component.html',
   styleUrl: './table-report.component.scss'
 })

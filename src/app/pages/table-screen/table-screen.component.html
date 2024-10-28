@@ -6,43 +6,50 @@
   <div class="container-side-bar-base" ></div>
 
   <div class="container-body">
-    <app-header-pages nameButton="ADICIONAR MESA +" title="MESAS"></app-header-pages>
 
-    <div class="buttons-container">
+    <div class="container-buttons">
+      <div class="header">
+        <img src="/FT-PIZZARIA.png" alt="Logo da FT">
+        <span>MESAS</span>
+        <app-button-header nameButton="ADICIONAR +"></app-button-header>
+      </div>
 
-      <app-buttons-table *ngIf="visibleTables >= 1" [numberTable]="'1'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 2" [numberTable]="'2'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 3" [numberTable]="'3'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 4" [numberTable]="'4'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 5" [numberTable]="'5'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 6" [numberTable]="'6'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 7" [numberTable]="'7'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 8" [numberTable]="'8'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 9" [numberTable]="'9'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 10" [numberTable]="'10'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 11" [numberTable]="'11'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 12" [numberTable]="'12'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 13" [numberTable]="'13'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 14" [numberTable]="'14'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 15" [numberTable]="'15'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 16" [numberTable]="'16'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 17" [numberTable]="'17'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 18" [numberTable]="'18'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 19" [numberTable]="'19'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 20" [numberTable]="'20'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 21" [numberTable]="'21'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 22" [numberTable]="'22'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 23" [numberTable]="'23'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 24" [numberTable]="'24'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 25" [numberTable]="'25'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 26" [numberTable]="'26'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 27" [numberTable]="'27'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 28" [numberTable]="'28'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
-      <app-buttons-table *ngIf="visibleTables >= 29" [numberTable]="'29'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+      <div class="buttons-container">
+        <app-buttons-table *ngIf="visibleTables >= 1" [numberTable]="'1'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 2" [numberTable]="'2'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 3" [numberTable]="'3'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 4" [numberTable]="'4'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 5" [numberTable]="'5'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 6" [numberTable]="'6'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 7" [numberTable]="'7'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 8" [numberTable]="'8'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 9" [numberTable]="'9'" [routerLink]="['/specific-table-screen']" ></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 10" [numberTable]="'10'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 11" [numberTable]="'11'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 12" [numberTable]="'12'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 13" [numberTable]="'13'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 14" [numberTable]="'14'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 15" [numberTable]="'15'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 16" [numberTable]="'16'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 17" [numberTable]="'17'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 18" [numberTable]="'18'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 19" [numberTable]="'19'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 20" [numberTable]="'20'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 21" [numberTable]="'21'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 22" [numberTable]="'22'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 23" [numberTable]="'23'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 24" [numberTable]="'24'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 25" [numberTable]="'25'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 26" [numberTable]="'26'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 27" [numberTable]="'27'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 28" [numberTable]="'28'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+        <app-buttons-table *ngIf="visibleTables >= 29" [numberTable]="'29'" [routerLink]="['/specific-table-screen']"></app-buttons-table>
+      </div>
     </div>
 
     <div class="button-see-more" *ngIf="visibleTables < totalTables">
       <button (click)="showMoreTables()">VER MAIS +</button>
+      <app-button-header nameButton="ADICIONAR +"></app-button-header>
     </div>
   </div>
 </div>
