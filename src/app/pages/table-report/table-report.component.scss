@@ -34,7 +34,7 @@
   width: 92%;
   display: flex;
   justify-content: center;
-  margin: 1rem 0;
+  margin: 1rem auto;
 
   button{
     padding: 0.4rem 1.12rem;
@@ -78,6 +78,7 @@
   .information-container {
     width: 70%;
   }
+
 }
 
 @media (max-width: 780px){
@@ -88,7 +89,7 @@
 
 @media (max-width: 600px) {
   .buttons-container {
-    width: 90%;
+    width: 70%;
   }
 
   .information-container {

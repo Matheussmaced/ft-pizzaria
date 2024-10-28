@@ -1,5 +1,12 @@
 @import "../../../theme/variables.scss";
 
+.logo-mobile{
+  display: none;
+  img{
+    width: 15rem;
+  }
+}
+
 header {
   display: flex;
   align-items: center;
@@ -12,7 +19,6 @@ header {
     color: $color-white;
     font-family: $font-rubik;
     text-align: center;
-    margin-left: 3rem;
   }
 }
 
@@ -27,3 +33,25 @@ header {
     justify-content: center;
   }
 }
+
+@media (max-width: 780px){
+
+  app-button-header{
+    display: none;
+  }
+
+  h1{
+    margin-left: 0 !important;
+    font-size: 5.5rem !important;
+  }
+
+  .information-container{
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .logo-mobile{
+    display: block;
+  }
+}
+
