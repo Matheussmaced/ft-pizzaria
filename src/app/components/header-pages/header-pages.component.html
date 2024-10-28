@@ -2,6 +2,6 @@
   <div class="information-container" [ngClass]=" {'centered': !showButton} ">
     <div></div>
     <h1> {{title}} </h1>
-    <button *ngIf="showButton" class="button-header-container" (click)="openAddTableDialog()"> {{nameButton}} </button>
+    <app-button-header [nameButton]="nameButton" [showButton]="showButton" ></app-button-header>
   </div>
 </header>

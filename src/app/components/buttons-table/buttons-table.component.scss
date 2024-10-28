@@ -1,5 +1,10 @@
 @import "../../../theme/variables.scss";
 
+div{
+  display: flex;
+  justify-content: center;
+}
+
 button{
   font-size: 4rem;
   font-family: $font-konkhmer;
