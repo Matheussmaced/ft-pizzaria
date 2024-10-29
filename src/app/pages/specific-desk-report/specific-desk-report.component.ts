@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.module';
 import { SideMenuComponent } from '../../components/side-menu/side-menu.component';
 import { HeaderPagesComponent } from '../../components/header-pages/header-pages.component';
+import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
 
 @Component({
   selector: 'app-specific-desk-report',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent],
   templateUrl: './specific-desk-report.component.html',
   styleUrl: './specific-desk-report.component.scss'
 })

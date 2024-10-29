@@ -13,6 +13,11 @@
 
     margin-top: 1rem;
   }
+
+  img{
+    width: 15rem;
+    display: none;
+  }
 }
 
 .container-body{
@@ -82,9 +87,16 @@
 
 @media (max-width: 980px){
   .informations{
+    flex-direction: column;
+
     app-button-header{
       display: none;
     }
+
+
+  img{
+    display: block;
+  }
   }
 
   .containers-summary{

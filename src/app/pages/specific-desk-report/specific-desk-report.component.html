@@ -1,41 +1,39 @@
 <div class="main-container">
-  <div class="container-header">
-    <div>
-      <app-side-menu></app-side-menu>
-    </div>
-
-    <div class="container-side-bar-base"></div>
-
-    <div class="container-body">
-      <app-header-pages nameButton="RELATÓRIO" title="RELATÓRIO DA MESA 1"></app-header-pages>
-    </div>
+  <div>
+    <app-side-menu></app-side-menu>
   </div>
 
-  <div class="menu">
-    <div class="container-title">
-      <span>HAMBURGUERS</span>
-    </div>
+  <div class="header">
+    <h1>MESA 1</h1>
+    <app-button-header nameButton="RELÁTORIO"></app-button-header>
+  </div>
 
-    <div>
-      <div *ngFor="let product of products; let i = index" class="product">
-        <span class="informations-product">
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-        </span>
+<div class="menu">
+  <div class="container-title">
+    <span>HAMBURGUERS</span>
+    <lucide-icon name="circle-chevron-down" size="24" (click)="toggleMenu()" class="icon-toggle"></lucide-icon>
+  </div>
 
-        <div class="value-and-buttons">
-          <span>R$ {{ product.price }},00</span>
+  <div *ngIf="visibleMenu">
+    <div *ngFor="let product of products; let i = index" class="product">
+      <span class="informations-product">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+      </span>
 
-          <div class="buttons">
-            <button class="plus" (click)="plusValue(i)"> + </button>
-            <span class="value"> {{ product.value }} </span>
-            <button class="minus" (click)="minusValue(i)"> - </button>
-            <button class="trash"> <lucide-icon name="trash-2"></lucide-icon> </button>
-          </div>
+      <div class="value-and-buttons">
+        <span>R$ {{ product.price }},00</span>
+
+        <div class="buttons">
+          <button class="plus" (click)="plusValue(i)"> + </button>
+          <span class="value"> {{ product.value }} </span>
+          <button class="minus" (click)="minusValue(i)"> - </button>
         </div>
       </div>
     </div>
-
-
   </div>
+</div>
+
+<div class="btn-final">
+  <app-button-header nameButton="RELATÓRIO"></app-button-header>
 </div>
