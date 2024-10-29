@@ -3,11 +3,12 @@ import { HeaderPagesComponent } from '../../components/header-pages/header-pages
 import { SideMenuComponent } from '../../components/side-menu/side-menu.component';
 import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.module';
 import { CommonModule } from '@angular/common';
+import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
 
 @Component({
   selector: 'app-stock',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent],
   templateUrl: './stock.component.html',
   styleUrl: './stock.component.scss'
 })

@@ -1,11 +1,18 @@
 @import "../../../theme/variables.scss";
 
-.container-header{
+.informations{
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  min-width: 100vh;
-  align-items: stretch;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  h1{
+    font-family: $font-rubik;
+    color: $color-white;
+    font-size: 2.3rem;
+
+    margin-top: 1rem;
+  }
 }
 
 .container-body{
@@ -13,13 +20,10 @@
   flex-grow: 1;
 }
 
-.container-side-bar-base{
-  width: 6rem;
-}
 
 .menu{
   width: 70%;
-  margin: 2rem 2rem 0rem 17rem;
+  margin: 2rem auto;
   color: $color-white;
   padding: 1rem;
   font-family: $font-konkhmer;
@@ -73,5 +77,36 @@
     &:hover{
       background-color: $color-secondary-green;
     }
+  }
+}
+
+@media (max-width: 980px){
+  .informations{
+    app-button-header{
+      display: none;
+    }
+  }
+
+  .containers-summary{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .body-summary{
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .menu{
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  app-side-menu{
+    display: none;
   }
 }

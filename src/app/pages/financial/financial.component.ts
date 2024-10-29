@@ -5,12 +5,13 @@ import { SideMenuComponent } from "../../components/side-menu/side-menu.componen
 import { CommonModule } from '@angular/common';
 import { ContainerSummaryComponent } from '../../components/container-summary/container-summary.component';
 import { TransactionInformationComponent } from "../../components/transaction-information/transaction-information.component";
+import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
 
 
 @Component({
   selector: 'app-financial',
   standalone: true,
-  imports: [CustomIconsModule, HeaderPagesComponent, SideMenuComponent, CommonModule, ContainerSummaryComponent, TransactionInformationComponent],
+  imports: [CustomIconsModule, HeaderPagesComponent, SideMenuComponent, CommonModule, ContainerSummaryComponent, TransactionInformationComponent, ButtonHeaderComponent],
   templateUrl: './financial.component.html',
   styleUrl: './financial.component.scss'
 })

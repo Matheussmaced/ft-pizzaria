@@ -3,11 +3,12 @@ import { SideMenuComponent } from "../../components/side-menu/side-menu.componen
 import { HeaderPagesComponent } from "../../components/header-pages/header-pages.component";
 import { CommonModule } from '@angular/common';
 import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.module';
+import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
 
 @Component({
   selector: 'app-edit-menu',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent],
   templateUrl: './edit-menu.component.html',
   styleUrl: './edit-menu.component.scss'
 })

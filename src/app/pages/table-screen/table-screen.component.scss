@@ -83,6 +83,10 @@
       transform: scale(1.05);
     }
   }
+
+  app-button-header{
+    display: none;
+  }
 }
 
 //mobile
@@ -128,6 +132,10 @@
     button{
       width: 8rem;
       margin: 0 auto;
+    }
+
+    app-button-header{
+      display: block;
     }
   }
 
