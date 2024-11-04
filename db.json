@@ -1,0 +1,72 @@
+{
+  "categories": [
+    {
+      "name": "Pizzas",
+      "products": [
+        {
+          "id": 1,
+          "name": "Pizza Margherita",
+          "description": "Molho de tomate, mussarela e manjericão",
+          "price": 25.00
+        },
+        {
+          "id": 2,
+          "name": "Pizza Calabresa",
+          "description": "Molho de tomate, mussarela e calabresa",
+          "price": 30.00
+        }
+      ]
+    },
+    {
+      "name": "Hambúrgueres",
+      "products": [
+        {
+          "id": 1,
+          "name": "Hambúrguer Clássico",
+          "description": "Pão, carne, queijo, alface e tomate",
+          "price": 15.00
+        },
+        {
+          "id": 2,
+          "name": "Cheeseburguer",
+          "description": "Pão, carne e queijo",
+          "price": 18.00
+        }
+      ]
+    },
+    {
+      "name": "Refrigerantes",
+      "products": [
+        {
+          "id": 1,
+          "name": "Coca-Cola",
+          "description": "Lata 350ml",
+          "price": 5.00
+        },
+        {
+          "id": 2,
+          "name": "Guaraná",
+          "description": "Lata 350ml",
+          "price": 5.00
+        }
+      ]
+    },
+    {
+      "name": "Sobremesas",
+      "products": [
+        {
+          "id": 1,
+          "name": "Sorvete de Chocolate",
+          "description": "Bola de sorvete de chocolate",
+          "price": 10.00
+        },
+        {
+          "id": 2,
+          "name": "Pudim",
+          "description": "Pudim de leite condensado",
+          "price": 8.00
+        }
+      ]
+    }
+  ]
+}
