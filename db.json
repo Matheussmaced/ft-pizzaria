@@ -2,7 +2,7 @@
   "categories": [
     {
       "name": "Pizzas",
-      "products": [
+      "snacks": [
         {
           "id": 1,
           "name": "Pizza Margherita",
@@ -19,7 +19,7 @@
     },
     {
       "name": "Hambúrgueres",
-      "products": [
+      "snacks": [
         {
           "id": 1,
           "name": "Hambúrguer Clássico",
@@ -36,7 +36,7 @@
     },
     {
       "name": "Refrigerantes",
-      "products": [
+      "snacks": [
         {
           "id": 1,
           "name": "Coca-Cola",
@@ -53,7 +53,7 @@
     },
     {
       "name": "Sobremesas",
-      "products": [
+      "snacks": [
         {
           "id": 1,
           "name": "Sorvete de Chocolate",
