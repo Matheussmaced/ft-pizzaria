@@ -4,46 +4,48 @@ import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.modul
 import { SideMenuComponent } from '../../components/side-menu/side-menu.component';
 import { HeaderPagesComponent } from '../../components/header-pages/header-pages.component';
 import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
+import { Category } from '../../../model/Category';
+import { MockServicesService } from '../../services/mock-services.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-specific-desk-report',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule],
   templateUrl: './specific-desk-report.component.html',
-  styleUrl: './specific-desk-report.component.scss'
+  styleUrl: './specific-desk-report.component.scss',
+  providers: [MockServicesService]
 })
 export class SpecificDeskReportComponent {
-  visibleMenu:boolean = false;
+  categories: Category[] = [];
 
-  products = [
-    {
-      name: 'HAMBURGUER 1',
-      description: 'PÃO, ALFACE, CARNE DE HAMBURGUER, MOLHO',
-      price: 10,
-      value: 0
-    },
-    {
-      name: 'HAMBURGUER 2',
-      description: 'PÃO, ALFACE, CARNE DE HAMBURGUER, MOLHO',
-      price: 10,
-      value: 0
-    }
-  ];
+  constructor(private mockservice: MockServicesService) {}
 
-  toggleMenu(): void {
-    this.visibleMenu = !this.visibleMenu;
-    console.log(this.visibleMenu);
+  ngOnInit(): void {
+    this.mockservice.getCategories().subscribe((data: Category[]) => {
+      this.categories = data.map(category => ({
+        ...category,
+        visible: false,
+        snacks: category.snacks.map(snack => ({
+          ...snack,
+          amount: 0
+        }))
+      }));
+    });
   }
 
-   plusValue(index: number): void {
-    this.products[index].value += 1;
-    console.log(this.products[index].value);
+  toggleMenu(categoryIndex: number): void {
+    this.categories[categoryIndex].visible = !this.categories[categoryIndex].visible;
   }
 
-  minusValue(index: number): void {
-    if (this.products[index].value > 0) {
-      this.products[index].value -= 1;
-      console.log(this.products[index].value);
+  plusValue(categoryIndex: number, snackIndex: number): void {
+    this.categories[categoryIndex].snacks[snackIndex].amount += 1;
+  }
+
+  minusValue(categoryIndex: number, snackIndex: number): void {
+    const snack = this.categories[categoryIndex].snacks[snackIndex];
+    if (snack.amount > 0) {
+      snack.amount -= 1;
     } else {
       alert("Não é possível diminuir");
     }

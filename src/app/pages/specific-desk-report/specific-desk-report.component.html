@@ -4,36 +4,37 @@
   </div>
 
   <div class="header">
-    <h1>MESA 1</h1>
-    <app-button-header nameButton="RELÁTORIO"></app-button-header>
+    <h1>RELATÓRIO DA MESA 1</h1>
+    <app-button-header nameButton="RELATÓRIO"></app-button-header>
   </div>
 
-<div class="menu">
-  <div class="container-title">
-    <span>HAMBURGUERS</span>
-    <lucide-icon name="circle-chevron-down" size="24" (click)="toggleMenu()" class="icon-toggle"></lucide-icon>
-  </div>
+  <div *ngFor="let category of categories; let i = index" class="menu">
+    <div class="container-title">
+      <span>{{ category.name }}</span>
+      <lucide-icon name="circle-chevron-down" size="24" (click)="toggleMenu(i)" class="icon-toggle"></lucide-icon>
+    </div>
 
-  <div *ngIf="visibleMenu">
-    <div *ngFor="let product of products; let i = index" class="product">
-      <span class="informations-product">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-      </span>
+    <div *ngIf="category.visible">
+      <div *ngFor="let product of category.snacks; let j = index" class="product">
+        <span class="informations-product">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+        </span>
 
-      <div class="value-and-buttons">
-        <span>R$ {{ product.price }},00</span>
+        <div class="value-and-buttons">
+          <span>R$ {{ product.price }},00</span>
 
-        <div class="buttons">
-          <button class="plus" (click)="plusValue(i)"> + </button>
-          <span class="value"> {{ product.value }} </span>
-          <button class="minus" (click)="minusValue(i)"> - </button>
+          <div class="buttons">
+            <button class="minus" (click)="minusValue(i, j)"> - </button>
+            <span class="value"> {{ product.amount }} </span>
+            <button class="plus" (click)="plusValue(i, j)"> + </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="btn-final">
-  <app-button-header nameButton="RELATÓRIO"></app-button-header>
+  <div class="btn-final">
+    <app-button-header nameButton="RELATÓRIO"></app-button-header>
+  </div>
 </div>

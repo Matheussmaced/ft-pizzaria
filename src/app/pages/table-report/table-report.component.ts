@@ -5,22 +5,35 @@ import { ButtonsTableComponent } from "../../components/buttons-table/buttons-ta
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
+import { TablesService } from '../../services/tables.service';
+import { Tables } from '../../../model/Tables';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-table-report',
   standalone: true,
-  imports: [SideMenuComponent, HeaderPagesComponent, ButtonsTableComponent, CommonModule, RouterLink, ButtonHeaderComponent],
+  imports: [SideMenuComponent, HeaderPagesComponent, ButtonsTableComponent, CommonModule, RouterLink, ButtonHeaderComponent, HttpClientModule],
   templateUrl: './table-report.component.html',
-  styleUrl: './table-report.component.scss'
+  styleUrl: './table-report.component.scss',
+  providers: [TablesService]
 })
 export class TableReportComponent {
-  visibleTables:number = 21;
-  totalTables: number = 30;
-  increment: number = 5;
+  tables: Tables[] = [];
+  visibleTables = 21;
 
-  showMoreTables(){
-    const newVisibleTables = this.visibleTables + this.increment;
+  constructor(private tablesService: TablesService) {}
 
-    this.visibleTables = newVisibleTables > this.totalTables ? this.totalTables : newVisibleTables;
+  ngOnInit(): void {
+    this.loadTables();
+  }
+
+  loadTables(): void {
+    this.tablesService.getTables().subscribe((data: Tables[]) => {
+      this.tables = data;
+    });
+  }
+
+  showMoreTables(): void {
+    this.visibleTables += 7;
   }
 }

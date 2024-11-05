@@ -3,23 +3,29 @@
     <app-side-menu></app-side-menu>
   </div>
 
-  <div class="container-side-bar-base" ></div>
+  <div class="container-side-bar-base"></div>
 
   <div class="container-body">
-
     <div class="container-buttons">
       <div class="header">
         <img src="/FT-PIZZARIA.png" alt="Logo da FT">
         <span>RELATÓRIO</span>
+        <app-button-header nameButton="ADICIONAR +"></app-button-header>
       </div>
 
       <div class="buttons-container">
-
+        <ng-container *ngFor="let table of tables | slice:0:visibleTables">
+          <app-buttons-table
+            [numberTable]="table.numberTable"
+            [routerLink]="['/specific-desk-report']">
+          </app-buttons-table>
+        </ng-container>
       </div>
     </div>
 
-    <div class="button-see-more" *ngIf="visibleTables < totalTables">
+    <div class="button-see-more" *ngIf="visibleTables < tables.length">
       <button (click)="showMoreTables()">VER MAIS +</button>
+      <app-button-header nameButton="ADICIONAR +"></app-button-header>
     </div>
   </div>
 </div>

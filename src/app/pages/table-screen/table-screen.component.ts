@@ -6,7 +6,7 @@ import { HeaderPagesComponent } from '../../components/header-pages/header-pages
 import { RouterModule } from '@angular/router';
 import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
 import { TablesService } from '../../services/tables.service';
-import { Tables } from '../../../interfaces/Tables';
+import { Tables } from '../../../model/Tables';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({

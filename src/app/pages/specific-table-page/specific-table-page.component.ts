@@ -5,8 +5,8 @@ import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.modul
 import { CommonModule } from '@angular/common';
 import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
 import { MockServicesService } from '../../services/mock-services.service';
-import { Category } from '../../../interfaces/Category';
-import { Snacks } from '../../../interfaces/Snacks';
+import { Category } from '../../../model/Category';
+import { Snacks } from '../../../model/Snacks';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({
