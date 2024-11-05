@@ -1,4 +1,4 @@
-import { Snacks } from '../interfaces/Snacks';
+import { Snacks } from '../model/Snacks';
 
 export interface Category{
   name: string,
