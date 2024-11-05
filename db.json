@@ -72,24 +72,37 @@
 
   "tables":[
     {
-      "numberTable": 1,
-      "numberTable": 2,
-      "numberTable": 3,
-      "numberTable": 4,
-      "numberTable": 5,
-      "numberTable": 6,
-      "numberTable": 7,
-      "numberTable": 8,
-      "numberTable": 9,
-      "numberTable": 10,
-      "numberTable": 11,
-      "numberTable": 12,
-      "numberTable": 13,
-      "numberTable": 14,
-      "numberTable": 15,
-      "numberTable": 16,
-      "numberTable": 17,
-      "numberTable": 18
+      "numberTable": 1
+    },
+    {
+      "numberTable": 2
+    },
+    {
+      "numberTable": 3
+    },
+    {
+      "numberTable": 4
+    },
+    {
+      "numberTable": 5
+    },
+    {
+      "numberTable": 6
+    },
+    {
+      "numberTable": 7
+    },
+    {
+      "numberTable": 8
+    },
+    {
+      "numberTable": 9
+    },
+    {
+      "numberTable": 10
+    },
+    {
+      "numberTable": 11
     }
   ]
 }
