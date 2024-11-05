@@ -1,26 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ButtonsTableComponent } from '../../components/buttons-table/buttons-table.component';
 import { SideMenuComponent } from "../../components/side-menu/side-menu.component";
 import { CommonModule } from '@angular/common';
 import { HeaderPagesComponent } from '../../components/header-pages/header-pages.component';
 import { RouterModule } from '@angular/router';
 import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
+import { TablesService } from '../../services/tables.service';
+import { Tables } from '../../../interfaces/Tables';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-table-screen',
   standalone: true,
-  imports: [ButtonsTableComponent, SideMenuComponent, CommonModule, HeaderPagesComponent, RouterModule, ButtonHeaderComponent],
+  imports: [ButtonsTableComponent, SideMenuComponent, CommonModule, HeaderPagesComponent, RouterModule, ButtonHeaderComponent, HttpClientModule],
   templateUrl: './table-screen.component.html',
-  styleUrl: './table-screen.component.scss'
+  styleUrl: './table-screen.component.scss',
+  providers: [TablesService]
 })
-export class TableScreenComponent {
-  visibleTables:number = 21;
-  totalTables: number = 30;
-  increment: number = 5;
+export class TableScreenComponent implements OnInit {
+  tables: Tables[] = [];
+  visibleTables = 21;
 
-  showMoreTables(){
-    const newVisibleTables = this.visibleTables + this.increment;
+  constructor(private tablesService: TablesService) {}
 
-    this.visibleTables = newVisibleTables > this.totalTables ? this.totalTables : newVisibleTables;
+  ngOnInit(): void {
+    this.loadTables();
+  }
+
+  loadTables(): void {
+    this.tablesService.getTables().subscribe((data: Tables[]) => {
+      this.tables = data;
+    });
+  }
+
+  showMoreTables(): void {
+    this.visibleTables += 7;
   }
 }

@@ -72,37 +72,52 @@
 
   "tables":[
     {
+      "id": "1",
       "numberTable": 1
     },
     {
+      "id": "2",
       "numberTable": 2
     },
     {
+      "id": "3",
       "numberTable": 3
     },
     {
+      "id": "4",
       "numberTable": 4
     },
     {
+      "id": "5",
       "numberTable": 5
     },
     {
+      "id": "6",
       "numberTable": 6
     },
     {
+      "id": "7",
       "numberTable": 7
     },
     {
+      "id": "8",
       "numberTable": 8
     },
     {
+      "id": "9",
       "numberTable": 9
     },
     {
+      "id": "10",
       "numberTable": 10
     },
     {
+      "id": "11",
       "numberTable": 11
+    },
+    {
+      "id": "12",
+      "numberTable": 22
     }
   ]
 }

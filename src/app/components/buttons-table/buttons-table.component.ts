@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './buttons-table.component.scss'
 })
 export class ButtonsTableComponent {
-   @Input() numberTable:string = "";
+   @Input() numberTable:number | null = null;
 }
