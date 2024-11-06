@@ -1,55 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderPagesComponent } from '../../components/header-pages/header-pages.component';
 import { SideMenuComponent } from '../../components/side-menu/side-menu.component';
 import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.module';
 import { CommonModule } from '@angular/common';
 import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
+import { Stock } from '../../../model/Stock';
+import { StockService } from '../../services/stock.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-stock',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule],
   templateUrl: './stock.component.html',
-  styleUrl: './stock.component.scss'
+  styleUrl: './stock.component.scss',
+  providers: [ StockService ]
 })
-export class StockComponent {
-  visibleMenu:boolean = false;
+export class StockComponent implements OnInit {
+  stocks: Stock[] = [];
 
-  products = [
-    {
-      name: 'HAMBURGUER 1',
-      description: 'PÃO, ALFACE, CARNE DE HAMBURGUER, MOLHO',
-      price: 10,
-      value: 0,
-      stock: 50,
-      typeUnid: 'UNID'
-    },
-    {
-      name: 'HAMBURGUER 2',
-      description: 'PÃO, ALFACE, CARNE DE HAMBURGUER, MOLHO',
-      price: 10,
-      value: 0,
-      stock: 30,
-      typeUnid: 'UNID'
-    }
-  ];
+  constructor(private stockService: StockService) {}
 
-  toggleMenu(): void {
-    this.visibleMenu = !this.visibleMenu;
-    console.log(this.visibleMenu);
+  ngOnInit(): void {
+    this.stockService.getStock().subscribe((data: Stock[]) => {
+      this.stocks = data.map(category => ({
+        ...category,
+        visible: false
+      }));
+    });
   }
 
-   plusValue(index: number): void {
-    this.products[index].value += 1;
-    console.log(this.products[index].value);
-  }
-
-  minusValue(index: number): void {
-    if (this.products[index].value > 0) {
-      this.products[index].value -= 1;
-      console.log(this.products[index].value);
-    } else {
-      alert("Não é possível diminuir");
-    }
+  toggleMenu(categoryIndex: number): void {
+    this.stocks[categoryIndex].visible = !this.stocks[categoryIndex].visible;
   }
 }

@@ -11,29 +11,27 @@
     </div>
   </div>
 
-  <div class="menu">
+  <div *ngFor="let stock of stocks; let i = index" class="menu">
     <div class="container-title">
-      <span>HAMBURGUERS</span>
-      <lucide-icon name="circle-chevron-down" size="24" (click)="toggleMenu()" class="icon-toggle"></lucide-icon>
+      <span>{{ stock.category }}</span>
+      <lucide-icon name="circle-chevron-down" size="24" (click)="toggleMenu(i)" class="icon-toggle"></lucide-icon>
     </div>
 
-    <div *ngIf="visibleMenu">
-      <div *ngFor="let product of products; let i = index" class="product">
+    <div *ngIf="stock.visible">
+      <div *ngFor="let product of stock.products; let j = index" class="product">
         <span class="informations-product">
           <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
         </span>
 
         <div class="value-and-buttons">
-          <span>{{ product.stock }}  {{product.typeUnid}} </span>
+          <span> 5 {{ product.unid }}</span>
 
           <div class="buttons">
-            <button class="edit" > <lucide-icon name="pencil"></lucide-icon> </button>
-            <button class="trash"> <lucide-icon name="trash-2"></lucide-icon> </button>
+            <button class="edit"><lucide-icon name="pencil"></lucide-icon></button>
+            <button class="trash"><lucide-icon name="trash-2"></lucide-icon></button>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>

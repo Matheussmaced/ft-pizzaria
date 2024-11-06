@@ -1,5 +1,6 @@
 export interface ProductStocks {
   id: number,
   name: string,
-  unid: string
+  unid: string,
+  visible: boolean
 }

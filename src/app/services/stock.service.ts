@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProductStocks } from '../../model/ProductStock';
+import { Stock } from '../../model/Stock';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class StockService {
 
   constructor( private http: HttpClient ) {}
 
-  getStock(): Observable<ProductStocks[]>{
-    return this.http.get<ProductStocks[]>(this.apiUrl);
+  getStock(): Observable<Stock[]>{
+    return this.http.get<Stock[]>(this.apiUrl);
   };
 }
