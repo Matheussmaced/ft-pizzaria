@@ -1,7 +1,21 @@
 @import "../../../theme/variables.scss";
 
-html{
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 2rem;
   width: 100%;
+  font-family: $font-rubik;
+
+  color: $color-white;
+  font-size: 1.5rem;
+
+  app-button-header{
+    position: absolute;
+    right: 0;
+    margin-right: 1rem;
+  }
 }
 
 .container-header{
@@ -9,43 +23,25 @@ html{
   align-items: flex-start;
   justify-content: flex-start;
   align-items: stretch;
-
 }
 
-.informations{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 1rem;
-
-  h1{
-    font-family: $font-rubik;
-    color: $color-white;
-    font-size: 2.3rem;
-
-  }
-
-  app-button-header{
-    position: absolute;
-    right: 0;
-    margin-right: 1rem;
-  }
-
-  img{
-    width: 15rem;
-    display: none;
-  }
+.container-body{
+  display: block;
+  flex-grow: 1;
 }
 
+.container-side-bar-base{
+  width: 6rem;
+}
 
 .menu{
   width: 60%;
-  margin: 2rem auto;
+  margin: 0.8rem auto;
   color: $color-white;
-  padding: 1rem;
+  padding: 0.8rem;
   border: $color-white solid 1px;
   font-family: $font-konkhmer;
+  border-radius: 6px;
 
   transition: 0.5s;
 
@@ -76,18 +72,27 @@ html{
     justify-content: space-between;
     margin-top: 0.8rem;
     border: $color-white solid 1px;
-    padding: 0.5rem;
+    padding: 0.2rem 1rem;
     border-radius: 3px;
 
 
     .informations-product{
       display: flex;
       flex-direction: column;
-      gap: 0.1rem;
       font-family: $font-konkhmer;
 
       p{
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        font-weight: 100;
+        font-family: $font-kite;
+
+        line-height: 1.6em;
+      }
+
+      h3{
+        font-size: 1rem;
+        font-family: $font-konkhmer;
+        line-height: 1.6em;
       }
     }
 
@@ -102,6 +107,16 @@ html{
 
         gap: 0.8rem;
 
+        .edit{
+          background-color: $color-white;
+          color: $color-black;
+          text-align: center;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
         .trash{
           background-color: $color-secondary-red;
           color: $color-black;
@@ -111,64 +126,15 @@ html{
           align-items: center;
           justify-content: center;
         }
-      }
 
-      button{
-        padding: 0 0.3rem;
-        width: 2.2rem;
-        height: 2.1rem;
-        border: none;
-        cursor: pointer;
-        font-size: 2rem;
+        button{
+          padding: 0.1rem 0.3rem;
+          border: none;
+          cursor: pointer;
+          font-size: 1.5rem;
 
-        border-radius: 3px;
-      }
-    }
-  }
-
-  .summary-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    margin-top: 5rem;
-
-    span{
-      display: flex;
-      justify-content: end;
-      gap: 1rem;
-
-      font-size: 1.5rem;
-    }
-
-    .btn-container{
-      display: flex;
-      justify-content: end;
-
-      margin: 1rem 0;
-    }
-
-    .value-container{
-      margin-top: auto;
-      color: $color-secondary-orange;
-    }
-
-    .btn-export{
-      display: flex;
-      background-color: $color-secondary-green;
-      color: $color-white;
-      align-items: center;
-      justify-content: center;
-      padding: 0.2rem 0.3rem;
-
-      width: 12rem;
-      border: none;
-      gap: 0.3rem;
-
-      cursor: pointer;
-      transition: 0.3s;
-
-      &:hover{
-        transform: scale(1.03);
+          border-radius: 3px;
+        }
       }
     }
   }
@@ -178,8 +144,7 @@ html{
   display: none;
 }
 
-
-// mobile
+//MOBILE
 
 @media (max-width: 980px){
   .btn-final{
@@ -187,15 +152,9 @@ html{
     justify-content: center;
   }
 
-  .informations{
-    flex-direction: column;
-
+  .header{
     app-button-header{
       display: none;
-    }
-
-    img{
-      display: block;
     }
   }
 

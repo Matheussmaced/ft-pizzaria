@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
+  margin: 1rem 0 2rem;
   width: 100%;
   font-family: $font-rubik;
 
@@ -36,11 +36,12 @@
 
 .menu{
   width: 60%;
-  margin: 2rem auto;
+  margin: 0.8rem auto;
   color: $color-white;
-  padding: 1rem;
+  padding: 0.8rem;
   border: $color-white solid 1px;
   font-family: $font-konkhmer;
+  border-radius: 6px;
 
   transition: 0.5s;
 
@@ -71,18 +72,27 @@
     justify-content: space-between;
     margin-top: 0.8rem;
     border: $color-white solid 1px;
-    padding: 0.5rem;
+    padding: 0.2rem 1rem;
     border-radius: 3px;
 
 
     .informations-product{
       display: flex;
       flex-direction: column;
-      gap: 0.1rem;
       font-family: $font-konkhmer;
 
       p{
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        font-weight: 100;
+        font-family: $font-kite;
+
+        line-height: 1.6em;
+      }
+
+      h3{
+        font-size: 1rem;
+        font-family: $font-konkhmer;
+        line-height: 1.6em;
       }
     }
 
@@ -98,8 +108,8 @@
         gap: 0.8rem;
 
         .plus{
-          background-color: $color-secondary-green;
-          color: $color-white;
+          background-color: $color-secondary-green-light;
+          color: $color-black;
           text-align: center;
 
           display: flex;
@@ -109,22 +119,23 @@
 
         .minus{
           background-color: $color-secondary-red;
-          color: $color-white;
+          color: $color-black;
           text-align: center;
 
           display: flex;
           align-items: center;
           justify-content: center;
+          margin-bottom: 0.2rem;
         }
       }
 
       button{
-        padding: 0 0.3rem;
-        width: 2.2rem;
-        height: 2.1rem;
+        padding: 0 0.2rem;
+        width: 1.6rem;
+        height: 1.5rem;
         border: none;
         cursor: pointer;
-        font-size: 2rem;
+        font-size: 1.5rem;
 
         border-radius: 3px;
       }
