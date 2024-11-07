@@ -10,6 +10,7 @@ html{
   justify-content: flex-start;
   align-items: stretch;
 
+
 }
 
 .informations{
@@ -17,12 +18,12 @@ html{
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 1rem;
+  margin: 1rem 0;
 
   h1{
     font-family: $font-rubik;
     color: $color-white;
-    font-size: 2.3rem;
+    font-size: 3rem;
 
   }
 
@@ -41,13 +42,15 @@ html{
 
 .menu{
   width: 60%;
-  margin: 2rem auto;
+  margin: 0.8rem auto;
   color: $color-white;
-  padding: 1rem;
+  padding: 0.8rem;
   border: $color-white solid 1px;
   font-family: $font-konkhmer;
 
   transition: 0.5s;
+
+  border-radius: 6px;
 
 
   .icon-toggle{
