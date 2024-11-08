@@ -1,37 +1,58 @@
 @import "../../../theme/variables.scss";
 
-html{
+html {
   background-color: $color-white;
 }
 
-.main-container{
+.burguer-menu {
+  display: none;
+}
+
+.close-menu {
+  display: none;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+.main-container {
   height: 100vh;
   background-color: $color-white;
+  position: fixed;
+  width: 11.5rem;
+  z-index: 15;
 
-  img{
+  img {
     background-color: $color-background;
     padding: 1rem;
   }
 
-  position: fixed;
+  &.visible {
+    display: block;
+  }
 }
 
-.menu-informations {
+.menu-informations,
+.menu-burguer,
+.close-menu {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   margin: 0;
-
   font-family: $font-rubik;
   font-weight: bolder;
   font-size: 0.875rem;
-
   padding: 1.5rem;
-
   justify-content: flex-start;
   align-items: flex-start;
-
-
   text-align: left;
 
   span {
@@ -54,23 +75,44 @@ html{
   }
 }
 
-.log-out-container{
+.log-out-container {
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin-bottom: 0.5rem;
   gap: 0.1rem;
-
   position: absolute;
   bottom: 0;
   left: 3.5rem;
 }
 
-@media (max-width: 780px){
-  .main-container{
+@media (max-width: 980px) {
+  .burguer-menu {
+    display: block;
+    position: fixed;
+    color: $color-white;
+    width: 20rem;
+    left: 1rem;
+    top: 1rem;
+    z-index: 30; // Ícone do menu hamburguer acima do overlay
+  }
+
+  .close-menu {
+    position: fixed;
+    left: 11rem;
+    color: $color-secondary-red;
+    z-index: 11;
+  }
+
+  .main-container {
     display: none;
+
+    &.visible {
+      display: block;
+    }
+  }
+
+  .overlay {
+    display: block; // Exibe o overlay no mobile quando o menu está aberto
   }
 }
-
-
