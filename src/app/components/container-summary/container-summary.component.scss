@@ -4,7 +4,7 @@
   margin-left: 0rem;
 }
 .main-container-green:first-child{
-  margin-left: 0rem;
+  margin: 0 auto;
 }
 
 .main-container{
@@ -84,6 +84,11 @@
 }
 
 @media (max-width: 980px){
+  .main-container-green:first-child{
+    margin: 0 auto !important;
+    width: 95%;
+  }
+
   .main-container{
     width: 95%;
     margin: 0 auto !important;

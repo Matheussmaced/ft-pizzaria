@@ -11,7 +11,9 @@
 }
 
 .description{
-  width: 6rem;
+  width: 10rem;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
   overflow-wrap: break-word;
   white-space: normal;
   word-break: break-word;
@@ -25,6 +27,8 @@
   gap: 0.5rem;
   background-color: $color-secondary-gray;
   padding: 0.9rem 1.87rem;
+
+  text-align: center;
 }
 
 .buttons{
@@ -57,6 +61,16 @@
     font-size: 0.75rem;
   }
 
+  .container-transactions{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: $color-secondary-gray;
+    padding: 0.3rem 0.5rem;
+  }
+
   .main-container{
     display: flex;
     align-items: center;
@@ -65,9 +79,7 @@
 
     border-radius: 7px;
 
-    background-color: $color-secondary-gray;
-
-    padding: 0.9rem 0.5rem;
+    padding: 0;
   }
 
 
