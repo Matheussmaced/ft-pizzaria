@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { AddTableDialogComponent } from '../add-table-dialog/add-table-dialog.component';
 import { CommonModule } from '@angular/common';
 import { ButtonHeaderComponent } from "../button-header/button-header.component";
 
