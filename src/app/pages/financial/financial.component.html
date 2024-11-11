@@ -4,11 +4,16 @@
       <app-side-menu></app-side-menu>
     </div>
 
+    <div class="modal">
+      <app-adding-financial *ngIf="modal" (closeModal)="closeModal()"></app-adding-financial>
+    </div>
+
     <div class="container-side-bar-base"></div>
 
     <div class="informations">
       <img src="/FT-PIZZARIA.png" alt="Logo da FT">
       <h1>GESTÃO FINANCEIRO</h1>
+      <app-button-header nameButton="NOVA TRANSAÇÃO" (click)="openModal()"></app-button-header>
     </div>
   </div>
 

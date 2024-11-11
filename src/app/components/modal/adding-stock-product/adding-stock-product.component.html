@@ -1,34 +1,36 @@
-<div class="main-container">
-  <div class="container-form">
-    <h1>ADICIONAR ITEM NO ESTOQUE</h1>
-      <form action="#">
-        <div class="container-inputs">
-          <label for="#">NOME DO ITEM</label>
-          <input type="text" placeholder="Insira o nome aqui" />
+  <div class="background">
+    <div class="main-container">
+      <div class="container-form">
+        <h1>ADICIONAR ITEM NO ESTOQUE</h1>
+          <form action="#">
+            <div class="container-inputs">
+              <label for="#">NOME DO ITEM</label>
+              <input type="text" placeholder="Insira o nome aqui" />
 
-          <label for="#">QUANTIDADE</label>
-          <input type="number" placeholder="Insira a descrição aqui" />
+              <label for="#">QUANTIDADE</label>
+              <input type="number" placeholder="Insira a descrição aqui" />
 
-          <label for="measure">TIPO DE MEDIDA</label>
-          <select class="measure">
-            <option value="" disabled selected>SELECIONE</option>
-            <option value="UNID.">UNID.</option>
-            <option value="GRAMA(G).">GRAMA(G).</option>
-            <option value="KILO(KG).">KILO(KG).</option>
-            <option value="LITRO (L).">LITRO (L).</option>
-            <option value="GRADE.">GRADE.</option>
-          </select>
+              <label for="measure">TIPO DE MEDIDA</label>
+              <select class="measure">
+                <option value="" disabled selected>SELECIONE</option>
+                <option value="UNID.">UNID.</option>
+                <option value="GRAMA(G).">GRAMA(G).</option>
+                <option value="KILO(KG).">KILO(KG).</option>
+                <option value="LITRO (L).">LITRO (L).</option>
+                <option value="GRADE.">GRADE.</option>
+              </select>
 
-          <label for="#">CATEGORIA</label>
-          <input type="text" placeholder="Insira a categoria aqui" />
-        </div>
+              <label for="#">CATEGORIA</label>
+              <input type="text" placeholder="Insira a categoria aqui" />
+            </div>
 
-      <div class="buttons-container">
-        <button class="btn-cancel" type="button" (click)="onCancel()">
-          CANCELAR
-        </button>
-        <button class="btn-ok">OK</button>
+          <div class="buttons-container">
+            <button class="btn-cancel" type="button" (click)="onCancel()">
+              CANCELAR
+            </button>
+            <button class="btn-ok">OK</button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
-</div>

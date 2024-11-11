@@ -1,0 +1,30 @@
+<div class="background">
+  <div class="main-container">
+    <div class="container-form">
+      <h1>ADICIONAR NOVA TRANSAÇÃO</h1>
+        <form action="#">
+          <div class="container-inputs">
+            <label for="#">DESCRIÇÃO DA NOVA TRANSAÇÃO</label>
+            <input type="text" placeholder="Insira a descrição aqui" />
+
+            <label for="#">VALOR DA TRANSAÇÃO</label>
+            <input type="number" placeholder="Insira o valor aqui" />
+
+            <label for="type">ENTRADA OU SAÍDA</label>
+            <select class="type">
+              <option value="" disabled selected>SELECIONE</option>
+              <option value="ENTRADA">ENTRADA</option>
+              <option value="SAÍDA.">SAÍDA</option>
+            </select>
+          </div>
+
+        <div class="buttons-container">
+          <button class="btn-cancel" type="button" (click)="onCancel()">
+            CANCELAR
+          </button>
+          <button class="btn-ok">OK</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

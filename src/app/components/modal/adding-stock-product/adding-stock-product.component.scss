@@ -4,6 +4,15 @@ html{
   background-color: $color-background;
 }
 
+.background{
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-background, 0.95);
+
+  position: absolute;
+  z-index: 39;
+}
+
 .main-container {
   width: 100%;
   height: 90vh;
@@ -25,6 +34,9 @@ html{
 
   label{
     margin-top: 1rem;
+    font-size: 0.8rem;
+
+    font-family: $font-kite;
   }
 }
 
@@ -39,7 +51,8 @@ html{
 
   h1 {
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
   }
 
   form {
