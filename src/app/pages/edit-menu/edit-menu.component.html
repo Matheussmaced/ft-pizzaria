@@ -3,9 +3,14 @@
     <app-side-menu></app-side-menu>
   </div>
 
+  <div class="modal">
+    <app-adding-snacks-menu *ngIf="modal" (closeModal)="closeModal()"></app-adding-snacks-menu>
+  </div>
+
   <div class="header">
     <img src="/FT-PIZZARIA.png" alt="Logo da FT">
     <h1>CARDÁPIO</h1>
+    <app-button-header nameButton="ADICIONAR +" (click)="openModal()"></app-button-header>
   </div>
 
   <div *ngFor="let category of categories; let i = index" class="menu">

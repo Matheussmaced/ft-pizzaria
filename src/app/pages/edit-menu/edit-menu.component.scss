@@ -11,10 +11,15 @@
   color: $color-white;
   font-size: 1.5rem;
 
+  h1{
+    margin-top: 1rem;
+  }
+
   app-button-header{
     position: absolute;
     right: 0;
     margin-right: 1rem;
+    margin-top: 1rem;
   }
 
 

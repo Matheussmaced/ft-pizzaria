@@ -7,17 +7,20 @@ import { ButtonHeaderComponent } from "../../components/button-header/button-hea
 import { MockServicesService } from '../../services/mock-services.service';
 import { Category } from '../../../model/Category';
 import { HttpClientModule } from '@angular/common/http';
+import { AddingSnacksMenuComponent } from "../../components/modal/adding-snacks-menu/adding-snacks-menu.component";
 
 @Component({
   selector: 'app-edit-menu',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, AddingSnacksMenuComponent],
   templateUrl: './edit-menu.component.html',
   styleUrl: './edit-menu.component.scss',
   providers: [MockServicesService]
 })
 export class EditMenuComponent {
   categories: Category[] = [];
+
+  modal:boolean = false;
 
   constructor(private mockservice: MockServicesService) {}
 
@@ -49,5 +52,13 @@ export class EditMenuComponent {
     } else {
       alert("Não é possível diminuir");
     }
+  }
+
+  openModal():void{
+    this.modal = !this.modal;
+  }
+
+  closeModal():void{
+    this.modal = false;
   }
 }
