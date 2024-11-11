@@ -7,17 +7,20 @@ import { ButtonHeaderComponent } from "../../components/button-header/button-hea
 import { Stock } from '../../../model/Stock';
 import { StockService } from '../../services/stock.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AddingStockProductComponent } from "../../components/modal/adding-stock-product/adding-stock-product.component";
 
 @Component({
   selector: 'app-stock',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, AddingStockProductComponent],
   templateUrl: './stock.component.html',
   styleUrl: './stock.component.scss',
   providers: [ StockService ]
 })
 export class StockComponent implements OnInit {
   stocks: Stock[] = [];
+
+  modal:boolean = false;
 
   constructor(private stockService: StockService) {}
 
@@ -32,5 +35,13 @@ export class StockComponent implements OnInit {
 
   toggleMenu(categoryIndex: number): void {
     this.stocks[categoryIndex].visible = !this.stocks[categoryIndex].visible;
+  }
+
+  openModal():void{
+    this.modal = !this.modal;
+  }
+
+  closeModal():void{
+    this.modal = false;
   }
 }
