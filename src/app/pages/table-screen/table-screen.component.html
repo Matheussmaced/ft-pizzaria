@@ -29,7 +29,10 @@
 
     <div class="button-see-more" *ngIf="visibleTables < tables.length">
       <button (click)="showMoreTables()">VER MAIS +</button>
-      <app-button-header nameButton="ADICIONAR +"></app-button-header>
+    </div>
+
+    <div class="btn-final">
+      <app-button-header nameButton="ADICIONAR +" (click)="openModal()"></app-button-header>
     </div>
   </div>
 </div>

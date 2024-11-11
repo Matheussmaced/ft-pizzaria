@@ -8,6 +8,11 @@
 
   border-radius: 7px;
   gap: 1rem;
+
+
+  span{
+    font-size: 0.9rem;
+  }
 }
 
 .description{
@@ -58,7 +63,16 @@
 
 @media (max-width: 980px){
   span{
-    font-size: 0.75rem;
+    font-size: 0.75rem !important;
+  }
+
+  .description{
+    width: 7rem;
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    overflow-wrap: break-word;
+    white-space: normal;
+    word-break: break-word;
   }
 
   .container-transactions{
@@ -68,7 +82,7 @@
     align-items: center;
     gap: 0.5rem;
     background-color: $color-secondary-gray;
-    padding: 0.3rem 0.5rem;
+    padding: 0.3rem 0.3rem;
   }
 
   .main-container{

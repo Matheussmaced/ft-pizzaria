@@ -65,7 +65,7 @@
   width: 92%;
   display: flex;
   justify-content: center;
-  margin: 1rem auto;
+  margin: 2rem auto 0;
 
   button{
     padding: 0.4rem 1.12rem;
@@ -89,11 +89,21 @@
   }
 }
 
+.btn-final{
+  display: none;
+}
+
 //mobile
 
 @media (max-width: 780px){
   .container-side-bar-base{
     display: none;
+  }
+
+  .btn-final{
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
   }
 
   .button-see-more{

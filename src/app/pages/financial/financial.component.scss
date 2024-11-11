@@ -96,7 +96,11 @@
     flex-direction: column;
 
     app-button-header{
-      display: none;
+      position: relative;
+      display: flex !important;
+      justify-content: end;
+      margin: 2rem 0 0;
+      left: 25%;
     }
 
 
