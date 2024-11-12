@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -11,7 +11,8 @@ import { SpecificDeskReportComponent } from './pages/specific-desk-report/specif
 import { EditMenuComponent } from './pages/edit-menu/edit-menu.component';
 import { StockComponent } from './pages/stock/stock.component';
 import { FinancialComponent } from './pages/financial/financial.component';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './services/auth.guard'; // AuthGuard importado
+import { AuthService } from './services/auth.service'; // AuthService importado
 
 const routes = [
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,8 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    HttpClientModule,
+    provideHttpClient(),
+    AuthService,
+    AuthGuard
   ]
 };

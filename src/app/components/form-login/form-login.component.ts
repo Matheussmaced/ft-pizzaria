@@ -12,7 +12,6 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './form-login.component.html',
   imports: [InputsLoginComponent, HttpClientModule, CommonModule, FormsModule],
   styleUrls: ['./form-login.component.scss'],
-  providers:[ AuthService ]
 })
 export class FormLoginComponent {
   email = '';

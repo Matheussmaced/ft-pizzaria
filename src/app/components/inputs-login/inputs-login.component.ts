@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [ CommonModule, HttpClientModule ],
   templateUrl: './inputs-login.component.html',
   styleUrl: './inputs-login.component.scss',
-  providers: [ AuthService ]
 })
 export class InputsLoginComponent {
   email: string = '';

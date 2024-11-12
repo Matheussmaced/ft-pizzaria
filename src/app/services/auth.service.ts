@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticated = false;
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private apiUrl = `${environment.apiUrl}/users`;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -19,21 +19,27 @@ export class AuthService {
       map(users => {
         const user = users.find(u => u.email === email && u.password === password);
         if (user) {
-          this.isAuthenticated = true;
+          this.isAuthenticatedSubject.next(true); // Atualiza o estado de autenticação
+          console.log('Usuário autenticado com sucesso');
           return true;
         } else {
+          console.log('Credenciais incorretas');
           return false;
         }
+      }),
+      catchError((error) => {
+        console.error('Erro de autenticação:', error);
+        return of(false);
       })
     );
   }
 
   logout() {
-    this.isAuthenticated = false;
+    this.isAuthenticatedSubject.next(false);
     this.router.navigate(['/login']);
   }
 
-  isLoggedIn(): boolean {
-    return this.isAuthenticated;
+  isLoggedIn(): Observable<boolean> {
+    return this.isAuthenticatedSubject.asObservable();
   }
 }
