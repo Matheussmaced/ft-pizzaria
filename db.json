@@ -1,4 +1,17 @@
 {
+  "users": [
+    {
+      "id":"1",
+      "email":"mateusbyakuya3@gmail.com",
+      "password": "123"
+    },
+    {
+      "id":"2",
+      "email":"mateusbyakuya1@gmail.com",
+      "password": "321"
+    }
+  ],
+
   "categories": [
     {
       "name": "Pizzas",

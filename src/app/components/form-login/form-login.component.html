@@ -3,11 +3,16 @@
   <h3>Faça o login para continuar</h3>
 
   <div class="inputs">
-    <app-inputs-login></app-inputs-login>
+    <app-inputs-login
+      (emailChange)="onEmailChange($event)"
+      (passwordChange)="onPasswordChange($event)">
+    </app-inputs-login>
   </div>
 
   <div class="forgot-password-and-send">
     <a href="#">Esqueci a senha</a>
-    <input type="submit" value="ENTRAR">
+    <button (click)="onLogin()">ENTRAR</button>
   </div>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 </div>
