@@ -19,6 +19,14 @@ import { AddingFinancialComponent } from "../../components/modal/adding-financia
 export class FinancialComponent {
   modal:boolean = false;
 
+  selectedMonth: string = '';
+
+  onMonthChange(target: EventTarget | null): void {
+    if (target instanceof HTMLSelectElement) {
+      this.selectedMonth = target.value;
+    }
+  }
+
   openModal():void{
     this.modal = !this.modal;
   }

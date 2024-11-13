@@ -41,6 +41,26 @@
 
 }
 
+.select-btn{
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
+
+.monthSelect{
+  padding: 0.4rem 1.12rem;
+  background-color: $color-secondary-gray;
+  color: $color-white;
+  border: none;
+
+  font-family: $font-konkhmer;
+
+  cursor: pointer;
+
+  transition: 0.5s;
+  width: 12rem;
+}
+
 .body-summary{
   width: 55rem;
   margin: 0 auto;
@@ -92,6 +112,16 @@
 }
 
 @media (max-width: 980px){
+  .select-btn{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .monthSelect{
+    width: 50%;
+  }
+
   .informations{
     flex-direction: column;
 

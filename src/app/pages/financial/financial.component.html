@@ -14,6 +14,7 @@
       <img src="/FT-PIZZARIA.png" alt="Logo da FT">
       <h1>GESTÃO FINANCEIRO</h1>
       <app-button-header nameButton="NOVA TRANSAÇÃO" (click)="openModal()"></app-button-header>
+      </div>
     </div>
   </div>
 
@@ -26,7 +27,24 @@
       </div>
 
     <div class="containers-transactions">
-      <app-transaction-information></app-transaction-information>
+      <div class="select-btn">
+        <select class="monthSelect" (change)="onMonthChange($event.target)">
+          <option value="" disabled selected>SELECIONE O MÊS</option>
+          <option value="january">JANEIRO</option>
+          <option value="february">FEVEREIRO</option>
+          <option value="march">MARÇO</option>
+          <option value="april">ABRIL</option>
+          <option value="may">MAIO</option>
+          <option value="june">JUNHO</option>
+          <option value="july">JULHO</option>
+          <option value="august">AGOSTO</option>
+          <option value="september">SETEMBRO</option>
+          <option value="october">OUTUBRO</option>
+          <option value="november">NOVEMBRO</option>
+          <option value="december">DEZEMBRO</option>
+        </select>
+      </div>
+      <app-transaction-information [filteredMonth]="selectedMonth"></app-transaction-information>
     </div>
   </div>
 </div>
