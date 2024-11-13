@@ -11,19 +11,21 @@ import { SpecificDeskReportComponent } from './pages/specific-desk-report/specif
 import { EditMenuComponent } from './pages/edit-menu/edit-menu.component';
 import { StockComponent } from './pages/stock/stock.component';
 import { FinancialComponent } from './pages/financial/financial.component';
-import { AuthGuard } from './services/auth.guard'; // AuthGuard importado
-import { AuthService } from './services/auth.service'; // AuthService importado
+import { AuthGuard } from './services/auth.guard';
+import { AuthService } from './services/auth.service';
 
 const routes = [
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'table-screen', component: TableScreenComponent, canActivate: [AuthGuard] },
-  { path: 'specific-table-screen', component: SpecificTablePageComponent, canActivate: [AuthGuard] },
-  { path: 'table-report', component: TableReportComponent, canActivate: [AuthGuard] },
-  { path: 'specific-desk-report', component: SpecificDeskReportComponent, canActivate: [AuthGuard] },
-  { path: 'edit-menu', component: EditMenuComponent, canActivate: [AuthGuard] },
-  { path: 'stock', component: StockComponent, canActivate: [AuthGuard] },
-  { path: 'financial', component: FinancialComponent, canActivate: [AuthGuard] }
+  { path: 'table-screen', component: TableScreenComponent},
+  { path: 'specific-table-screen', component: SpecificTablePageComponent},
+  { path: 'table-report', component: TableReportComponent},
+  { path: 'specific-desk-report', component: SpecificDeskReportComponent},
+  { path: 'edit-menu', component: EditMenuComponent},
+  { path: 'stock', component: StockComponent},
+  { path: 'financial', component: FinancialComponent},
+  { path: '**', component: LoginComponent }
 ];
 
 export const appConfig: ApplicationConfig = {
