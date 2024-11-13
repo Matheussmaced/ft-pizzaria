@@ -15,6 +15,48 @@
   }
 }
 
+.navigation{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-top: 3rem;
+
+  span{
+    font-size: 1rem;
+    color: $color-secondary-green;
+    font-family: $font-konkhmer;
+    cursor: pointer;
+
+    &:hover{
+      color: $color-secondary-green-light;
+    }
+  }
+
+  button.active{
+    background-color: $color-secondary-green;
+    color: $color-white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  button{
+    padding: 0.4rem 0.7rem;
+    background-color: $color-secondary-gray;
+    color: $color-white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:hover{
+      background-color: $color-secondary-green;
+    }
+  }
+}
+
 .description{
   width: 10rem;
   font-size: 0.9rem;
@@ -32,6 +74,7 @@
   gap: 0.5rem;
   background-color: $color-secondary-gray;
   padding: 0.9rem 1.87rem;
+  margin-top: 0.8rem;
 
   text-align: center;
 }

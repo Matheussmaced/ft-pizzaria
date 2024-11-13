@@ -1,16 +1,24 @@
-<div class="main-container first-container">
-  <ng-container *ngFor="let financial of financials">
-    <div class="container-transactions" *ngFor="let transaction of financial.transactions">
-      <span class="description"> {{ transaction.description }} </span>
-      <span class="value"> R$ {{ transaction.amount | number:'1.2-2' }} </span>
-      <span> {{ transaction.type }} </span>
-      <span> {{ transaction.date }} </span>
+<div class="container-transactions" *ngFor="let transaction of transactionsToDisplay">
+  <span class="description">{{ transaction.description }}</span>
+  <span class="value">R$ {{ transaction.amount | number: '1.2-2' }}</span>
+  <span>{{ transaction.type }}</span>
+  <span>{{ transaction.date }}</span>
 
-      <div class="buttons">
-        <button class="trash">
-          <lucide-icon name="trash-2" size="20"></lucide-icon>
-        </button>
-      </div>
-    </div>
-  </ng-container>
+  <div class="buttons">
+    <button class="trash">
+      <lucide-icon name="trash-2" size="20"></lucide-icon>
+    </button>
+  </div>
+</div>
+
+<div class="navigation" *ngIf="totalPages > 1">
+  <span class="back" (click)="goToPreviousPage()"> < </span>
+
+  <button *ngFor="let page of buttonsToShow"
+          [class.active]="currentPage === page"
+          (click)="goToPage(page)">
+    {{ page }}
+  </button>
+
+  <span class="front" (click)="goToNextPage()"> > </span>
 </div>
