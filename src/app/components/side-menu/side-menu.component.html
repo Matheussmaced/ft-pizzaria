@@ -33,7 +33,7 @@
       <a [routerLink]="['/financial']">FINANCEIRO</a>
     </span>
     <span class="log-out-container">
-      <a [routerLink]="['/table-screen']">SAIR</a>
+      <a (click)="Onlogout()">SAIR</a>
       <lucide-icon name="log-out" size="23"></lucide-icon>
     </span>
   </div>

@@ -1,7 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.module';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -13,6 +14,8 @@ import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.modul
 export class SideMenuComponent {
   menuOpen = false;
   isDesktop = window.innerWidth > 980;
+
+  constructor(private authService: AuthService, private router: Router){}
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
@@ -40,5 +43,9 @@ export class SideMenuComponent {
         this.menuOpen = false;
       }
     }
+  }
+
+  Onlogout():void{
+    this.authService.logout()
   }
 }
