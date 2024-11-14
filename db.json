@@ -179,11 +179,13 @@
         "category": "Carnes",
         "products": [
           {
+            "quantity": 5,
             "id": 1,
             "name": "Picanha",
             "unit": "KG"
           },
           {
+            "quantity": 5,
             "id": 2,
             "name": "Alcatra",
             "unit": "KG"
@@ -194,11 +196,13 @@
         "category": "Verduras e Legumes",
         "products": [
           {
+            "quantity": 5,
             "id": 3,
             "name": "Alface",
             "unit": "UNID"
           },
           {
+            "quantity": 5,
             "id": 4,
             "name": "Tomate",
             "unit": "KG"
@@ -209,11 +213,13 @@
         "category": "Refrigerantes",
         "products": [
           {
+            "quantity": 5,
             "id": 5,
             "name": "Coca-Cola",
             "unit": "UNID"
           },
           {
+            "quantity": 5,
             "id": 6,
             "name": "Guaraná",
             "unit": "UNID"
@@ -224,11 +230,13 @@
         "category": "Cervejas",
         "products": [
           {
+            "quantity": 5,
             "id": 7,
             "name": "Cerveja Pilsen",
             "unit": "UNID"
           },
           {
+            "quantity": 5,
             "id": 8,
             "name": "Cerveja IPA",
             "unit": "UNID"
@@ -239,11 +247,13 @@
         "category": "Molhos",
         "products": [
           {
+            "quantity": 5,
             "id": 9,
             "name": "Ketchup",
             "unit": "GRAMA"
           },
           {
+            "quantity": 5,
             "id": 10,
             "name": "Maionese",
             "unit": "GRAMA"
