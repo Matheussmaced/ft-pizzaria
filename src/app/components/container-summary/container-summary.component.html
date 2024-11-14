@@ -1,8 +1,8 @@
-<div  *ngFor="let financial of financials;" [ngClass]="classMainContainer">
+<div  *ngFor="let financial of filteredMonth;" [ngClass]="classMainContainer">
   <div class="header">
     <span> {{title}} </span>
     <lucide-icon name={{icon}} size="24" [ngClass]="classIcon"></lucide-icon>
   </div>
 
-  <span class="value" > R$ {{ financial[typeOfValueInformation] }},00 </span>
+  <span class="value"> R$ {{ getFinancialValue(financial) }},00 </span>
 </div>

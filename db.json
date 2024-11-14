@@ -375,6 +375,129 @@
           "date": "05/11/2024"
         }
       ]
+    },
+    {
+      "month": "december",
+      "year": 2024,
+      "income": 12000.00,
+      "expenses": 3000.00,
+      "totalBalance": 7000.00,
+      "transactions": [
+        {
+          "description": "Pedido da mesa 5",
+          "amount": 1000.00,
+          "type": "VENDA",
+          "date": "07/11/2024"
+        },
+        {
+          "description": "Compra de ingredientes",
+          "amount": 500.00,
+          "type": "COMPRA",
+          "date": "06/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Compra de equipamentos",
+          "amount": 3000.00,
+          "type": "COMPRA",
+          "date": "03/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Compra de equipamentos",
+          "amount": 3000.00,
+          "type": "COMPRA",
+          "date": "03/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Compra de equipamentos",
+          "amount": 3000.00,
+          "type": "COMPRA",
+          "date": "03/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Compra de equipamentos",
+          "amount": 3000.00,
+          "type": "COMPRA",
+          "date": "03/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Compra de equipamentos",
+          "amount": 3000.00,
+          "type": "COMPRA",
+          "date": "03/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        },
+        {
+          "description": "Venda de produtos",
+          "amount": 2000.00,
+          "type": "VENDA",
+          "date": "05/11/2024"
+        }
+      ]
     }
   ]
 }

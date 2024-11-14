@@ -15,21 +15,24 @@ import { CommonModule } from '@angular/common';
 })
 export class ContainerSummaryComponent implements OnInit {
   financials: Financial[] = [];
-  @Input() title:string = "";
-  @Input() typeOfValueInformation:string = "";
-  @Input() icon:string = "";
-  @Input() classIcon:string = "";
-  @Input() classMainContainer:string = "";
+  @Input() filteredMonth: Financial[] = [];
+  @Input() title: string = "";
+  @Input() typeOfValueInformation: keyof Financial = "";
+  @Input() icon: string = "";
+  @Input() classIcon: string = "";
+  @Input() classMainContainer: string = "";
 
-  constructor ( private financialService: FinancialService ) {}
-
+  constructor(private financialService: FinancialService) {}
 
   ngOnInit(): void {
+    const currentMonth = new Date().toLocaleString('default', { month: 'long' }).toLowerCase();
+
     this.financialService.getFinancial().subscribe((data: Financial[]) => {
-      this.financials = data.map(headerFinancial => ({
-        ...headerFinancial,
-      }))
-    })
+      this.financials = data;
+    });
   }
 
+  getFinancialValue(financial: Financial): number {
+    return financial[this.typeOfValueInformation] as number;
+  }
 }
