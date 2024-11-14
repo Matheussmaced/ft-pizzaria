@@ -160,6 +160,38 @@
     justify-content: center;
   }
 
+  .informations-product{
+    display: flex;
+    flex-direction: column;
+    font-family: $font-konkhmer;
+
+    p{
+      width: 10rem;
+    }
+
+    p,h3{
+      width: 20ch;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    h3{
+      font-size: 0.8rem;
+      font-family: $font-konkhmer;
+      line-height: 1.6em;
+      width: 10rem;
+    }
+  }
+
+  .product{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.8rem;
+    border: $color-white solid 1px;
+    padding: 0.2rem 0.5rem !important;
+    border-radius: 3px;
+    }
+
   .header{
     flex-direction: column;
 
@@ -173,6 +205,11 @@
   }
 
   .menu{
-    width: 90%;
+    width: 98%;
+    padding: 0.5rem;
+  }
+
+  .value-and-buttons{
+    font-size: 0.9rem;
   }
 }

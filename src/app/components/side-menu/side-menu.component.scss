@@ -101,9 +101,10 @@ html {
 
   .close-menu {
     position: fixed;
-    left: 11rem;
+    left: 7.5rem;
+    top: -0.5rem;
     color: $color-secondary-red;
-    z-index: 11;
+    z-index: 40;
   }
 
   .main-container {
