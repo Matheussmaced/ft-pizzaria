@@ -10,13 +10,12 @@ import { AddingFinancialComponent } from "../../components/modal/adding-financia
 import { FinancialService } from '../../services/financial.service';
 import { Financial } from '../../../model/financial/Financial';
 
-
 @Component({
   selector: 'app-financial',
   standalone: true,
   imports: [CustomIconsModule, HeaderPagesComponent, SideMenuComponent, CommonModule, ContainerSummaryComponent, TransactionInformationComponent, ButtonHeaderComponent, AddingFinancialComponent],
   templateUrl: './financial.component.html',
-  styleUrl: './financial.component.scss'
+  styleUrls: ['./financial.component.scss']
 })
 export class FinancialComponent implements OnInit {
   financials: Financial[] = [];
@@ -27,10 +26,20 @@ export class FinancialComponent implements OnInit {
   constructor(private financialService: FinancialService) {}
 
   ngOnInit(): void {
+    this.selectedMonth = this.getCurrentMonth();
     this.financialService.getFinancial().subscribe((data) => {
       this.financials = data;
       this.filterByMonth();
     });
+  }
+
+  getCurrentMonth(): string {
+    const monthNames = [
+      'january', 'february', 'march', 'april', 'may', 'june',
+      'july', 'august', 'september', 'october', 'november', 'december'
+    ];
+    const currentMonthIndex = new Date().getMonth();
+    return monthNames[currentMonthIndex];
   }
 
   onMonthChange(target: EventTarget | null): void {

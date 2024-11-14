@@ -25,8 +25,9 @@ export class TransactionInformationComponent implements OnInit, OnChanges {
   constructor(private financialService: FinancialService) {}
 
   ngOnInit(): void {
-    const currentMonth = new Date().toLocaleString('default', { month: 'long' }).toLowerCase();
-    this.filteredMonth = currentMonth;
+    if (!this.filteredMonth) {
+      this.filteredMonth = this.getCurrentMonth();
+    }
 
     this.financialService.getFinancial().subscribe((data: Financial[]) => {
       this.financials = data;
@@ -39,6 +40,10 @@ export class TransactionInformationComponent implements OnInit, OnChanges {
     this.currentPage = 1;
     this.updateTransactionsToDisplay();
     this.updateButtonsToShow();
+  }
+
+  getCurrentMonth(): string {
+    return new Date().toLocaleString('default', { month: 'long' }).toLowerCase();
   }
 
   updateTransactionsToDisplay(): void {
