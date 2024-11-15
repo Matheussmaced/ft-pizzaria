@@ -50,6 +50,13 @@
 
   transition: 0.5s;
 
+  h2:first-child{
+    margin-top: 0rem !important;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+
 
   .icon-toggle{
     cursor: pointer;
@@ -71,6 +78,8 @@
   .product:first-child{
     margin-top: 2rem;
   }
+
+
 
   .product{
     display: flex;
@@ -123,7 +132,7 @@
         }
 
         .minus{
-          background-color: $color-secondary-red;
+          background-color:  $color-white;
           color: $color-black;
           text-align: center;
 
@@ -131,6 +140,12 @@
           align-items: center;
           justify-content: center;
           margin-bottom: 0.2rem;
+        }
+
+        .trash{
+          display: flex;
+          justify-content: center;
+          background-color: $color-secondary-red;
         }
       }
 
@@ -145,6 +160,53 @@
         border-radius: 3px;
       }
     }
+  }
+}
+
+.summary{
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+
+  span{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+
+    h4{
+      color: $color-secondary-orange;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.btn-container{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.export-btn{
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 0.5rem;
+  border: none;
+  font-size: 0.6rem;
+  background-color: $color-secondary-green;
+  color: $color-white;
+  margin: 1rem 0;
+  cursor: pointer;
+
+  gap: 0.4rem;
+
+  justify-content: end;
+  transition: 0.5s;
+
+  &:hover{
+    transform: scale(1.05);
   }
 }
 

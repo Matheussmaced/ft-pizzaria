@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-specific-desk-report',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, CustomIconsModule],
   templateUrl: './specific-desk-report.component.html',
   styleUrl: './specific-desk-report.component.scss',
   providers: [MockServicesService]

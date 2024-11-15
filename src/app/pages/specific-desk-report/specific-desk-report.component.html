@@ -9,33 +9,74 @@
     <app-button-header nameButton="RELATÓRIO"></app-button-header>
   </div>
 
-  <div *ngFor="let category of categories; let i = index" class="menu">
-    <div class="container-title">
-      <span>{{ category.name }}</span>
-      <lucide-icon name="circle-chevron-down" size="24" (click)="toggleMenu(i)" class="icon-toggle"></lucide-icon>
-    </div>
+  <div class="menu">
+    <h2>HAMBURGUERS</h2>
+    <div class="product">
+      <span class="informations-product">
+        <h3>HAMBURGUER 1</h3>
+        <p>PÃO, ALFACE, CARNE DE HAMBURGUER, MOLHO</p>
+      </span>
 
-    <div *ngIf="category.visible">
-      <div *ngFor="let product of category.snacks; let j = index" class="product">
-        <span class="informations-product">
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-        </span>
+      <div class="value-and-buttons">
+        <span>R$ 10,00</span>
 
-        <div class="value-and-buttons">
-          <span>R$ {{ product.price }},00</span>
-
-          <div class="buttons">
-            <button class="minus" (click)="minusValue(i, j)"> - </button>
-            <span class="value"> {{ product.amount }} </span>
-            <button class="plus" (click)="plusValue(i, j)"> + </button>
-          </div>
+        <div class="buttons">
+          <button class="minus"> - </button>
+          <span class="value"> 1 </span>
+          <button class="plus"> + </button>
+          <button class="trash"><lucide-icon name="trash-2" size="24" size="19"></lucide-icon></button>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="btn-final">
-    <app-button-header nameButton="RELATÓRIO"></app-button-header>
+    <div class="product">
+      <span class="informations-product">
+        <h3>HAMBURGUER 1</h3>
+        <p>PÃO, ALFACE, CARNE DE HAMBURGUER, MOLHO</p>
+      </span>
+
+      <div class="value-and-buttons">
+        <span>R$ 10,00</span>
+
+        <div class="buttons">
+          <button class="minus"> - </button>
+          <span class="value"> 1 </span>
+          <button class="plus"> + </button>
+          <button class="trash"><lucide-icon name="trash-2" size="24" size="19"></lucide-icon></button>
+        </div>
+      </div>
+    </div>
+
+    <h2>REFRIGERANTES</h2>
+
+
+    <div class="product">
+      <span class="informations-product">
+        <h3>REFRIGERANTE 2L</h3>
+      </span>
+
+      <div class="value-and-buttons">
+        <span>R$ 10,00</span>
+
+        <div class="buttons">
+          <button class="minus"> - </button>
+          <span class="value"> 1 </span>
+          <button class="plus"> + </button>
+          <button class="trash"><lucide-icon name="trash-2" size="24" size="19"></lucide-icon></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <span>
+        TOTAL DO PEDIDO: <h4>R$ 52,00</h4>
+      </span>
+    </div>
+    <div class="btn-container">
+      <button class="export-btn">
+        EXPORTAR EXCEL
+        <lucide-icon name="download" size="16"></lucide-icon>
+      </button>
+    </div>
   </div>
 </div>
