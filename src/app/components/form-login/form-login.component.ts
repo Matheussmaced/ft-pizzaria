@@ -34,13 +34,25 @@ export class FormLoginComponent {
         if (isAuthenticated) {
           this.router.navigate(['/table-screen']);
         } else {
-          this.errorMessage = 'Email ou senha incorretos!';
+          this.showError('Email ou senha incorretos!');
         }
       },
       (error) => {
-        this.errorMessage = 'Erro ao conectar com o servidor. Tente novamente mais tarde.';
+        this.showError('Erro ao conectar com o servidor. Tente novamente mais tarde.');
         console.error(error);
       }
     );
+  }
+
+  showError(message: string) {
+    this.errorMessage = '';
+
+    setTimeout(() => {
+      this.errorMessage = message;
+
+      setTimeout(() => {
+        this.errorMessage = '';
+      }, 5000);
+    });
   }
 }
