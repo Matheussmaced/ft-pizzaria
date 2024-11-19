@@ -2,13 +2,13 @@
   <div class="main-container">
       <div class="container-form">
       <h1>ADICIONAR MESA</h1>
-      <form action="#">
+      <form (ngSubmit)="onSubmit()">
         <label for="#">NÚMERO DA MESA</label>
-        <input type="number" placeholder="Insira o numero aqui">
+        <input type="number" placeholder="Insira o numero aqui" [(ngModel)]="formData.numberTable" name="numberTable">
 
         <div class="buttons-container">
           <button class="btn-cancel" type="button" (click)="onCancel()">CANCELAR</button>
-          <button class="btn-ok">OK</button>
+          <button class="btn-ok" type="submit">OK</button>
         </div>
       </form>
     </div>
