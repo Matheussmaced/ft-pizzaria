@@ -4,10 +4,11 @@ import { HeaderPagesComponent } from "../../components/header-pages/header-pages
 import { CommonModule } from '@angular/common';
 import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.module';
 import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
-import { MockServicesService } from '../../services/mock-services.service';
+import { ProductsService } from '../../services/products.service';
 import { Category } from '../../../model/Category';
 import { HttpClientModule } from '@angular/common/http';
 import { AddingSnacksMenuComponent } from "../../components/modal/adding-snacks-menu/adding-snacks-menu.component";
+import { Snacks } from '../../../model/Snacks';
 
 @Component({
   selector: 'app-edit-menu',
@@ -15,21 +16,21 @@ import { AddingSnacksMenuComponent } from "../../components/modal/adding-snacks-
   imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, AddingSnacksMenuComponent],
   templateUrl: './edit-menu.component.html',
   styleUrl: './edit-menu.component.scss',
-  providers: [MockServicesService]
+  providers: [ProductsService]
 })
 export class EditMenuComponent {
   categories: Category[] = [];
 
   modal:boolean = false;
 
-  constructor(private mockservice: MockServicesService) {}
+  constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.mockservice.getCategories().subscribe((data: Category[]) => {
+    this.productsService.getCategories().subscribe((data: any[]) => {
       this.categories = data.map(category => ({
-        ...category,
+        name: category.category,
         visible: false,
-        snacks: category.snacks.map(snack => ({
+        snacks: category.snacks.map((snack: Snacks) => ({
           ...snack,
           amount: 0
         }))

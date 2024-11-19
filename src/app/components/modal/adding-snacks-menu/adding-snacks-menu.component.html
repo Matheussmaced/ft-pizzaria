@@ -7,6 +7,21 @@
             <label for="#">NOME DO ITEM</label>
             <input type="text" placeholder="Insira o nome aqui" />
 
+            <div class="select-container">
+              <div class="select">
+                <label for="#">CATEGORIA</label>
+                <select class="category">
+                  <option value="" disabled selected>SELECIONE</option>
+                  <option value="stock" *ngFor="let category of categories" [value]="category.name">
+                  {{ category.name }}
+                  </option>
+                </select>
+              </div>
+
+
+              <p (click)="openModal()">ADICIONAR NOVA CATEGORIA</p>
+            </div>
+
             <label for="#">DESCRIÇÃO</label>
             <input type="text" placeholder="Insira a descrição aqui" />
 
@@ -25,5 +40,9 @@
         </div>
       </form>
     </div>
+  </div>
+
+  <div *ngIf="modal" class="modal">
+    <app-adding-new-category (closeModal)="closeModalCategory()"></app-adding-new-category>
   </div>
 </div>

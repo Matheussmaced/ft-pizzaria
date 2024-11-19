@@ -4,7 +4,7 @@ import { SideMenuComponent } from '../../components/side-menu/side-menu.componen
 import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.module';
 import { CommonModule } from '@angular/common';
 import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
-import { MockServicesService } from '../../services/mock-services.service';
+import { ProductsService } from '../../services/products.service';
 import { Category } from '../../../model/Category';
 import { HttpClientModule } from '@angular/common/http';
 import { Snacks } from '../../../model/Snacks';
@@ -15,15 +15,15 @@ import { Snacks } from '../../../model/Snacks';
   imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule],
   templateUrl: './specific-table-page.component.html',
   styleUrls: ['./specific-table-page.component.scss'],
-  providers: [MockServicesService]
+  providers: [ProductsService]
 })
 export class SpecificTablePageComponent implements OnInit {
   categories: Category[] = [];
 
-  constructor(private mockservice: MockServicesService) {}
+  constructor(private productService: ProductsService) {}
 
   ngOnInit(): void {
-    this.mockservice.getCategories().subscribe((data: any[]) => {
+    this.productService.getCategories().subscribe((data: any[]) => {
       this.categories = data.map(category => ({
         name: category.category,
         visible: false,
