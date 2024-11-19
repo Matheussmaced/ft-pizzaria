@@ -7,6 +7,7 @@ import { ButtonHeaderComponent } from "../../components/button-header/button-hea
 import { MockServicesService } from '../../services/mock-services.service';
 import { Category } from '../../../model/Category';
 import { HttpClientModule } from '@angular/common/http';
+import { Snacks } from '../../../model/Snacks';
 
 @Component({
   selector: 'app-specific-table-page',
@@ -22,11 +23,11 @@ export class SpecificTablePageComponent implements OnInit {
   constructor(private mockservice: MockServicesService) {}
 
   ngOnInit(): void {
-    this.mockservice.getCategories().subscribe((data: Category[]) => {
+    this.mockservice.getCategories().subscribe((data: any[]) => {
       this.categories = data.map(category => ({
-        ...category,
+        name: category.category,
         visible: false,
-        snacks: category.snacks.map(snack => ({
+        snacks: category.snacks.map((snack: Snacks) => ({
           ...snack,
           amount: 0
         }))

@@ -8,7 +8,7 @@ import { Stock } from '../../model/Stock';
   providedIn: 'root'
 })
 export class StockService {
-  private apiUrl = `${environment.apiUrl}/stocks`;
+  private apiUrl = `${environment.apiUrl}/v1/products?id=Product%20ID&type=stock&page=1&limit=8`;
 
   constructor( private http: HttpClient ) {}
 

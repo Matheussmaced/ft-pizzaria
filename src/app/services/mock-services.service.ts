@@ -8,7 +8,7 @@ import { Category } from '../../model/Category'
   providedIn: 'root'
 })
 export class MockServicesService {
-  private apiUrl = `${environment.apiUrl}/categories`
+  private apiUrl = `${environment.apiUrl}/v1/products?id=Product%20ID&type=snack&page=1&limit=8`
 
   constructor(private http: HttpClient) {}
 

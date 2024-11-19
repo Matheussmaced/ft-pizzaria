@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
-  private apiUrl = `${environment.apiUrl}/users`;
+  private apiUrl = `http://localhost:3000/users`;
 
   constructor(private http: HttpClient, private router: Router) {}
 

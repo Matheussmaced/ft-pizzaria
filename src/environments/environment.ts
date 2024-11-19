@@ -1,4 +1,4 @@
 export const environment = {
   product: false,
-  apiUrl: "http://localhost:3000"
+  apiUrl: "https://sistema-ft-garcon.onrender.com/api"
 }
