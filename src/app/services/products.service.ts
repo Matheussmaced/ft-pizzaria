@@ -3,6 +3,8 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../../model/Category'
+import { ProductStocks } from '../../model/ProductStock';
+import { Snacks } from '../../model/Snacks';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +16,11 @@ export class ProductsService {
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.apiUrl);
+  }
+
+  addProduct(snack: Snacks): Observable<Snacks>{
+    const apiUrlPost = `${environment.apiUrl}/v1/products`
+
+    return this.http.post<Snacks>(apiUrlPost, snack);
   }
 }

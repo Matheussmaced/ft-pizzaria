@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 })
 export class TablesService {
 
-  private apiUrl = `${environment.apiUrl}/tables`
+  private apiUrl = `${environment.apiUrl}/v1/tables`
 
   constructor( private http: HttpClient ) { }
 

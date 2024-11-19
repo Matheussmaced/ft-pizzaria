@@ -4,11 +4,12 @@ import { Category } from '../../../../model/Category';
 import { Snacks } from '../../../../model/Snacks';
 import { CommonModule } from '@angular/common';
 import { AddingNewCategoryComponent } from "../adding-new-category/adding-new-category.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-adding-snacks-menu',
   standalone: true,
-  imports: [CommonModule, AddingNewCategoryComponent],
+  imports: [CommonModule, AddingNewCategoryComponent, FormsModule],
   templateUrl: './adding-snacks-menu.component.html',
   styleUrl: './adding-snacks-menu.component.scss'
 })
@@ -16,6 +17,13 @@ export class AddingSnacksMenuComponent implements OnInit {
   @Output() closeModal = new EventEmitter<void>();
   categories: Category[] = [];
   modal:boolean = false;
+
+  formData = {
+    name: '',
+    category: '',
+    description: '',
+    price: 0,
+  };
 
   constructor ( private productsService: ProductsService ) {}
 
@@ -42,5 +50,9 @@ export class AddingSnacksMenuComponent implements OnInit {
 
   closeModalCategory(): void {
     this.modal = false;
+  }
+
+  onSubmit(): void {
+    console.log('Dados do formulário:', this.formData);
   }
 }
