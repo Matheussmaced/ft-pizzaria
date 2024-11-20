@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tables } from '../../model/Tables';
@@ -13,7 +13,14 @@ export class TablesService {
 
   constructor( private http: HttpClient ) { }
 
-  getTables(): Observable<Tables[]>{
-    return this.http.get<Tables[]>(this.apiUrl)
+  getTables(): Observable<Tables[]> {
+    const authToken = localStorage.getItem('authToken');
+    let headers = new HttpHeaders();
+
+    if (authToken) {
+      headers = headers.set('Authorization', `Bearer ${authToken}`);
+    }
+
+    return this.http.get<Tables[]>(this.apiUrl, { headers });
   }
 }

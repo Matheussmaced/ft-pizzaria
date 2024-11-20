@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
 import { TablesService } from '../../services/tables.service';
 import { Tables } from '../../../model/Tables';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AddingTableModalComponent } from "../../components/modal/adding-table-modal/adding-table-modal.component";
 
 @Component({
@@ -26,6 +26,7 @@ export class TableScreenComponent implements OnInit {
 
 
   constructor(private tablesService: TablesService) {}
+
 
   ngOnInit(): void {
     this.loadTables();
@@ -48,4 +49,6 @@ export class TableScreenComponent implements OnInit {
   closeModal():void{
     this.modal = false;
   }
+
+
 }
