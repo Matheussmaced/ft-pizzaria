@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Category } from '../../model/Category'
 import { ProductStocks } from '../../model/ProductStock';
 import { Snacks } from '../../model/Snacks';
+import { CreateItemDTO } from '../../DTO/createItemDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,9 @@ export class ProductsService {
     return this.http.get<Category[]>(this.apiUrl);
   }
 
-  addProduct(snack: Snacks): Observable<Snacks>{
+  addProduct(createItemDto: CreateItemDTO): Observable<CreateItemDTO>{
     const apiUrlPost = `${environment.apiUrl}/v1/products`
 
-    return this.http.post<Snacks>(apiUrlPost, snack);
+    return this.http.post<Snacks>(apiUrlPost, createItemDto);
   }
 }

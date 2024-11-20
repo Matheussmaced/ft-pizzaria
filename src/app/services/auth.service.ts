@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
-  private apiUrl = `http://localhost:3000/users`;
+  private apiUrl = `${environment.apiUrl}/v1/login`;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -19,18 +19,25 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
-      map(users => {
-        const user = users.find(u => u.email === email && u.password === password);
+    const loginPayload = { email, password };
 
-        if (user) {
-          const fakeToken = `fake-jwt-token-${user.id}`;
-          localStorage.setItem('authToken', fakeToken);
+    console.log('Enviando dados para login:', loginPayload);
+
+    return this.http.post<{ accessToken: string, role_id: string }>(`${environment.apiUrl}/v1/auth`, loginPayload).pipe(
+      map((response) => {
+        console.log('Resposta da API:', response);
+        console.log('Token retornado:', response.accessToken);  // Acessando o campo correto
+
+        // Verifique se o accessToken existe na resposta
+        if (response.accessToken) {
+          localStorage.setItem('authToken', response.accessToken);
+          localStorage.setItem('role_id', response.role_id);
+
           this.isAuthenticatedSubject.next(true);
           console.log('Usuário autenticado com sucesso');
           return true;
         } else {
-          console.log('Credenciais incorretas');
+          console.error('Token não encontrado na resposta da API');
           return false;
         }
       }),
@@ -41,8 +48,10 @@ export class AuthService {
     );
   }
 
+
   logout() {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('role_id'); // Remover a role_id ao sair
     this.isAuthenticatedSubject.next(false);
     this.router.navigate(['/login']);
   }
@@ -53,5 +62,9 @@ export class AuthService {
 
   getToken(): string | null {
     return localStorage.getItem('authToken');
+  }
+
+  getRoleId(): string | null {
+    return localStorage.getItem('role_id');
   }
 }

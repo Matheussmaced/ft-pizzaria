@@ -5,6 +5,7 @@ import { Snacks } from '../../../../model/Snacks';
 import { CommonModule } from '@angular/common';
 import { AddingNewCategoryComponent } from "../adding-new-category/adding-new-category.component";
 import { FormsModule } from '@angular/forms';
+import { CreateItemDTO } from '../../../../DTO/createItemDTO';
 
 @Component({
   selector: 'app-adding-snacks-menu',
@@ -53,6 +54,40 @@ export class AddingSnacksMenuComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Dados do formulário:', this.formData);
+    const selectedCategory = this.categories.find(
+      (category) => category.name === this.formData.category
+    );
+
+    if (!selectedCategory) {
+      console.error('Categoria não encontrada');
+      alert('A categoria selecionada não existe.');
+      return;
+    }
+
+
+    const createItemDto: CreateItemDTO = {
+      name: this.formData.name,
+      description: this.formData.description,
+      price: this.formData.price,
+    };
+
+
+    this.productsService.addProduct(createItemDto).subscribe(
+      (response) => {
+        console.log('Produto adicionado com sucesso:', response);
+
+        selectedCategory.snacks.push({
+          ...response,
+          amount: 0,
+        });
+
+        alert('Produto adicionado com sucesso!');
+        this.closeModal.emit();
+      },
+      (error) => {
+        console.error('Erro ao adicionar produto:', error);
+        alert('Erro ao adicionar o produto. Tente novamente.');
+      }
+    );
   }
 }
