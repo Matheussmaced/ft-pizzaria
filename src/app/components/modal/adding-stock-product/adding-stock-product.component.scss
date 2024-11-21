@@ -38,6 +38,42 @@ html{
   }
 }
 
+.select-container{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .select{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .category{
+    width: 40%;
+    padding: 0.4rem;
+    font-family: $font-konkhmer;
+    font-weight: 100;
+    color: $color-background;
+
+    border: none;
+  }
+
+  p{
+    text-decoration: none;
+    color: $color-secondary-green;
+    font-family: $font-rubik;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: 600;
+
+    transition: 0.5s;
+
+    &:hover{
+      color: $color-secondary-green-light;
+    }
+  }
+}
+
 .container-form {
   background-color: $color-background;
   color: $color-white;

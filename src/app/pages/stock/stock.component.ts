@@ -33,7 +33,6 @@ export class StockComponent implements OnInit {
         visible: false,
         products: item.stock.map((product: ProductStocks) => ({
           ...product,
-          quantity: 0
         }))
       }));
       console.log('Dados mapeados:', this.stocks);

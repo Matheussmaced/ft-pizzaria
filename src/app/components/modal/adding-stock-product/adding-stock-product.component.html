@@ -19,6 +19,22 @@
                 <option value="LITRO (L).">LITRO (L).</option>
                 <option value="GRADE.">GRADE.</option>
               </select>
+
+              <div class="select-container">
+                <label for="#">CATEGORIA</label>
+                <select [(ngModel)]="formData.categoryId" name="categoryId" class="category" required>
+                  <option value="" disabled selected>SELECIONE</option>
+                  <option *ngFor="let category of categories" [value]="category.id">
+                    {{ category.name }}
+                  </option>
+                </select>
+              </div>
+
+              <label for="#">DESCRIÇÃO</label>
+              <input type="text" placeholder="Insira a descrição aqui" [(ngModel)]="formData.description" name="quantity" />
+
+              <label for="#">PREÇO</label>
+              <input type="number" placeholder="Insira o preço aqui" [(ngModel)]="formData.price" name="quantity" />
             </div>
 
           <div class="buttons-container">
