@@ -21,7 +21,8 @@
         <ng-container *ngFor="let table of tables | slice:0:visibleTables">
           <app-buttons-table
             [numberTable]="table.numberTable"
-            [routerLink]="['/specific-table-screen']">
+            [routerLink]="['/specific-table-screen', table.numberTable]"
+            [queryParams]="{ tableId: table.numberTable }">
           </app-buttons-table>
         </ng-container>
       </div>

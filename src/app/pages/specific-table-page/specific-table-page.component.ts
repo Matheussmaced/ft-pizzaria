@@ -8,6 +8,7 @@ import { ProductsService } from '../../services/products.service';
 import { Category } from '../../../model/Category';
 import { HttpClientModule } from '@angular/common/http';
 import { Snacks } from '../../../model/Snacks';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-specific-table-page',
@@ -19,10 +20,18 @@ import { Snacks } from '../../../model/Snacks';
 })
 export class SpecificTablePageComponent implements OnInit {
   categories: Category[] = [];
+  tableId!: number;
 
-  constructor(private productService: ProductsService) {}
+  constructor(private productService: ProductsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    // Obter o ID ou número da mesa da URL
+    this.route.params.subscribe(params => {
+      this.tableId = params['tableId'];
+      console.log('Mesa selecionada:', this.tableId); // Apenas para verificação
+    });
+
+    // Carregar os dados da mesa
     this.productService.getCategories().subscribe((data: any[]) => {
       this.categories = data.map(category => ({
         name: category.category,
