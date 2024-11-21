@@ -23,4 +23,15 @@ export class TablesService {
 
     return this.http.get<Tables[]>(this.apiUrl, { headers });
   }
+
+  addTable(tableData: { num: number }): Observable<Tables> {
+    const authToken = localStorage.getItem('authToken');
+    let headers = new HttpHeaders();
+
+    if (authToken) {
+      headers = headers.set('Authorization', `Bearer ${authToken}`);
+    }
+
+    return this.http.post<Tables>(this.apiUrl, tableData, { headers });
+  }
 }

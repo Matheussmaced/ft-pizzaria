@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TablesService } from '../../../services/tables.service';
 
 @Component({
   selector: 'app-adding-table-modal',
@@ -16,11 +17,25 @@ export class AddingTableModalComponent {
     numberTable: 0
   };
 
+  constructor(private tablesService: TablesService) {}
+
   onCancel(){
     this.closeModal.emit();
   }
 
   onSubmit():void{
-    console.log('Dados do Formulario: ', this.formData)
+    const tableData = { num: this.formData.numberTable };
+
+    this.tablesService.addTable(tableData).subscribe({
+      next: (response) => {
+        console.log('Mesa adicionada com sucesso:', response);
+        this.closeModal.emit(); // Fechar o modal após sucesso
+      },
+      error: (error) => {
+        console.error('Erro ao adicionar mesa:', error);
+      }
+    });
   }
+
+
 }

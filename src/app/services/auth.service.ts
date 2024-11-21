@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
-  private apiUrl = `${environment.apiUrl}/v1/login`;
+  private apiUrl = `${environment.apiUrl}/v1/auth`;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -23,7 +23,7 @@ export class AuthService {
 
     console.log('Enviando dados para login:', loginPayload);
 
-    return this.http.post<{ accessToken: string, role_id: string }>(`${environment.apiUrl}/v1/auth`, loginPayload).pipe(
+    return this.http.post<{ accessToken: string, role_id: string }>(this.apiUrl, loginPayload).pipe(
       map((response) => {
         console.log('Resposta da API:', response);
         console.log('Token retornado:', response.accessToken);  // Acessando o campo correto
