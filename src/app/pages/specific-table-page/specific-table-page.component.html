@@ -23,7 +23,7 @@
         </span>
 
         <div class="value-and-buttons">
-          <span>R$ {{ product.price }},00</span>
+          <span class="product-span">R$ {{ product.price }},00</span>
 
           <div class="buttons">
             <button class="minus" (click)="minusValue(i, j)"> - </button>
@@ -38,4 +38,8 @@
   <div class="btn-final">
     <app-button-header nameButton="RELATÓRIO"></app-button-header>
   </div>
+
+  <div class="btn-add-order">
+    <button (click)="addOrder()">ADICIONAR PEDIDO</button>
+   </div>
 </div>

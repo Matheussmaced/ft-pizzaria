@@ -151,6 +151,30 @@
   }
 }
 
+.btn-add-order{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+
+  button{
+      padding: 0.4rem 1.12rem;
+      background-color: $color-secondary-green;
+      color: $color-white;
+      border: none;
+
+      font-family: $font-konkhmer;
+
+      cursor: pointer;
+
+      transition: 0.5s;
+
+      &:hover{
+        transform: scale(1.05);
+      }
+    }
+}
+
 .btn-final{
   display: none;
 }

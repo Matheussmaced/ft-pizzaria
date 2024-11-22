@@ -9,6 +9,9 @@ import { Category } from '../../../model/Category';
 import { HttpClientModule } from '@angular/common/http';
 import { Snacks } from '../../../model/Snacks';
 import { ActivatedRoute } from '@angular/router';
+import { CreateOrderDTO } from '../../../DTO/createOrderDTO';
+import { Order_itemsDTO } from '../../../DTO/order_itemsDTO';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-specific-table-page',
@@ -22,7 +25,16 @@ export class SpecificTablePageComponent implements OnInit {
   categories: Category[] = [];
   tableId!: number;
 
-  constructor(private productService: ProductsService, private route: ActivatedRoute) {}
+  accumulatedOrder: CreateOrderDTO = {
+    total: 0,
+    title: '',
+    order_items: []
+  };
+
+  constructor(private productService: ProductsService,
+              private route: ActivatedRoute,
+              private orderService: OrderService
+             ) {}
 
   ngOnInit(): void {
     // Obter o ID ou número da mesa da URL
@@ -59,5 +71,61 @@ export class SpecificTablePageComponent implements OnInit {
     } else {
       alert("Não é possível diminuir");
     }
+  }
+
+  addOrder(): void {
+    const newOrderItems: Order_itemsDTO[] = [];
+    let newTotal = 0;
+
+    // Criar novo pedido com base nos produtos
+    this.categories.forEach(category => {
+      category.snacks.forEach(snack => {
+        if (snack.amount > 0) {
+          const subTotal = snack.amount * snack.price;
+          newTotal += subTotal;
+
+          // Adicionar ao array de novos pedidos
+          newOrderItems.push({
+            quantity: snack.amount,
+            product_id: String(snack.id), // Garantir que o ID é string
+            sub_total: subTotal
+          });
+        }
+      });
+    });
+
+    if (newOrderItems.length === 0) {
+      alert('Não há pedidos para a mesa!');
+      return;
+    }
+
+    // Atualizar o pedido acumulado
+    newOrderItems.forEach(newItem => {
+      const existingItem = this.accumulatedOrder.order_items.find(
+        item => item.product_id === newItem.product_id
+      );
+
+      if (existingItem) {
+        existingItem.quantity += newItem.quantity;
+        existingItem.sub_total += newItem.sub_total;
+      } else {
+        this.accumulatedOrder.order_items.push(newItem);
+      }
+    });
+
+    this.accumulatedOrder.total += newTotal;
+    this.accumulatedOrder.title = `Venda mesa ${this.tableId}`;
+
+    // Enviar pedido acumulado para a API
+    this.orderService.createOrder(this.accumulatedOrder).subscribe({
+      next: response => {
+        console.log('Pedido enviado com sucesso:', response);
+        alert('Pedido enviado com sucesso!');
+      },
+      error: err => {
+        console.error('Erro ao enviar pedido:', err);
+        alert('Erro ao enviar pedido!');
+      }
+    });
   }
 }
