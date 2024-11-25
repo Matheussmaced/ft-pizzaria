@@ -21,7 +21,7 @@ export class AddingSnacksMenuComponent implements OnInit {
 
   formData = {
     name: '',
-    category: '',
+    categoryId: '', // Alterei para categoryId com 'Id' maiúsculo
     description: '',
     price: 0,
   };
@@ -29,14 +29,17 @@ export class AddingSnacksMenuComponent implements OnInit {
   constructor ( private productsService: ProductsService ) {}
 
   ngOnInit(): void {
-    this.productsService.getCategories().subscribe((data: any[]) => {
+    this.productsService.getCategoriesModal().subscribe((data: any[]) => {
+      console.log('Dados retornados da API:', data);  // Loga os dados para ver a estrutura
+
       this.categories = data.map(category => ({
-        name: category.category,
+        id: category.id,  // Certifique-se que `category.id` é o valor correto
+        name: category.name,  // Ajuste para `category.name` ou o campo correto
         visible: false,
-        snacks: category.snacks.map((snack: Snacks) => ({
+        snacks: category.snacks ? category.snacks.map((snack: Snacks) => ({
           ...snack,
           amount: 0
-        }))
+        })) : []
       }));
     });
   }
@@ -55,7 +58,7 @@ export class AddingSnacksMenuComponent implements OnInit {
 
   onSubmit(): void {
     const selectedCategory = this.categories.find(
-      (category) => category.name === this.formData.category
+      (category) => String(category.id) === String(this.formData.categoryId) // Usei categoryId aqui
     );
 
     if (!selectedCategory) {
@@ -64,21 +67,23 @@ export class AddingSnacksMenuComponent implements OnInit {
       return;
     }
 
-
     const createItemDto: CreateItemDTO = {
       name: this.formData.name,
       description: this.formData.description,
       price: this.formData.price,
+      is_snack: 1, // Fixando como lanche
+      category_id: this.formData.categoryId, // Aqui também usei categoryId
     };
 
+    console.log('Enviando os seguintes dados para o backend:', createItemDto);
 
     this.productsService.addProduct(createItemDto).subscribe(
-      (response) => {
+      (response: Snacks) => {
         console.log('Produto adicionado com sucesso:', response);
 
         selectedCategory.snacks.push({
-          ...response,
-          amount: 0,
+          ...response, // O backend retorna o snack completo, incluindo o ID
+          amount: 0, // Garante que o campo 'amount' seja inicializado
         });
 
         alert('Produto adicionado com sucesso!');

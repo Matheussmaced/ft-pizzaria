@@ -34,6 +34,7 @@ export class SpecificDeskReportComponent {
     // Carregar os dados da mesa
     this.productService.getCategories().subscribe((data: any[]) => {
       this.categories = data.map(category => ({
+        id: category.id,
         name: category.category,
         visible: false,
         snacks: category.snacks.map((snack: Snacks) => ({

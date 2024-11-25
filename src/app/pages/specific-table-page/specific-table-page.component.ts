@@ -36,25 +36,30 @@ export class SpecificTablePageComponent implements OnInit {
               private orderService: OrderService
              ) {}
 
-  ngOnInit(): void {
-    // Obter o ID ou número da mesa da URL
-    this.route.params.subscribe(params => {
-      this.tableId = params['tableId'];
-      console.log('Mesa selecionada:', this.tableId); // Apenas para verificação
-    });
+      ngOnInit(): void {
+        this.route.params.subscribe(params => {
+        this.tableId = params['tableId'];
+        console.log('Mesa selecionada:', this.tableId);
+        });
 
-    // Carregar os dados da mesa
-    this.productService.getCategories().subscribe((data: any[]) => {
-      this.categories = data.map(category => ({
-        name: category.category,
-        visible: false,
-        snacks: category.snacks.map((snack: Snacks) => ({
-          ...snack,
-          amount: 0
-        }))
-      }));
-    });
-  }
+        this.productService.getCategories().subscribe((data: any[]) => {
+          this.categories = data.map(category => ({
+            id: category.id,
+            name: category.category,
+            visible: false,
+            snacks: category.snacks.map((snack: Snacks) => ({
+              ...snack,
+              amount: 0
+            }))
+       }));
+      });
+
+     // Recuperar pedido acumulado do localStorage, se existir
+      const savedOrder = localStorage.getItem('currentOrder');
+      if (savedOrder) {
+      this.accumulatedOrder = JSON.parse(savedOrder);
+     }
+    }
 
   toggleMenu(categoryIndex: number): void {
     this.categories[categoryIndex].visible = !this.categories[categoryIndex].visible;
@@ -95,7 +100,7 @@ export class SpecificTablePageComponent implements OnInit {
     });
 
     if (newOrderItems.length === 0) {
-      alert('Não há pedidos para a mesa!');
+      alert('Não há pedidos para adicionar!');
       return;
     }
 
@@ -116,11 +121,26 @@ export class SpecificTablePageComponent implements OnInit {
     this.accumulatedOrder.total += newTotal;
     this.accumulatedOrder.title = `Venda mesa ${this.tableId}`;
 
+    // Salvar pedido no localStorage
+    localStorage.setItem('currentOrder', JSON.stringify(this.accumulatedOrder));
+    alert('Pedido adicionado com sucesso!');
+  }
+
+  finalizeOrder(): void {
+    const orderData = localStorage.getItem('currentOrder');
+    if (!orderData) {
+      alert('Nenhum pedido encontrado para finalizar!');
+      return;
+    }
+
+    const order: CreateOrderDTO = JSON.parse(orderData);
+
     // Enviar pedido acumulado para a API
-    this.orderService.createOrder(this.accumulatedOrder).subscribe({
+    this.orderService.createOrder(order).subscribe({
       next: response => {
         console.log('Pedido enviado com sucesso:', response);
         alert('Pedido enviado com sucesso!');
+        localStorage.removeItem('currentOrder'); // Limpar localStorage após o envio
       },
       error: err => {
         console.error('Erro ao enviar pedido:', err);

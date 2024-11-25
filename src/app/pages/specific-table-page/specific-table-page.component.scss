@@ -36,6 +36,8 @@
   justify-content: center;
   margin-top: 2rem;
 
+  gap: 1rem;
+
   button{
       padding: 0.4rem 1.12rem;
       background-color: $color-secondary-green;
@@ -51,6 +53,11 @@
       &:hover{
         transform: scale(1.05);
       }
+    }
+
+    .btn-add{
+      background-color: $color-background-error;
+      color: $color-background;
     }
 }
 

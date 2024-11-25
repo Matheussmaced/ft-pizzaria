@@ -10,12 +10,14 @@
           <div class="select-container">
             <div class="select">
               <label for="#">CATEGORIA</label>
-              <select [(ngModel)]="formData.category" name="category" class="category" required>
+              <select [(ngModel)]="formData.categoryId" name="categoryId" class="category" required>
                 <option value="" disabled selected>SELECIONE</option>
-                <option *ngFor="let category of categories" [value]="category.name">
+                <option *ngFor="let category of categories" [value]="category.id">
                   {{ category.name }}
                 </option>
               </select>
+
+              <p>{{ formData.categoryId }}</p>
             </div>
             <p (click)="openModal()">ADICIONAR NOVA CATEGORIA</p>
           </div>

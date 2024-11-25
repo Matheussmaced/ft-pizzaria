@@ -27,14 +27,22 @@ export class EditMenuComponent {
 
   ngOnInit(): void {
     this.productsService.getCategories().subscribe((data: any[]) => {
-      this.categories = data.map(category => ({
-        name: category.category,
-        visible: false,
-        snacks: category.snacks.map((snack: Snacks) => ({
-          ...snack,
-          amount: 0
-        }))
-      }));
+      // Verifique se 'data' está definido e se é um array
+      if (Array.isArray(data)) {
+        this.categories = data.map(category => ({
+          id: category.id,
+          name: category.category,
+          visible: false,
+          snacks: category.snacks.map((snack: Snacks) => ({
+            ...snack,
+            amount: 0
+          }))
+        }));
+      } else {
+        console.error('Dados inválidos recebidos:', data); // Caso os dados não sejam um array válido
+      }
+    }, (error) => {
+      console.error('Erro ao carregar categorias:', error);
     });
   }
 
