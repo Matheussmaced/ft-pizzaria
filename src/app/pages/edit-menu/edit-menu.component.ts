@@ -25,6 +25,8 @@ export class EditMenuComponent {
   modal:boolean = false;
   modalEditProduct:boolean = false;
 
+  idProduct:string = "";
+
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
@@ -73,8 +75,16 @@ export class EditMenuComponent {
     this.modal = false;
   }
 
-  openModalEditProduct():void{
+  openModalEditProduct( id:string | undefined):void{
+    if (!id) {
+      console.error('ID do produto está indefinido');
+      alert('Ocorreu um erro. Produto inválido.');
+      return;
+    }
+
     this.modalEditProduct = !this.modal;
+
+    this.idProduct = id;
   }
 
   closeModalEditProduct():void{

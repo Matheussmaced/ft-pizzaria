@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
 import { Snacks } from '../../../../model/Snacks';
 import { CreateItemDTO } from '../../../../DTO/createItemDTO';
@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class EditProductComponent {
   @Output() closeModal = new EventEmitter<void>();
+  @Input() idProduct = "";
   categories: Category[] = [];
   modal:boolean = false;
 
@@ -33,6 +34,7 @@ export class EditProductComponent {
   ngOnInit(): void {
     this.productsService.getCategoriesModal().subscribe((data: any[]) => {
       console.log('Dados retornados da API:', data);  // Loga os dados para ver a estrutura
+      console.log('id produto' + this.idProduct)
 
       this.categories = data.map(category => ({
         id: category.id,  // Certifique-se que `category.id` é o valor correto

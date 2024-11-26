@@ -5,7 +5,7 @@
 
   <div class="modal">
     <app-adding-snacks-menu *ngIf="modal" (closeModal)="closeModal()"></app-adding-snacks-menu>
-    <app-edit-product *ngIf="modalEditProduct" (closeModal)="closeModalEditProduct()"></app-edit-product>
+    <app-edit-product *ngIf="modalEditProduct" (closeModal)="closeModalEditProduct()" [idProduct]="idProduct"></app-edit-product>
   </div>
 
   <div class="header">
@@ -31,7 +31,7 @@
           <span>R$ {{ product.price }},00</span>
 
           <div class="buttons">
-            <button class="edit" (click)="openModalEditProduct()" > <lucide-icon name="pencil" size="20"></lucide-icon> </button>
+            <button class="edit" (click)="openModalEditProduct( product.id)" > <lucide-icon name="pencil" size="20"></lucide-icon> </button>
             <button class="trash"> <lucide-icon name="trash-2" size="20"></lucide-icon> </button>
           </div>
         </div>
