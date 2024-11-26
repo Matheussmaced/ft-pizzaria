@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { Category } from '../../model/Category'
 import { ProductStocks } from '../../model/ProductStock';
 import { Snacks } from '../../model/Snacks';
@@ -43,7 +43,6 @@ export class ProductsService {
     return this.http.get<Category[]>(`${environment.apiUrl}/v1/products?id=Product%20ID&type=snack&page=1&limit=8`, { headers });
   }
 
-  // Método para adicionar produto (o mesmo que você já tem)
   addProduct(createItemDto: CreateItemDTO): Observable<Snacks> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -56,5 +55,34 @@ export class ProductsService {
     const headers = new HttpHeaders().set( 'Authorization', `Bearer ${token}`);
 
     return this.http.put<Snacks>(`${environment.apiUrl}/v1/products/${idProduct}`, editItemDto, { headers })
+  }
+
+  deleteProduct(idProduct: string) {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('Token de autenticação não encontrado.');
+      alert('Erro: Não foi possível autenticar a requisição.');
+      return; // Retorna vazio para evitar chamada sem token.
+    }
+
+    // Exibe a confirmação antes de proceder com a exclusão
+    const userConfirmed = confirm("Tem certeza que deseja deletar esse item?");
+    if (!userConfirmed) {
+      console.log('Ação de exclusão cancelada pelo usuário.');
+      return; // Cancela a execução do método
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<Snacks>(
+      `${environment.apiUrl}/v1/products/${idProduct}`,
+      { headers }
+    ).pipe(
+      catchError((error) => {
+        console.error('Erro ao deletar produto:', error);
+        alert('Erro ao deletar o produto. Tente novamente.');
+        return throwError(() => new Error('Erro ao realizar a requisição DELETE'));
+      })
+    );
   }
 }

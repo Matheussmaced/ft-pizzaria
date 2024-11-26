@@ -90,4 +90,28 @@ export class EditMenuComponent {
   closeModalEditProduct():void{
     this.modalEditProduct = false;
   }
+
+  deleteProduct(id: string | undefined): void {
+    if (!id) {
+      console.error('ID do produto está indefinido');
+      alert('Ocorreu um erro. Produto inválido.');
+      return;
+    }
+
+    this.productsService.deleteProduct(id)?.subscribe(
+      () => {
+        console.log('Produto deletado com sucesso:', id);
+        // Atualizar a lista local de categorias removendo o produto
+        this.categories = this.categories.map(category => ({
+          ...category,
+          snacks: category.snacks.filter(snack => snack.id !== id)
+        }));
+        alert('Produto removido com sucesso!');
+      },
+      (error) => {
+        console.error('Erro ao deletar produto:', error);
+        alert('Erro ao remover o produto. Tente novamente.');
+      }
+    );
+  }
 }
