@@ -9,11 +9,12 @@ import { Category } from '../../../model/Category';
 import { HttpClientModule } from '@angular/common/http';
 import { AddingSnacksMenuComponent } from "../../components/modal/adding-snacks-menu/adding-snacks-menu.component";
 import { Snacks } from '../../../model/Snacks';
+import { EditProductComponent } from "../../components/modal/edit-product/edit-product.component";
 
 @Component({
   selector: 'app-edit-menu',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, AddingSnacksMenuComponent],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, AddingSnacksMenuComponent, EditProductComponent],
   templateUrl: './edit-menu.component.html',
   styleUrl: './edit-menu.component.scss',
   providers: [ProductsService]
@@ -22,6 +23,7 @@ export class EditMenuComponent {
   categories: Category[] = [];
 
   modal:boolean = false;
+  modalEditProduct:boolean = false;
 
   constructor(private productsService: ProductsService) {}
 
@@ -69,5 +71,13 @@ export class EditMenuComponent {
 
   closeModal():void{
     this.modal = false;
+  }
+
+  openModalEditProduct():void{
+    this.modalEditProduct = !this.modal;
+  }
+
+  closeModalEditProduct():void{
+    this.modalEditProduct = false;
   }
 }

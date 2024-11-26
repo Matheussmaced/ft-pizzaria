@@ -6,6 +6,7 @@ import { Category } from '../../model/Category'
 import { ProductStocks } from '../../model/ProductStock';
 import { Snacks } from '../../model/Snacks';
 import { CreateItemDTO } from '../../DTO/createItemDTO';
+import { EditItemDTO } from '../../DTO/editItemDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,12 @@ export class ProductsService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.post<Snacks>(`${environment.apiUrl}/v1/products`, createItemDto, { headers });
+  }
+
+  editProduct( editItemDto: EditItemDTO, idProduct: string ): Observable<Snacks> {
+    const token = localStorage.getItem( 'authToken' );
+    const headers = new HttpHeaders().set( 'Authorization', `Bearer ${token}`);
+
+    return this.http.put<Snacks>(`${environment.apiUrl}/v1/products/${idProduct}`, editItemDto, { headers })
   }
 }
