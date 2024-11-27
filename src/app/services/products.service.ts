@@ -43,6 +43,17 @@ export class ProductsService {
     return this.http.get<Category[]>(`${environment.apiUrl}/v1/products?type=snack`, { headers });
   }
 
+  getProductById ( idProduct: string ): Observable<Snacks> {
+    const authToken = localStorage.getItem('authToken');
+    let headers = new HttpHeaders();
+
+    if (authToken) {
+      headers = headers.set('Authorization', `Bearer ${authToken}`);
+    }
+
+    return this.http.get<Snacks>(`${environment.apiUrl}/v1/products/${idProduct}`)
+  }
+
   addProduct(createItemDto: CreateItemDTO): Observable<Snacks> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

@@ -4,5 +4,6 @@ export interface ProductStocks {
   unit: string,
   quantity?: number,
   description: string,
+  category_id?: string,
   visible: boolean
 }

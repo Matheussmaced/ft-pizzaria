@@ -6,6 +6,7 @@ import { Category } from '../../../../model/Category';
 import { AddingNewCategoryComponent } from "../adding-new-category/adding-new-category.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { EditItemDTO } from '../../../../DTO/editItemDTO';
 
 @Component({
   selector: 'app-edit-product',
@@ -16,11 +17,15 @@ import { FormsModule } from '@angular/forms';
 })
 export class EditProductComponent {
   @Output() closeModal = new EventEmitter<void>();
-  @Input() idProduct = "";
+
+  @Input() productId = "";
+  @Input() categodyId = "";
+
   categories: Category[] = [];
   modal:boolean = false;
 
   selectedProductId: string | null = null;
+
 
   formData = {
     name: '',
@@ -34,7 +39,8 @@ export class EditProductComponent {
   ngOnInit(): void {
     this.productsService.getCategoriesModal().subscribe((data: any[]) => {
       console.log('Dados retornados da API:', data);  // Loga os dados para ver a estrutura
-      console.log('id produto' + this.idProduct)
+      console.log('id produto' + this.productId)
+      console.log('id da categoria' + this.categodyId)
 
       this.categories = data.map(category => ({
         id: category.id,  // Certifique-se que `category.id` é o valor correto
@@ -61,41 +67,26 @@ export class EditProductComponent {
   }
 
   onSubmit(): void {
-    const selectedCategory = this.categories.find(
-      (category) => String(category.id) === String(this.formData.categoryId) // Usei categoryId aqui
-    );
-
-    if (!selectedCategory) {
-      console.error('Categoria não encontrada');
-      alert('A categoria selecionada não existe.');
-      return;
-    }
-
-    const createItemDto: CreateItemDTO = {
+    const editItemDto: EditItemDTO = {
       name: this.formData.name,
       description: this.formData.description,
       price: this.formData.price,
       is_snack: 1, // Fixando como lanche
-      category_id: this.formData.categoryId, // Aqui também usei categoryId
+      category_id: this.categodyId, // Aqui também usei categoryId
     };
 
-    console.log('Enviando os seguintes dados para o backend:', createItemDto);
+    console.log('Enviando os seguintes dados para o backend:', editItemDto);
 
-    this.productsService.addProduct(createItemDto).subscribe(
+    this.productsService.editProduct(editItemDto, this.productId).subscribe(
       (response: Snacks) => {
-        console.log('Produto adicionado com sucesso:', response);
+        console.log('Produto atualizado com sucesso:', response);
 
-        selectedCategory.snacks.push({
-          ...response, // O backend retorna o snack completo, incluindo o ID
-          amount: 0, // Garante que o campo 'amount' seja inicializado
-        });
-
-        alert('Produto adicionado com sucesso!');
+        alert('Produto atualizado com sucesso!');
         this.closeModal.emit();
       },
       (error) => {
-        console.error('Erro ao adicionar produto:', error);
-        alert('Erro ao adicionar o produto. Tente novamente.');
+        console.error('Erro ao atualizar o produto:', error);
+        alert('Erro ao atualizar o produto. Tente novamente.');
       }
     );
   }

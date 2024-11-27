@@ -25,7 +25,9 @@ export class EditMenuComponent {
   modal:boolean = false;
   modalEditProduct:boolean = false;
 
-  idProduct:string = "";
+  productId:string = "";
+  categoryId: string = "";
+
 
   constructor(private productsService: ProductsService) {}
 
@@ -75,8 +77,8 @@ export class EditMenuComponent {
     this.modal = false;
   }
 
-  openModalEditProduct( id:string | undefined):void{
-    if (!id) {
+  openModalEditProduct( productIdApi:string | undefined, categoryIdApi:string | undefined):void{
+    if (!productIdApi || !categoryIdApi) {
       console.error('ID do produto está indefinido');
       alert('Ocorreu um erro. Produto inválido.');
       return;
@@ -84,7 +86,8 @@ export class EditMenuComponent {
 
     this.modalEditProduct = !this.modal;
 
-    this.idProduct = id;
+    this.productId = productIdApi;
+    this.categoryId = categoryIdApi;
   }
 
   closeModalEditProduct():void{

@@ -5,5 +5,6 @@ export interface Snacks {
   price: number,
   quentatity?: number,
   unit?: string,
-  amount: number
+  amount: number,
+  category_id?: string
 }
