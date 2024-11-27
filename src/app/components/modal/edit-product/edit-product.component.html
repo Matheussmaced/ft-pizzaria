@@ -5,10 +5,10 @@
       <form (ngSubmit)="onSubmit()">
         <div class="container-inputs">
           <label for="#">NOME DO ITEM</label>
-          <input type="text" placeholder="Insira o nome aqui" [(ngModel)]="formData.name" name="name" required />
+          <input type="text" placeholder="Insira o nome aqui" [(ngModel)]="formData.name" name="name"  />
 
           <label for="#">DESCRIÇÃO</label>
-          <input type="text" placeholder="Insira a descrição aqui" [(ngModel)]="formData.description" name="description" />
+          <input type="text" placeholder="Insira a descrição aqui" [(ngModel)]="formData.description" name="description"  />
 
           <label for="#">PREÇO</label>
           <input type="number" placeholder="Insira o preço aqui" [(ngModel)]="formData.price" name="price" />

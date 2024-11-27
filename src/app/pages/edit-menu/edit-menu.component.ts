@@ -77,17 +77,17 @@ export class EditMenuComponent {
     this.modal = false;
   }
 
-  openModalEditProduct( productIdApi:string | undefined, categoryIdApi:string | undefined):void{
+  openModalEditProduct(productIdApi: string | undefined, categoryIdApi: string | undefined): void {
     if (!productIdApi || !categoryIdApi) {
-      console.error('ID do produto está indefinido');
-      alert('Ocorreu um erro. Produto inválido.');
+      console.error('ID do produto ou categoria está indefinido');
+      alert('Ocorreu um erro. Produto ou categoria inválido.');
       return;
     }
 
-    this.modalEditProduct = !this.modal;
+    this.productId = productIdApi; // Define o ID do produto
+    this.categoryId = categoryIdApi; // Define o ID da categoria
 
-    this.productId = productIdApi;
-    this.categoryId = categoryIdApi;
+    this.modalEditProduct = true; // Abre o modal
   }
 
   closeModalEditProduct():void{

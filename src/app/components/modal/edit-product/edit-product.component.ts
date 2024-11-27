@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
 import { Snacks } from '../../../../model/Snacks';
 import { CreateItemDTO } from '../../../../DTO/createItemDTO';
@@ -7,6 +7,7 @@ import { AddingNewCategoryComponent } from "../adding-new-category/adding-new-ca
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EditItemDTO } from '../../../../DTO/editItemDTO';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-edit-product',
@@ -29,22 +30,21 @@ export class EditProductComponent {
 
   formData = {
     name: '',
-    categoryId: '', // Alterei para categoryId com 'Id' maiúsculo
+    categoryId: '',
     description: '',
     price: 0,
   };
 
-  constructor ( private productsService: ProductsService ) {}
+  constructor ( private productsService: ProductsService, private cdr: ChangeDetectorRef ) {}
 
   ngOnInit(): void {
-    this.productsService.getCategoriesModal().subscribe((data: any[]) => {
-      console.log('Dados retornados da API:', data);  // Loga os dados para ver a estrutura
-      console.log('id produto' + this.productId)
-      console.log('id da categoria' + this.categodyId)
+    console.log(this.productId);
 
+    // Carrega categorias para uso geral
+    this.productsService.getCategoriesModal().subscribe((data: any[]) => {
       this.categories = data.map(category => ({
-        id: category.id,  // Certifique-se que `category.id` é o valor correto
-        name: category.name,  // Ajuste para `category.name` ou o campo correto
+        id: category.id,
+        name: category.name,
         visible: false,
         snacks: category.snacks ? category.snacks.map((snack: Snacks) => ({
           ...snack,
@@ -52,7 +52,44 @@ export class EditProductComponent {
         })) : []
       }));
     });
+
+    // Carrega informações do produto pelo ID
+    if (this.productId) {
+      this.productsService.getProductById(this.productId).subscribe(
+        (response: any[]) => {
+          console.log('Produto carregado:', response);
+
+          if (response.length > 0) {
+            const product = response[0];
+
+            console.log(product);
+
+            if (product.snacks && product.snacks.length > 0) {
+              const snack = product.snacks[0];
+
+              this.formData = {
+                name: snack.name || '',
+                categoryId: this.categodyId,
+                description: snack.description || '',
+                price: snack.price || 0,
+              };
+            }
+          } else {
+            console.error('Nenhum produto encontrado para o ID fornecido.');
+            alert('Erro: Nenhum produto encontrado.');
+          }
+        },
+        (error) => {
+          console.error('Erro ao carregar o produto:', error);
+          alert('Erro ao carregar o produto. Verifique se o ID está correto.');
+        }
+      );
+    } else {
+      console.error('ID do produto não foi fornecido.');
+      alert('Erro: ID do produto não especificado.');
+    }
   }
+
 
   onCancel(){
     this.closeModal.emit();
@@ -71,8 +108,8 @@ export class EditProductComponent {
       name: this.formData.name,
       description: this.formData.description,
       price: this.formData.price,
-      is_snack: 1, // Fixando como lanche
-      category_id: this.categodyId, // Aqui também usei categoryId
+      is_snack: 1,
+      category_id: this.categodyId,
     };
 
     console.log('Enviando os seguintes dados para o backend:', editItemDto);

@@ -43,7 +43,7 @@ export class ProductsService {
     return this.http.get<Category[]>(`${environment.apiUrl}/v1/products?type=snack`, { headers });
   }
 
-  getProductById ( idProduct: string ): Observable<Snacks> {
+  getProductById ( idProduct: string ): Observable<Snacks[]> {
     const authToken = localStorage.getItem('authToken');
     let headers = new HttpHeaders();
 
@@ -51,7 +51,7 @@ export class ProductsService {
       headers = headers.set('Authorization', `Bearer ${authToken}`);
     }
 
-    return this.http.get<Snacks>(`${environment.apiUrl}/v1/products/${idProduct}`)
+    return this.http.get<Snacks[]>(`${environment.apiUrl}/v1/products?id=${idProduct}&type=snack`)
   }
 
   addProduct(createItemDto: CreateItemDTO): Observable<Snacks> {
