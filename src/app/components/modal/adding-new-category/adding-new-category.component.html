@@ -2,9 +2,9 @@
   <div class="main-container">
       <div class="container-form">
       <h1>ADICIONAR NOVA CATEGORIA</h1>
-      <form action="#">
+      <form (ngSubmit)="onSubmit()">
         <label for="#">Nome da categoria</label>
-        <input type="text" placeholder="Insira o nome aqui">
+        <input type="text" placeholder="Insira o nome aqui" [(ngModel)]="formData.name" name="name">
 
         <div class="buttons-container">
           <button class="btn-cancel" type="button" (click)="onCancel()">CANCELAR</button>
