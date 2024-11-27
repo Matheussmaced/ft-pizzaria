@@ -22,6 +22,10 @@ export class StockComponent implements OnInit {
   stocks: Stock[] = [];
 
   modal:boolean = false;
+  modalEditStock:boolean = false;
+
+  stockId:string = "";
+  categoryId: string = "";
 
   constructor(private stockService: StockService) {}
 
@@ -35,7 +39,6 @@ export class StockComponent implements OnInit {
           ...product,
         }))
       }));
-      console.log('Dados mapeados:', this.stocks);
     });
   }
 
@@ -49,5 +52,21 @@ export class StockComponent implements OnInit {
 
   closeModal():void{
     this.modal = false;
+  }
+
+  openModalEditStock(stockIdApi: string | undefined, categoryIdApi: string | undefined): void {
+    if (!stockIdApi || !categoryIdApi) {
+      console.log(this.stockId, this.categoryId)
+      console.error('ID do produto ou categoria está indefinido');
+      alert('Ocorreu um erro. Produto ou categoria inválido.');
+      return;
+    }
+
+    this.stockId = stockIdApi;
+    this.categoryId = categoryIdApi;
+
+    this.modalEditStock = true;
+
+    console.log(this.stockId, this.categoryId)
   }
 }

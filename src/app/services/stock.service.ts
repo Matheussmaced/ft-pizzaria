@@ -32,4 +32,11 @@ export class StockService {
 
     return this.http.post<CreateStockDTO>(this.apiUrlPost, createStockDTO, { headers })
   }
+
+  editStock(editStockDTO: CreateStockDTO, idProduct: string): Observable<Stock> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.put<Stock>(`${environment.apiUrl}/v1/products/${idProduct}?type=stock`, editStockDTO, { headers });
+  }
 }
