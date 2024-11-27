@@ -40,7 +40,7 @@ export class ProductsService {
       headers = headers.set('Authorization', `Bearer ${authToken}`);
     }
 
-    return this.http.get<Category[]>(`${environment.apiUrl}/v1/products?id=Product%20ID&type=snack&page=1&limit=8`, { headers });
+    return this.http.get<Category[]>(`${environment.apiUrl}/v1/products?type=snack`, { headers });
   }
 
   addProduct(createItemDto: CreateItemDTO): Observable<Snacks> {

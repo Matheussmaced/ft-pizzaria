@@ -10,7 +10,7 @@ import { CreateItemDTO } from '../../DTO/createItemDTO';
   providedIn: 'root'
 })
 export class StockService {
-  private apiUrl = `${environment.apiUrl}/v1/products?id=Product%20ID&type=stock&page=1&limit=8`;
+  private apiUrl = `${environment.apiUrl}/v1/products?type=stock`;
   private apiUrlPost = `${environment.apiUrl}/v1/products`;
 
   constructor( private http: HttpClient ) {}
