@@ -9,11 +9,12 @@ import { StockService } from '../../services/stock.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AddingStockProductComponent } from "../../components/modal/adding-stock-product/adding-stock-product.component";
 import { ProductStocks } from '../../../model/ProductStock';
+import { EditStockComponent } from "../../components/modal/edit-stock/edit-stock.component";
 
 @Component({
   selector: 'app-stock',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, AddingStockProductComponent],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, AddingStockProductComponent, EditStockComponent],
   templateUrl: './stock.component.html',
   styleUrl: './stock.component.scss',
   providers: [ StockService ]
@@ -55,6 +56,8 @@ export class StockComponent implements OnInit {
   }
 
   openModalEditStock(stockIdApi: string | undefined, categoryIdApi: string | undefined): void {
+    console.log('Abrindo modal de edição:', stockIdApi, categoryIdApi);
+
     if (!stockIdApi || !categoryIdApi) {
       console.log(this.stockId, this.categoryId)
       console.error('ID do produto ou categoria está indefinido');
@@ -66,7 +69,9 @@ export class StockComponent implements OnInit {
     this.categoryId = categoryIdApi;
 
     this.modalEditStock = true;
+  }
 
-    console.log(this.stockId, this.categoryId)
+  closeModalEditProduct():void{
+    this.modalEditStock = false;
   }
 }

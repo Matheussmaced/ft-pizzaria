@@ -6,6 +6,7 @@
 
     <div class="modal">
       <app-adding-stock-product *ngIf="modal" (closeModal)="closeModal()"></app-adding-stock-product>
+      <app-edit-stock *ngIf="modalEditStock" (closeModal)="closeModal()" [stockId]="stockId" [categodyId]="categoryId"></app-edit-stock>
     </div>
 
     <div class="informations">
