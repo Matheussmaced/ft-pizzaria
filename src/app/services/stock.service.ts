@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { Stock } from '../../model/Stock';
 import { CreateStockDTO } from '../../DTO/createStockDTO';
-import { CreateItemDTO } from '../../DTO/createItemDTO';
 import { Category } from '../../model/Category';
 
 @Injectable({
@@ -64,5 +63,35 @@ export class StockService {
     }
 
     return this.http.get<Stock[]>(`${environment.apiUrl}/v1/products?id=${idProduct}&type=snack`)
+  }
+
+
+  deleteStock(idProduct: string) {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('Token de autenticação não encontrado.');
+      alert('Erro: Não foi possível autenticar a requisição.');
+      return; // Retorna vazio para evitar chamada sem token.
+    }
+
+    // Exibe a confirmação antes de proceder com a exclusão
+    const userConfirmed = confirm("Tem certeza que deseja deletar esse item?");
+    if (!userConfirmed) {
+      console.log('Ação de exclusão cancelada pelo usuário.');
+      return; // Cancela a execução do método
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<Stock>(
+      `${environment.apiUrl}/v1/products/${idProduct}`,
+      { headers }
+    ).pipe(
+      catchError((error) => {
+        console.error('Erro ao deletar produto:', error);
+        alert('Erro ao deletar o produto. Tente novamente.');
+        return throwError(() => new Error('Erro ao realizar a requisição DELETE'));
+      })
+    );
   }
 }

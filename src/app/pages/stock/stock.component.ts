@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddingStockProductComponent } from "../../components/modal/adding-stock-product/adding-stock-product.component";
 import { ProductStocks } from '../../../model/ProductStock';
 import { EditStockComponent } from "../../components/modal/edit-stock/edit-stock.component";
+import { Category } from '../../../model/Category';
 
 @Component({
   selector: 'app-stock',
@@ -21,6 +22,7 @@ import { EditStockComponent } from "../../components/modal/edit-stock/edit-stock
 })
 export class StockComponent implements OnInit {
   stocks: Stock[] = [];
+  categories: Category[] = [];
 
   modal:boolean = false;
   modalEditStock:boolean = false;
@@ -73,5 +75,29 @@ export class StockComponent implements OnInit {
 
   closeModalEditProduct():void{
     this.modalEditStock = false;
+  }
+
+  deleteProduct(id: string | undefined): void {
+    if (!id) {
+      console.error('ID do produto está indefinido');
+      alert('Ocorreu um erro. Produto inválido.');
+      return;
+    }
+
+    this.stockService.deleteStock(id)?.subscribe(
+      () => {
+        console.log('Produto deletado com sucesso:', id);
+        // Atualizar a lista local de categorias removendo o produto
+        this.categories = this.categories.map(category => ({
+          ...category,
+          snacks: category.snacks.filter(stock => stock.id !== id)
+        }));
+        alert('Produto removido com sucesso!');
+      },
+      (error) => {
+        console.error('Erro ao deletar produto:', error);
+        alert('Erro ao remover o produto. Tente novamente.');
+      }
+    );
   }
 }

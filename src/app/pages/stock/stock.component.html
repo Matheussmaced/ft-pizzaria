@@ -6,7 +6,7 @@
 
     <div class="modal">
       <app-adding-stock-product *ngIf="modal" (closeModal)="closeModal()"></app-adding-stock-product>
-      <app-edit-stock *ngIf="modalEditStock" (closeModal)="closeModal()" [stockId]="stockId" [categodyId]="categoryId"></app-edit-stock>
+      <app-edit-stock *ngIf="modalEditStock" (closeModal)="closeModal()" [stockId]="stockId" [categoryId]="categoryId"></app-edit-stock>
     </div>
 
     <div class="informations">
@@ -26,14 +26,13 @@
       <div *ngFor="let product of stock.products; let j = index" class="product">
         <span class="informations-product">
           <h3>{{ product.name }}</h3>
-          <p> {{product.id}} </p>
         </span>
 
         <div class="value-and-buttons">
           <span> {{product.quantity}} {{ product.unit }}</span>
           <div class="buttons">
             <button class="edit" (click)="openModalEditStock( product.id, product.category_id)"><lucide-icon name="pencil"></lucide-icon></button>
-            <button class="trash"><lucide-icon name="trash-2"></lucide-icon></button>
+            <button class="trash"><lucide-icon name="trash-2" (click)="deleteProduct( product.id)"></lucide-icon></button>
           </div>
         </div>
       </div>
