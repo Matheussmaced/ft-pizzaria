@@ -9,67 +9,36 @@
     <app-button-header nameButton="RELATÓRIO"></app-button-header>
   </div>
 
-  <div class="menu">
-    <h2>HAMBURGUERS</h2>
-    <div class="product">
-      <span class="informations-product">
-        <h3>HAMBURGUER 1</h3>
-        <p>PÃO, ALFACE, CARNE DE HAMBURGUER, MOLHO</p>
-      </span>
+  <div class="menu" *ngIf="filteredOrders.length > 0; else noOrders">
+    <div *ngFor="let order of filteredOrders">
+      <h2>{{ order.title }}</h2>
+      <div *ngFor="let item of order.order_items" class="product">
+        <span class="informations-product">
+          <h3>{{ item.product.name }}</h3>
+          <p>{{ item.product.description }}</p>
+        </span>
 
-      <div class="value-and-buttons">
-        <span>R$ 10,00</span>
+        <div class="value-and-buttons">
+          <span>R$ {{ item.product.price | number: '1.2-2' }}</span>
 
-        <div class="buttons">
-          <button class="minus"> - </button>
-          <span class="value"> 1 </span>
-          <button class="plus"> + </button>
-          <button class="trash"><lucide-icon name="trash-2" size="24" size="19"></lucide-icon></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product">
-      <span class="informations-product">
-        <h3>HAMBURGUER 1</h3>
-        <p>PÃO, ALFACE, CARNE DE HAMBURGUER, MOLHO</p>
-      </span>
-
-      <div class="value-and-buttons">
-        <span>R$ 10,00</span>
-
-        <div class="buttons">
-          <button class="minus"> - </button>
-          <span class="value"> 1 </span>
-          <button class="plus"> + </button>
-          <button class="trash"><lucide-icon name="trash-2" size="24" size="19"></lucide-icon></button>
-        </div>
-      </div>
-    </div>
-
-    <h2>REFRIGERANTES</h2>
-
-
-    <div class="product">
-      <span class="informations-product">
-        <h3>REFRIGERANTE 2L</h3>
-      </span>
-
-      <div class="value-and-buttons">
-        <span>R$ 10,00</span>
-
-        <div class="buttons">
-          <button class="minus"> - </button>
-          <span class="value"> 1 </span>
-          <button class="plus"> + </button>
-          <button class="trash"><lucide-icon name="trash-2" size="24" size="19"></lucide-icon></button>
+          <div class="buttons">
+            <button class="minus" (click)="minusValue(order.id, item.product.id)"> - </button>
+            <span class="value"> {{ item.quantity }} </span>
+            <button class="plus" (click)="plusValue(order.id, item.product.id)"> + </button>
+            <button class="trash" (click)="removeItem(order.id, item.product.id)">
+              <lucide-icon name="trash-2" size="24" size="19"></lucide-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="summary">
       <span>
-        TOTAL DO PEDIDO: <h4>R$ 52,00</h4>
+        TOTAL DO PEDIDO:
+        <h4>
+          R$ {{ totalAmount | number: '1.2-2' }}
+        </h4>
       </span>
     </div>
     <div class="btn-container">
@@ -79,4 +48,10 @@
       </button>
     </div>
   </div>
+
+  <ng-template #noOrders>
+    <div class="no-content">
+      <p>NENHUM PEDIDO ENCONTRADO PARA ESTA MESA.</p>
+    </div>
+  </ng-template>
 </div>

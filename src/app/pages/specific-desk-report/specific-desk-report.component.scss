@@ -43,16 +43,13 @@
   width: 60%;
   margin: 0.8rem auto;
   color: $color-white;
-  padding: 0.8rem;
+  padding: 0 2rem 2rem 2rem;
   border: $color-white solid 1px;
   font-family: $font-konkhmer;
   border-radius: 6px;
 
   transition: 0.5s;
 
-  h2:first-child{
-    margin-top: 0rem !important;
-  }
   h2{
     margin-top: 1rem;
   }
@@ -212,6 +209,19 @@
 
 .btn-final{
   display: none;
+}
+
+.no-content{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 90%;
+
+  margin: 2rem auto;
+  color: $color-secondary-red;
+  font-family: $font-rubik;
+  font-size: 1.2rem;
+  font-weight: bolder;
 }
 
 //MOBILE
