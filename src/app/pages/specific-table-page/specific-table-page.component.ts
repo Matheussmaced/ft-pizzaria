@@ -8,7 +8,7 @@ import { ProductsService } from '../../services/products.service';
 import { Category } from '../../../model/Category';
 import { HttpClientModule } from '@angular/common/http';
 import { Snacks } from '../../../model/Snacks';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CreateOrderDTO } from '../../../DTO/createOrderDTO';
 import { Order_itemsDTO } from '../../../DTO/order_itemsDTO';
 import { OrderService } from '../../services/order.service';
@@ -16,7 +16,7 @@ import { OrderService } from '../../services/order.service';
 @Component({
   selector: 'app-specific-table-page',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule],
+  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, RouterLink],
   templateUrl: './specific-table-page.component.html',
   styleUrls: ['./specific-table-page.component.scss'],
   providers: [ProductsService]

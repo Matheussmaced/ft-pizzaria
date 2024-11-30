@@ -6,7 +6,7 @@
   <div class="header">
     <img src="/FT-PIZZARIA.png" alt="Logo da FT">
     <h1>MESA {{ tableId }}</h1>
-    <app-button-header nameButton="RELATÓRIO"></app-button-header>
+    <app-button-header nameButton="RELATÓRIO" [routerLink]="['/specific-desk-report', tableId]"></app-button-header>
   </div>
 
   <div *ngFor="let category of categories; let i = index" class="menu">
@@ -36,7 +36,7 @@
   </div>
 
   <div class="btn-final">
-    <app-button-header nameButton="RELATÓRIO"></app-button-header>
+    <app-button-header nameButton="RELATÓRIO" [routerLink]="['/specific-desk-report', tableId]"></app-button-header>
   </div>
 
   <div class="btn-add-order">
