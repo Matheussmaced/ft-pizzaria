@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class FinancialComponent implements OnInit {
   financials: Financial[] = [];
+  currentFinancial: Financial[] = [];
+
   filteredFinancials: Financial[] = [];
   years: number[] = [];
   selectedMonth: string = '';
@@ -62,6 +64,17 @@ export class FinancialComponent implements OnInit {
           this.financials = data;
           this.informsTransactions = this.financials;
           console.log('dados recebidos', this.informsTransactions);
+        },
+        (error) => {
+          console.log('Erro ao buscar dados financeiros', error);
+        }
+      )
+
+      this.financialService.getFinancialsByMonthCurrent(startDate, endDate).subscribe(
+        (data) => {
+          this.financials = data;
+          this.currentFinancial = this.financials;
+          console.log('dados recebidos', this.currentFinancial);
         },
         (error) => {
           console.log('Erro ao buscar dados financeiros', error);

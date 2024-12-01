@@ -21,9 +21,35 @@
   <div class="menu">
     <div class="body-summary">
       <div class="containers-summary">
-        <app-container-summary title="ENTRADAS DO MÊS" typeOfValueInformation="income" icon="CircleChevronUp" classIcon="iconUp" classMainContainer="main-container" [filteredMonth]="filteredFinancials"></app-container-summary>
-        <app-container-summary title="SAIDAS DO MÊS" typeOfValueInformation="expenses" icon="CircleChevronDown" classIcon="iconDown" classMainContainer="main-container" [filteredMonth]="filteredFinancials"></app-container-summary>
-        <app-container-summary title="TOTAL" typeOfValueInformation="totalBalance" icon="DollarSign" classIcon="iconDollar" classMainContainer="main-container-green" [filteredMonth]="filteredFinancials"></app-container-summary>
+        <!-- Entradas do Mês -->
+        <app-container-summary
+          title="ENTRADAS DO MÊS"
+          typeOfValueInformation="currentBalance"
+          icon="CircleChevronUp"
+          classIcon="iconUp"
+          classMainContainer="main-container"
+          [getInforms]="currentFinancial">
+        </app-container-summary>
+
+        <!-- Saídas do Mês -->
+        <app-container-summary
+          title="SAIDAS DO MÊS"
+          typeOfValueInformation="cashIn"
+          icon="CircleChevronDown"
+          classIcon="iconDown"
+          classMainContainer="main-container"
+          [getInforms]="currentFinancial">
+        </app-container-summary>
+
+        <!-- Total do Mês -->
+        <app-container-summary
+          title="TOTAL"
+          typeOfValueInformation="cashOut"
+          icon="DollarSign"
+          classIcon="iconDollar"
+          classMainContainer="main-container-green"
+          [getInforms]="currentFinancial">
+        </app-container-summary>
       </div>
 
     <div class="containers-transactions">

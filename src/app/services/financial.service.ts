@@ -39,4 +39,20 @@ export class FinancialService {
 
     return this.http.get<Financial[]>(`${this.apiUrl}`, { headers, params });
   }
+
+  getFinancialsByMonthCurrent(startDate: string, endDate: string): Observable<Financial[]> {
+    const params = {
+      startDate: `${startDate}-01T00:00:00Z`,
+      endDate: `${endDate}-01T00:00:00Z`
+    };
+
+    const authToken = localStorage.getItem('authToken');
+    let headers = new HttpHeaders();
+
+    if (authToken) {
+      headers = headers.set('Authorization', `Bearer ${authToken}`);
+    }
+
+    return this.http.get<Financial[]>(`${this.apiUrl}/current`, { headers, params });
+  }
 }
