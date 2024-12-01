@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateOrderDTO } from '../../DTO/createOrderDTO';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Order, PaginatedOrders } from '../../model/Order';
 import { UpdateOrderDTO } from '../../DTO/UpdateOrderItemDTO';
@@ -33,5 +33,33 @@ export class OrderService {
   updateOrder(idOrder: string, order: CreateOrderDTO): Observable<Order> {
     const url = `${this.apiUrl}/${idOrder}`;
     return this.http.put<Order>(url, order);
+  }
+
+  deleteOrder(idOrder: string) {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('Token de autenticação não encontrado.');
+      alert('Erro: Não foi possível autenticar a requisição.');
+      return;
+    }
+
+    const userConfirmed = confirm("Tem certeza que deseja deletar esse item?");
+    if (!userConfirmed) {
+      console.log('Ação de exclusão cancelada pelo usuário.');
+      return;
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<Order>(
+      `${environment.apiUrl}/${idOrder}`,
+      { headers }
+    ).pipe(
+      catchError((error) => {
+        console.error('Erro ao deletar produto:', error);
+        alert('Erro ao deletar o produto. Tente novamente.');
+        return throwError(() => new Error('Erro ao realizar a requisição DELETE'));
+      })
+    );
   }
 }

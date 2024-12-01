@@ -44,9 +44,24 @@
 .select-btn{
   display: flex;
   width: 100%;
-  justify-content: end;
+  justify-content: center;
+  align-items: end;
 
   gap: 1rem;
+
+  button{
+    background-color: $color-secondary-green;
+    padding: 0.3rem 0.5rem;
+    border: none;
+    cursor: pointer;
+    color: $color-white;
+
+    transition: 0.3s;
+
+    &:hover{
+      transform: scale(1.05);
+    }
+  }
 }
 
 .monthSelect{
@@ -54,13 +69,14 @@
   background-color: $color-secondary-gray;
   color: $color-white;
   border: none;
+  font-size: 0.8rem;
 
   font-family: $font-konkhmer;
 
   cursor: pointer;
 
   transition: 0.5s;
-  width: 15rem;
+  width: 9rem;
 }
 
 .body-summary{

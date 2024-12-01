@@ -9,28 +9,68 @@ import { ButtonHeaderComponent } from "../../components/button-header/button-hea
 import { AddingFinancialComponent } from "../../components/modal/adding-financial/adding-financial.component";
 import { FinancialService } from '../../services/financial.service';
 import { Financial } from '../../../model/financial/Financial';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-financial',
   standalone: true,
-  imports: [CustomIconsModule, HeaderPagesComponent, SideMenuComponent, CommonModule, ContainerSummaryComponent, TransactionInformationComponent, ButtonHeaderComponent, AddingFinancialComponent],
+  imports: [CustomIconsModule, HeaderPagesComponent, SideMenuComponent, CommonModule, ContainerSummaryComponent, TransactionInformationComponent, ButtonHeaderComponent, AddingFinancialComponent, FormsModule],
   templateUrl: './financial.component.html',
   styleUrls: ['./financial.component.scss']
 })
 export class FinancialComponent implements OnInit {
   financials: Financial[] = [];
   filteredFinancials: Financial[] = [];
+  years: number[] = [];
   selectedMonth: string = '';
   modal: boolean = false;
+
+  informsTransactions: Financial[] = [];
+
+  startMonth: string = '';
+  endMonth: string = '';
+  startYear: string = '';
+  endYear: string = '';
 
   constructor(private financialService: FinancialService) {}
 
   ngOnInit(): void {
-    this.selectedMonth = this.getCurrentMonth();
+    this.years = this.generateYears(2010, 2100);
+    console.log(this.selectedMonth)
     this.financialService.getFinancial().subscribe((data) => {
       this.financials = data;
       this.filterByMonth();
     });
+  }
+
+  generateYears(start: number, end: number): number[] {
+    const years = [];
+    for (let year = start; year <= end; year++) {
+      years.push(year);
+    }
+    return years;
+  }
+
+
+  confirmDate(): void {
+    if (this.startMonth && this.endMonth && this.startYear && this.endYear) {
+      const startDate = `${this.startYear}-${this.startMonth}`;
+      const endDate = `${this.endYear}-${this.endMonth}`;
+
+      this.financialService.getFinancialsByMonth(startDate, endDate).subscribe(
+        (data) => {
+          this.financials = data;
+          this.informsTransactions = this.financials;
+          console.log('dados recebidos', this.informsTransactions);
+        },
+        (error) => {
+          console.log('Erro ao buscar dados financeiros', error);
+        }
+      )
+
+    } else {
+      console.log('Por favor, selecione todos os campos.');
+    }
   }
 
   getCurrentMonth(): string {
@@ -49,21 +89,6 @@ export class FinancialComponent implements OnInit {
     ];
     const index = monthNames.indexOf(month.toLowerCase());
     return (index + 1).toString().padStart(2, '0');
-  }
-
-  onMonthChange(): void {
-    const startMonth = (document.querySelector('#startMonth') as HTMLSelectElement)?.value;
-    const endMonth = (document.querySelector('#endMonth') as HTMLSelectElement)?.value;
-
-    if (startMonth && endMonth) {
-      const startDate = `01/${this.getMonthNumber(startMonth)}/2024`; // Exemplo: Janeiro -> 01/01/2024
-      const endDate = `31/${this.getMonthNumber(endMonth)}/2024`; // Exemplo: Dezembro -> 31/12/2024
-
-      this.financialService.getFinancialsByMonth(startDate, endDate).subscribe((data) => {
-        this.financials = data;
-        this.filterByMonth();
-      });
-    }
   }
 
   filterByMonth(): void {

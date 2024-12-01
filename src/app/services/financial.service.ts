@@ -9,7 +9,7 @@ import { Financial } from '../../model/financial/Financial';
 })
 export class FinancialService {
 
-  private apiUrl = `${environment.apiUrl}/financies`;
+  private apiUrl = `${environment.apiUrl}/v1/financies`;
 
   constructor( private http: HttpClient ) { }
 
@@ -25,7 +25,18 @@ export class FinancialService {
   }
 
   getFinancialsByMonth(startDate: string, endDate: string): Observable<Financial[]> {
-    const params = `?startDate=${startDate}&endDate=${endDate}`;
-    return this.http.get<Financial[]>(`${this.apiUrl}${params}`);
+    const params = {
+      startDate: `${startDate}-01T00:00:00Z`, // ajustando para data no formato UTC
+      endDate: `${endDate}-01T00:00:00Z`
+    };
+
+    const authToken = localStorage.getItem('authToken');
+    let headers = new HttpHeaders();
+
+    if (authToken) {
+      headers = headers.set('Authorization', `Bearer ${authToken}`);
+    }
+
+    return this.http.get<Financial[]>(`${this.apiUrl}`, { headers, params });
   }
 }

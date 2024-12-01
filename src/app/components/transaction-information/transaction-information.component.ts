@@ -22,6 +22,8 @@ export class TransactionInformationComponent implements OnInit, OnChanges {
   totalPages: number = 0;
   buttonsToShow: number[] = [];
 
+  @Input() getInforms: any[] = []
+
   constructor(private financialService: FinancialService) {}
 
   ngOnInit(): void {
@@ -37,17 +39,11 @@ export class TransactionInformationComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.financials = [];
-    this.transactionsToDisplay = [];
+    console.log('Updated getInforms:', this.getInforms);
 
-    // Carregar transações filtradas
-    this.financialService.getFinancial().subscribe((data: Financial[]) => {
-      this.financials = data.filter(financial =>
-        financial.month.toLowerCase() === this.filteredMonth.toLowerCase()
-      );
-      this.updateTransactionsToDisplay();
-      this.updateButtonsToShow();
-    });
+    this.currentPage = 1;
+    this.updateTransactionsToDisplay();
+    this.updateButtonsToShow();
   }
 
   getCurrentMonth(): string {
@@ -55,7 +51,7 @@ export class TransactionInformationComponent implements OnInit, OnChanges {
   }
 
   updateTransactionsToDisplay(): void {
-    const selectedFinancial = this.financials.find(
+    const selectedFinancial = this.getInforms.find(
       (financial) => financial.month.toLowerCase() === this.filteredMonth
     );
 

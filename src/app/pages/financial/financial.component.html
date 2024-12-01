@@ -30,42 +30,61 @@
       <div class="select-btn">
         <div>
           <p>MÊS INICIAL</p>
-          <select class="monthSelect" (change)="onMonthChange()">
-            <option value="" disabled selected>SELECIONE O MÊS INICIAL</option>
-            <option value="january">JANEIRO</option>
-            <option value="february">FEVEREIRO</option>
-            <option value="march">MARÇO</option>
-            <option value="april">ABRIL</option>
-            <option value="may">MAIO</option>
-            <option value="june">JUNHO</option>
-            <option value="july">JULHO</option>
-            <option value="august">AGOSTO</option>
-            <option value="september">SETEMBRO</option>
-            <option value="october">OUTUBRO</option>
-            <option value="november">NOVEMBRO</option>
-            <option value="december">DEZEMBRO</option>
+          <select class="monthSelect" [(ngModel)]="startMonth">
+            <option value="" disabled selected>SELECIONE</option>
+            <option value="01">JANEIRO</option>
+            <option value="02">FEVEREIRO</option>
+            <option value="03">MARÇO</option>
+            <option value="04">ABRIL</option>
+            <option value="05">MAIO</option>
+            <option value="06">JUNHO</option>
+            <option value="07">JULHO</option>
+            <option value="08">AGOSTO</option>
+            <option value="09">SETEMBRO</option>
+            <option value="10">OUTUBRO</option>
+            <option value="11">NOVEMBRO</option>
+            <option value="12">DEZEMBRO</option>
           </select>
         </div>
         <div>
           <p>MÊS FINAL</p>
-          <select class="monthSelect" (change)="onMonthChange()">
-            <option value="" disabled selected>SELECIONE O MÊS FINAL</option>
-            <option value="january">JANEIRO</option>
-            <option value="february">FEVEREIRO</option>
-            <option value="march">MARÇO</option>
-            <option value="april">ABRIL</option>
-            <option value="may">MAIO</option>
-            <option value="june">JUNHO</option>
-            <option value="july">JULHO</option>
-            <option value="august">AGOSTO</option>
-            <option value="september">SETEMBRO</option>
-            <option value="october">OUTUBRO</option>
-            <option value="november">NOVEMBRO</option>
-            <option value="december">DEZEMBRO</option>
+          <select class="monthSelect" [(ngModel)]="endMonth">
+            <option value="" disabled selected>SELECIONE</option>
+            <option value="01">JANEIRO</option>
+            <option value="02">FEVEREIRO</option>
+            <option value="03">MARÇO</option>
+            <option value="04">ABRIL</option>
+            <option value="05">MAIO</option>
+            <option value="06">JUNHO</option>
+            <option value="07">JULHO</option>
+            <option value="08">AGOSTO</option>
+            <option value="09">SETEMBRO</option>
+            <option value="10">OUTUBRO</option>
+            <option value="11">NOVEMBRO</option>
+            <option value="12">DEZEMBRO</option>
           </select>
         </div>
+        <div>
+          <p>ANO INICIAL</p>
+          <select class="monthSelect" [(ngModel)]="startYear">
+            <option value="" disabled selected>SELECIONE</option>
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+        <div>
+          <p>ANO FINAL</p>
+          <select class="monthSelect" [(ngModel)]="endYear">
+            <option value="" disabled selected>SELECIONE</option>
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+
+        <div>
+          <button (click)="confirmDate()">Confirmar</button>
+        </div>
       </div>
-      <app-transaction-information [filteredMonth]="selectedMonth"></app-transaction-information>
+      </div>
+      <app-transaction-information [filteredMonth]="selectedMonth" [getInforms]="informsTransactions"></app-transaction-information>
     </div>
   </div>
-</div>
+

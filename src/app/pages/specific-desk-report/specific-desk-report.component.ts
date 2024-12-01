@@ -20,7 +20,7 @@ import { CreateOrderDTO } from '../../../DTO/createOrderDTO';
   imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, CustomIconsModule],
   templateUrl: './specific-desk-report.component.html',
   styleUrl: './specific-desk-report.component.scss',
-  providers: [ProductsService]
+  providers: [ProductsService, OrderService]
 })
 export class SpecificDeskReportComponent {
   categories: Category[] = [];
@@ -188,14 +188,45 @@ export class SpecificDeskReportComponent {
     });
   }
 
-
+/*
   removeItem(orderId: string, productId: string): void {
     const order = this.filteredOrders.find(o => o.id === orderId);
     if (order) {
-      order.order_items = order.order_items.filter(i => i.product.id !== productId);
-      this.updateOrderTotal(order);
+      const itemToRemove = order.order_items.find(i => i.product.id === productId);
+
+      if (this.orderService) {
+        this.orderService.deleteOrder(productId).subscribe({
+          next: (response) => {
+            console.log("Item excluído com sucesso:", response);
+
+            // Remover o item da lista de itens do pedido
+            order.order_items = order.order_items.filter(i => i.product.id !== productId);
+
+            // Atualizar o total do pedido
+            this.updateOrderTotal(order);
+
+            // Se necessário, enviar o pedido atualizado
+            this.orderService.updateOrder(orderId, order).subscribe({
+              next: (updateResponse) => {
+                console.log("Pedido atualizado com o item removido:", updateResponse);
+                this.loadOrders(); // Atualiza a lista de pedidos após a remoção
+              },
+              error: (updateError) => {
+                console.error("Erro ao atualizar o pedido:", updateError);
+              }
+            });
+          },
+          error: (error) => {
+            console.error("Erro ao excluir o item:", error);
+          }
+        });
+      } else {
+        console.error("OrderService não está definido.");
+      }
+    } else {
+      console.error("Pedido não encontrado.");
     }
-  }
+  }*/
 
   updateOrderTotal(order: Order): void {
     order.total = order.order_items.reduce((sum, item) => sum + item.sub_total, 0);
