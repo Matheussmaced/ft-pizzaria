@@ -4,6 +4,7 @@ import { CreateOrderDTO } from '../../DTO/createOrderDTO';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Order, PaginatedOrders } from '../../model/Order';
+import { UpdateOrderDTO } from '../../DTO/UpdateOrderItemDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,18 @@ export class OrderService {
     return this.http.get<PaginatedOrders>(url);
   }
 
+  getOrderById( id:string ): Observable<any>{
+    const url = `${this.apiUrl}?id=${id}&limit=10&page=1`
+
+    return this.http.get<any>(url);
+  }
+
   createOrder(order: CreateOrderDTO): Observable<any> {
     return this.http.post(this.apiUrl, order);
+  }
+
+  updateOrder(idOrder: string, order: CreateOrderDTO): Observable<Order> {
+    const url = `${this.apiUrl}/${idOrder}`;
+    return this.http.put<Order>(url, order);
   }
 }

@@ -28,21 +28,42 @@
 
     <div class="containers-transactions">
       <div class="select-btn">
-        <select class="monthSelect" (change)="onMonthChange($event.target)">
-          <option value="" disabled selected>SELECIONE O MÊS</option>
-          <option value="january">JANEIRO</option>
-          <option value="february">FEVEREIRO</option>
-          <option value="march">MARÇO</option>
-          <option value="april">ABRIL</option>
-          <option value="may">MAIO</option>
-          <option value="june">JUNHO</option>
-          <option value="july">JULHO</option>
-          <option value="august">AGOSTO</option>
-          <option value="september">SETEMBRO</option>
-          <option value="october">OUTUBRO</option>
-          <option value="november">NOVEMBRO</option>
-          <option value="december">DEZEMBRO</option>
-        </select>
+        <div>
+          <p>MÊS INICIAL</p>
+          <select class="monthSelect" (change)="onMonthChange()">
+            <option value="" disabled selected>SELECIONE O MÊS INICIAL</option>
+            <option value="january">JANEIRO</option>
+            <option value="february">FEVEREIRO</option>
+            <option value="march">MARÇO</option>
+            <option value="april">ABRIL</option>
+            <option value="may">MAIO</option>
+            <option value="june">JUNHO</option>
+            <option value="july">JULHO</option>
+            <option value="august">AGOSTO</option>
+            <option value="september">SETEMBRO</option>
+            <option value="october">OUTUBRO</option>
+            <option value="november">NOVEMBRO</option>
+            <option value="december">DEZEMBRO</option>
+          </select>
+        </div>
+        <div>
+          <p>MÊS FINAL</p>
+          <select class="monthSelect" (change)="onMonthChange()">
+            <option value="" disabled selected>SELECIONE O MÊS FINAL</option>
+            <option value="january">JANEIRO</option>
+            <option value="february">FEVEREIRO</option>
+            <option value="march">MARÇO</option>
+            <option value="april">ABRIL</option>
+            <option value="may">MAIO</option>
+            <option value="june">JUNHO</option>
+            <option value="july">JULHO</option>
+            <option value="august">AGOSTO</option>
+            <option value="september">SETEMBRO</option>
+            <option value="october">OUTUBRO</option>
+            <option value="november">NOVEMBRO</option>
+            <option value="december">DEZEMBRO</option>
+          </select>
+        </div>
       </div>
       <app-transaction-information [filteredMonth]="selectedMonth"></app-transaction-information>
     </div>

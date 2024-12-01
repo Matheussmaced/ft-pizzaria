@@ -37,9 +37,17 @@ export class TransactionInformationComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.currentPage = 1;
-    this.updateTransactionsToDisplay();
-    this.updateButtonsToShow();
+    this.financials = [];
+    this.transactionsToDisplay = [];
+
+    // Carregar transações filtradas
+    this.financialService.getFinancial().subscribe((data: Financial[]) => {
+      this.financials = data.filter(financial =>
+        financial.month.toLowerCase() === this.filteredMonth.toLowerCase()
+      );
+      this.updateTransactionsToDisplay();
+      this.updateButtonsToShow();
+    });
   }
 
   getCurrentMonth(): string {

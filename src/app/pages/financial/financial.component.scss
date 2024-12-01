@@ -45,6 +45,8 @@
   display: flex;
   width: 100%;
   justify-content: end;
+
+  gap: 1rem;
 }
 
 .monthSelect{
@@ -58,7 +60,7 @@
   cursor: pointer;
 
   transition: 0.5s;
-  width: 12rem;
+  width: 15rem;
 }
 
 .body-summary{

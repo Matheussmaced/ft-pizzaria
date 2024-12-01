@@ -11,6 +11,8 @@ import { Snacks } from '../../../model/Snacks';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
 import { Order, PaginatedOrders } from '../../../model/Order';
+import { UpdateOrderDTO } from '../../../DTO/UpdateOrderItemDTO';
+import { CreateOrderDTO } from '../../../DTO/createOrderDTO';
 
 @Component({
   selector: 'app-specific-desk-report',
@@ -26,6 +28,14 @@ export class SpecificDeskReportComponent {
   tableId!: number;
   totalAmount: number = 0;
 
+  idProduct: string = '';
+
+  accumulatedOrder: CreateOrderDTO = {
+    total: 0,
+    title: '',
+    order_items: []
+  };
+
   constructor(private productService: ProductsService,
               private route: ActivatedRoute,
               private orderService: OrderService
@@ -35,7 +45,6 @@ export class SpecificDeskReportComponent {
     // Obter o ID ou número da mesa da URL
     this.route.params.subscribe(params => {
       this.tableId = +params['tableId'];
-      console.log('Mesa selecionada:', this.tableId); // Para depuração
       this.loadOrders(); // Carregar os pedidos ao obter o ID da mesa
     });
 
@@ -75,25 +84,110 @@ export class SpecificDeskReportComponent {
     this.categories[categoryIndex].visible = !this.categories[categoryIndex].visible;
   }
 
-  plusValue(orderId: string, productId: string): void {
-    const order = this.filteredOrders.find(o => o.id === orderId);
-    const item = order?.order_items.find(i => i.product.id === productId);
-    if (item) {
-      item.quantity++;
-      item.sub_total = item.quantity * item.product.price;
-      this.updateOrderTotal(order!);
-    }
+  minusValue(orderId: string, productId: string): void {
+    this.orderService.getOrderById(orderId).subscribe({
+      next: (paginatedOrders: any) => {
+
+        // Validar se 'orders' existe e é um array
+        if (!paginatedOrders.orders || !Array.isArray(paginatedOrders.orders)) {
+          console.error("A resposta não contém um array de pedidos.");
+          return;
+        }
+
+        // Localizar o pedido pelo ID
+        const order = paginatedOrders.orders.find((o: any) => o.id === orderId);
+
+        if (!order) {
+          console.error(`Pedido com ID ${orderId} não encontrado.`);
+          return;
+        }
+
+        // Localizar o item do produto dentro do pedido
+        const item = order.order_items.find((i: any) => i.product.id === productId);
+
+        if (!item || item.quantity <= 0) {
+          console.warn("Produto não encontrado ou quantidade já é 0.");
+          return;
+        }
+
+        // Atualizar a quantidade do produto
+        item.quantity -= 1;
+        item.sub_total = item.quantity * item.product.price;
+
+        // Recalcular o total do pedido
+        order.total = order.order_items.reduce((sum: number, item: any) => sum + item.sub_total, 0);
+
+        // Enviar o pedido atualizado ao backend
+        this.orderService.updateOrder(orderId, order).subscribe({
+          next: (response) => {
+            console.log("Pedido atualizado com sucesso:", response);
+            this.loadOrders(); // Atualizar a lista de pedidos
+          },
+          error: (err) => {
+            console.error("Erro ao atualizar o pedido:", err);
+          },
+        });
+      },
+      error: (err) => {
+        console.error("Erro ao buscar pedido por ID:", err);
+      },
+    });
   }
 
-  minusValue(orderId: string, productId: string): void {
-    const order = this.filteredOrders.find(o => o.id === orderId);
-    const item = order?.order_items.find(i => i.product.id === productId);
-    if (item && item.quantity > 0) {
-      item.quantity--;
-      item.sub_total = item.quantity * item.product.price;
-      this.updateOrderTotal(order!);
-    }
+  plusValue(orderId: string, productId: string): void {
+    this.orderService.getOrderById(orderId).subscribe({
+      next: (paginatedOrders: any) => {
+        console.log(`RESPOSTA DA API NO GETORDERBYID`, paginatedOrders);
+
+        // Validar se 'orders' existe e é um array
+        if (!paginatedOrders.orders || !Array.isArray(paginatedOrders.orders)) {
+          console.error("A resposta não contém um array de pedidos.");
+          return;
+        }
+
+        // Localizar o pedido pelo ID
+        const order = paginatedOrders.orders.find((o: any) => o.id === orderId);
+
+        if (!order) {
+          console.error(`Pedido com ID ${orderId} não encontrado.`);
+          return;
+        }
+
+        // Localizar o item do produto dentro do pedido
+        const item = order.order_items.find((i: any) => i.product.id === productId);
+
+        if (!item) {
+          console.error("Produto não encontrado no pedido.");
+          return;
+        }
+
+        // Atualizar a quantidade do produto
+        item.quantity += 1;
+        item.sub_total = item.quantity * item.product.price;
+
+        // Recalcular o total do pedido
+        order.total = order.order_items.reduce((sum: number, item: any) => sum + item.sub_total, 0);
+
+        // Log do pedido atualizado
+        console.log("Pedido atualizado:", order);
+
+        // Enviar o pedido atualizado ao backend
+        this.orderService.updateOrder(orderId, order).subscribe({
+          next: (response) => {
+            console.log("Pedido atualizado com sucesso:", response);
+            this.loadOrders(); // Atualizar a lista de pedidos
+          },
+          error: (err) => {
+            console.error("Erro ao atualizar o pedido:", err);
+          },
+        });
+      },
+      error: (err) => {
+        console.error("Erro ao buscar pedido por ID:", err);
+      },
+    });
   }
+
 
   removeItem(orderId: string, productId: string): void {
     const order = this.filteredOrders.find(o => o.id === orderId);

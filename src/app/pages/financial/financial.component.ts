@@ -42,10 +42,27 @@ export class FinancialComponent implements OnInit {
     return monthNames[currentMonthIndex];
   }
 
-  onMonthChange(target: EventTarget | null): void {
-    if (target instanceof HTMLSelectElement) {
-      this.selectedMonth = target.value;
-      this.filterByMonth();
+  getMonthNumber(month: string): string {
+    const monthNames = [
+      'january', 'february', 'march', 'april', 'may', 'june',
+      'july', 'august', 'september', 'october', 'november', 'december'
+    ];
+    const index = monthNames.indexOf(month.toLowerCase());
+    return (index + 1).toString().padStart(2, '0');
+  }
+
+  onMonthChange(): void {
+    const startMonth = (document.querySelector('#startMonth') as HTMLSelectElement)?.value;
+    const endMonth = (document.querySelector('#endMonth') as HTMLSelectElement)?.value;
+
+    if (startMonth && endMonth) {
+      const startDate = `01/${this.getMonthNumber(startMonth)}/2024`; // Exemplo: Janeiro -> 01/01/2024
+      const endDate = `31/${this.getMonthNumber(endMonth)}/2024`; // Exemplo: Dezembro -> 31/12/2024
+
+      this.financialService.getFinancialsByMonth(startDate, endDate).subscribe((data) => {
+        this.financials = data;
+        this.filterByMonth();
+      });
     }
   }
 

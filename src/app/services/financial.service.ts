@@ -24,7 +24,8 @@ export class FinancialService {
     return this.http.get<Financial[]>(`${this.apiUrl}`);
   }
 
-  getFinancialsByMonth(month: string): Observable<Financial[]> {
-    return this.http.get<Financial[]>(`${this.apiUrl}?month=${month}`);
+  getFinancialsByMonth(startDate: string, endDate: string): Observable<Financial[]> {
+    const params = `?startDate=${startDate}&endDate=${endDate}`;
+    return this.http.get<Financial[]>(`${this.apiUrl}${params}`);
   }
 }
