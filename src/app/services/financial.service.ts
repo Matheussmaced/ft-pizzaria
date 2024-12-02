@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Financial } from '../../model/financial/Financial';
+import { FinanciesDTO } from '../../DTO/financiesDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,9 @@ export class FinancialService {
     }
 
     return this.http.get<Financial[]>(`${this.apiUrl}/current`, { headers, params });
+  }
+
+  createTransaction( transaction: FinanciesDTO ):Observable<any>{
+    return this.http.post(this.apiUrl, transaction)
   }
 }

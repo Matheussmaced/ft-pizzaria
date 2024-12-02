@@ -6,13 +6,18 @@ import { HeaderPagesComponent } from '../../components/header-pages/header-pages
 import { ButtonHeaderComponent } from "../../components/button-header/button-header.component";
 import { Category } from '../../../model/Category';
 import { ProductsService } from '../../services/products.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Snacks } from '../../../model/Snacks';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
 import { Order, PaginatedOrders } from '../../../model/Order';
 import { UpdateOrderDTO } from '../../../DTO/UpdateOrderItemDTO';
 import { CreateOrderDTO } from '../../../DTO/createOrderDTO';
+import { FinanciesDTO } from '../../../DTO/financiesDTO';
+import { Financial } from '../../../model/financial/Financial';
+import { FinancialService } from '../../services/financial.service';
+import { environment } from '../../../environments/environment';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-specific-desk-report',
@@ -38,7 +43,9 @@ export class SpecificDeskReportComponent {
 
   constructor(private productService: ProductsService,
               private route: ActivatedRoute,
-              private orderService: OrderService
+              private orderService: OrderService,
+              private financialService: FinancialService,
+              private http: HttpClient
             ) {}
 
   ngOnInit(): void {
@@ -188,45 +195,61 @@ export class SpecificDeskReportComponent {
     });
   }
 
-/*
-  removeItem(orderId: string, productId: string): void {
-    const order = this.filteredOrders.find(o => o.id === orderId);
-    if (order) {
-      const itemToRemove = order.order_items.find(i => i.product.id === productId);
+  onSubmit(): void {
+    const formDataFinancieCurrent: FinanciesDTO = {
+      description: `Venda da mesa ${this.tableId}`,
+      type: "INCOME",
+      value: this.totalAmount,
+      transaction_date: new Date().toISOString(),
+    };
 
-      if (this.orderService) {
-        this.orderService.deleteOrder(productId).subscribe({
-          next: (response) => {
-            console.log("Item excluído com sucesso:", response);
+    this.financialService.createTransaction(formDataFinancieCurrent).subscribe(
+      (res) => {
+        console.log('Transação enviada com sucesso', res);
 
-            // Remover o item da lista de itens do pedido
-            order.order_items = order.order_items.filter(i => i.product.id !== productId);
-
-            // Atualizar o total do pedido
-            this.updateOrderTotal(order);
-
-            // Se necessário, enviar o pedido atualizado
-            this.orderService.updateOrder(orderId, order).subscribe({
-              next: (updateResponse) => {
-                console.log("Pedido atualizado com o item removido:", updateResponse);
-                this.loadOrders(); // Atualiza a lista de pedidos após a remoção
-              },
-              error: (updateError) => {
-                console.error("Erro ao atualizar o pedido:", updateError);
-              }
-            });
-          },
-          error: (error) => {
-            console.error("Erro ao excluir o item:", error);
-          }
-        });
-      } else {
-        console.error("OrderService não está definido.");
+        this.deleteAllOrders();
       }
-    } else {
-      console.error("Pedido não encontrado.");
+    );
+  }
+
+  deleteAllOrders(): void {
+    for (let order of this.filteredOrders) {
+      this.deleteOrder(order.id);
     }
-  }*/
+}
+
+deleteOrder(idOrder: string): void {
+  if (!idOrder) {
+    console.error('ID do pedido é inválido ou não fornecido.');
+    return; // Interromper a execução se o idOrder não for válido
+  }
+
+  const token = localStorage.getItem('authToken');
+  if (!token) {
+    console.error('Token de autenticação não encontrado.');
+    alert('Erro: Não foi possível autenticar a requisição.');
+    return;
+  }
+
+  const userConfirmed = confirm("Tem certeza que deseja limpar a mesa?");
+  if (!userConfirmed) {
+    console.log('Ação de exclusão cancelada pelo usuário.');
+    return;
+  }
+
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  this.http.delete<Order>(
+    `${environment.apiUrl}/v1/orders/${idOrder}`,
+    { headers }
+  ).pipe(
+    catchError((error) => {
+      console.error('Erro ao deletar produto:', error);
+      alert('Erro ao deletar o produto. Tente novamente.');
+      return throwError(() => new Error('Erro ao realizar a requisição DELETE'));
+    })
+  ).subscribe();
+}
 
   updateOrderTotal(order: Order): void {
     order.total = order.order_items.reduce((sum, item) => sum + item.sub_total, 0);

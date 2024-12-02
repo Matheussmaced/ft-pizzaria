@@ -6,6 +6,7 @@
   <div class="header">
     <img src="/FT-PIZZARIA.png" alt="Logo da FT">
     <h1>RELATÓRIO DA MESA {{ tableId }}</h1>
+    <app-button-header [nameButton]="'Limpar mesa'" (click)="onSubmit()"></app-button-header>
   </div>
 
   <div class="menu" *ngIf="filteredOrders.length > 0; else noOrders">
