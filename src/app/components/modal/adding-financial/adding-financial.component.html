@@ -2,27 +2,57 @@
   <div class="main-container">
     <div class="container-form">
       <h1>ADICIONAR NOVA TRANSAÇÃO</h1>
-        <form action="#">
-          <div class="container-inputs">
-            <label for="#">DESCRIÇÃO DA NOVA TRANSAÇÃO</label>
-            <input type="text" placeholder="Insira a descrição aqui" />
+      <form (ngSubmit)="onSubmit()">
+        <div class="container-inputs">
+          <label for="description">DESCRIÇÃO DA NOVA TRANSAÇÃO</label>
+          <input
+            type="text"
+            id="description"
+            placeholder="Insira a descrição aqui"
+            [(ngModel)]="description"
+            name="description"
+            required
+          />
 
-            <label for="#">VALOR DA TRANSAÇÃO</label>
-            <input type="number" placeholder="Insira o valor aqui" />
+          <label for="amount">VALOR DA TRANSAÇÃO</label>
+          <input
+            type="number"
+            id="amount"
+            placeholder="Insira o valor aqui"
+            [(ngModel)]="amount"
+            name="amount"
+            required
+            min="0.01"
+          />
 
-            <label for="type">ENTRADA OU SAÍDA</label>
-            <select class="type">
-              <option value="" disabled selected>SELECIONE</option>
-              <option value="ENTRADA">ENTRADA</option>
-              <option value="SAÍDA.">SAÍDA</option>
-            </select>
-          </div>
+          <label for="type">ENTRADA OU SAÍDA</label>
+          <select
+            id="type"
+            [(ngModel)]="type"
+            name="type"
+            required
+            class="type"
+          >
+            <option value="" disabled selected>SELECIONE</option>
+            <option value="INCOME">ENTRADA</option>
+            <option value="OUTCOME">SAÍDA</option>
+          </select>
+        </div>
 
         <div class="buttons-container">
-          <button class="btn-cancel" type="button" (click)="onCancel()">
+          <button
+            class="btn-cancel"
+            type="button"
+            (click)="onCancel()"
+          >
             CANCELAR
           </button>
-          <button class="btn-ok">OK</button>
+          <button
+            class="btn-ok"
+            type="submit"
+          >
+            OK
+          </button>
         </div>
       </form>
     </div>

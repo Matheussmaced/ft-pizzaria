@@ -95,4 +95,12 @@ export class TransactionInformationComponent implements OnInit, OnChanges {
       this.goToPage(this.currentPage + 1);
     }
   }
+
+  deleteTransaction(idTransaction:string):void{
+    this.financialService.deleteTransaction(idTransaction)?.subscribe(
+      (res: Financial) => {
+        alert("Transação deletada com sucesso!")
+      }
+    );
+  }
 }
