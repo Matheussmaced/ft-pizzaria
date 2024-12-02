@@ -13,6 +13,7 @@ import { FinancialComponent } from './pages/financial/financial.component';
 import { AuthGuard } from './services/auth.guard';
 import { AuthService } from './services/auth.service';
 import { SpecificTablePageComponent } from './pages/specific-table-page/specific-table-page.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 const routes = [
   { path: '', component: LoginComponent },
@@ -34,6 +35,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     AuthService,
-    AuthGuard
+    AuthGuard, provideAnimationsAsync()
   ]
 };

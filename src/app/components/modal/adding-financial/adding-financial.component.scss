@@ -43,7 +43,7 @@ html{
   color: $color-white;
   border: solid 1px $color-white;
   font-family: $font-konkhmer;
-  width: 27rem;
+  width: 29rem;
   padding: 1rem 3rem;
   margin: 0 auto;
 
@@ -97,4 +97,39 @@ html{
     color: $color-white;
     border: none;
   }
+}
+
+.date-container-and-select{
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+
+  .select{
+    display: flex;
+    flex-direction: column;
+
+    select{
+      width: 10rem;
+    }
+  }
+
+  .date{
+    display: flex;
+    gap: 0.3rem;
+    width: 12rem;
+
+  }
+}
+
+/* Estilo para inputs inválidos */
+.invalid {
+  border: 2px solid $color-secondary-red;
+  background-color: #ffe6e6;
+}
+
+/* Estilo para mensagens de erro */
+.error-message {
+  color: $color-secondary-red;
+  font-size: 0.2em;
+  margin-top: 4px;
 }

@@ -25,18 +25,92 @@
             min="0.01"
           />
 
-          <label for="type">ENTRADA OU SAÍDA</label>
-          <select
-            id="type"
-            [(ngModel)]="type"
-            name="type"
-            required
-            class="type"
-          >
-            <option value="" disabled selected>SELECIONE</option>
-            <option value="INCOME">ENTRADA</option>
-            <option value="OUTCOME">SAÍDA</option>
-          </select>
+          <div class="date-container-and-select">
+            <div class="select">
+              <label for="type">ENTRADA OU SAÍDA</label>
+              <select
+                id="type"
+                [(ngModel)]="type"
+                name="type"
+                required
+                class="type"
+              >
+                <option value="" disabled selected>SELECIONE</option>
+                <option value="INCOME">ENTRADA</option>
+                <option value="OUTCOME">SAÍDA</option>
+              </select>
+            </div>
+
+            <div class="date">
+              <!-- Input para o DIA -->
+              <div class="form-group">
+                <label for="description">DIA</label>
+                <input
+                type="text"
+                  placeholder="DIA"
+                  [(ngModel)]="day"
+                  name="day"
+                  required
+                  minlength="2"
+                  maxlength="2"
+                  pattern="^[0-9]{2}$"
+                  #dayInput="ngModel"
+                  [class.invalid]="dayInput.invalid && dayInput.touched"
+                />
+                <!--
+                <div *ngIf="dayInput.invalid && dayInput.touched" class="error-message">
+                  <p class="error-message-input">Minimo 2 dígitos!</p>
+                </div>
+                 -->
+              </div>
+
+              <!-- Input para o MÊS -->
+              <div class="form-group">
+                <label for="description">MÊS</label>
+                <input
+                  type="text"
+                  placeholder="MÊS"
+                  [(ngModel)]="month"
+                  name="month"
+                  required
+                  minlength="2"
+                  maxlength="2"
+                  pattern="^[0-9]{2}$"
+                  #monthInput="ngModel"
+                  [class.invalid]="monthInput.invalid && monthInput.touched"
+                />
+                <!--
+                <div *ngIf="monthInput.invalid && monthInput.touched" class="error-message">
+                  O mês deve ter exatamente 2 dígitos!
+                </div>
+                -->
+              </div>
+
+              <!-- Input para o ANO -->
+              <div class="form-group">
+                <label for="description">ANO</label>
+                <input
+                  type="text"
+                  placeholder="ANO"
+                  [(ngModel)]="year"
+                  name="year"
+                  required
+                  minlength="4"
+                  maxlength="4"
+                  pattern="^[0-9]{4}$"
+                  #yearInput="ngModel"
+                  [class.invalid]="yearInput.invalid && yearInput.touched"
+                />
+                <!--
+                <div *ngIf="yearInput.invalid && yearInput.touched" class="error-message">
+                  O ano deve ter exatamente 4 dígitos!
+                </div>
+               -->
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
         <div class="buttons-container">

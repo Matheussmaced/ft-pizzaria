@@ -27,3 +27,6 @@ html{
 .custom-backdrop {
   background-color: rgba(0, 0, 0, 0.7) !important; // Fundo escuro com 70% de opacidade
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
