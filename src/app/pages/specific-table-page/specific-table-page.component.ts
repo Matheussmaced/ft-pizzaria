@@ -43,6 +43,9 @@ export class SpecificTablePageComponent implements OnInit {
       console.log('Mesa selecionada:', this.tableId);
     });
 
+    this.loadCategories();
+    this.loadOrderForTable();
+
     // Carregar categorias
     this.productService.getCategories().subscribe((data: any[]) => {
       this.categories = data.map(category => ({
@@ -67,12 +70,47 @@ export class SpecificTablePageComponent implements OnInit {
     });
   }
 
+  loadCategories(): void {
+    this.productService.getCategories().subscribe((data: any[]) => {
+      this.categories = data.map(category => ({
+        id: category.id,
+        name: category.category,
+        visible: false,
+        snacks: category.snacks.map((snack: Snacks) => ({
+          ...snack,
+          amount: 0 // Inicializar quantidade com 0
+        }))
+      }));
+
+      // Atualizar os produtos com base no pedido recuperado
+      this.updateCategoryAmounts();
+    });
+  }
+
+  loadOrderForTable(): void {
+    const savedOrder = localStorage.getItem(`currentOrder_${this.tableId}`);
+    if (savedOrder) {
+      this.accumulatedOrder = JSON.parse(savedOrder);
+      console.log(`Pedido recuperado para a mesa ${this.tableId}:`, this.accumulatedOrder);
+
+      // Atualizar as quantidades de snacks com base no pedido
+      this.updateCategoryAmounts();
+    } else {
+      // Resetar o acumulado caso não haja pedido
+      this.accumulatedOrder = {
+        total: 0,
+        title: '',
+        order_items: []
+      };
+    }
+  }
+
   // Atualizar as quantidades dos produtos com base no pedido acumulado
   updateCategoryAmounts(): void {
     this.accumulatedOrder.order_items.forEach(item => {
       const snack = this.findSnackByProductId(item.product_id);
       if (snack) {
-        snack.amount = item.quantity;
+        snack.amount = item.quantity; // Atualizar o valor do `amount`
       }
     });
   }
@@ -156,7 +194,7 @@ export class SpecificTablePageComponent implements OnInit {
   }
 
   finalizeOrder(): void {
-    const orderData = localStorage.getItem('currentOrder');
+    const orderData = localStorage.getItem(`currentOrder_${this.tableId}`);
     if (!orderData) {
       alert('Nenhum pedido encontrado para finalizar!');
       return;
@@ -169,17 +207,18 @@ export class SpecificTablePageComponent implements OnInit {
       next: response => {
         console.log('Pedido enviado com sucesso:', response);
         alert('Pedido enviado com sucesso!');
-        localStorage.removeItem('currentOrder'); // Limpar localStorage após o envio
+        localStorage.removeItem(`currentOrder_${this.tableId}`); // Limpar localStorage da mesa após o envio
       },
       error: err => {
         console.error('Erro ao enviar pedido:', err);
         alert('Erro ao enviar pedido!');
       }
     });
+
   }
 
   // Função para atualizar o pedido no localStorage
   updateOrderInLocalStorage(): void {
-    localStorage.setItem('currentOrder', JSON.stringify(this.accumulatedOrder));
+    localStorage.setItem(`currentOrder_${this.tableId}`, JSON.stringify(this.accumulatedOrder));
   }
 }
