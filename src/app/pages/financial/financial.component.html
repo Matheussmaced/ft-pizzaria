@@ -18,7 +18,11 @@
     </div>
   </div>
 
-  <div class="menu">
+  <div *ngIf="isLoading" class="loading-message">
+    Carregando...
+  </div>
+
+  <div class="menu" *ngIf="!isLoading">
     <div class="body-summary">
       <div class="containers-summary">
         <!-- Entradas do Mês -->
@@ -54,7 +58,7 @@
 
     <div class="containers-transactions">
       <div class="select-btn">
-        <div>
+        <div class="buttons">
           <p>MÊS INICIAL</p>
           <select class="monthSelect" [(ngModel)]="startMonth">
             <option value="" disabled selected>SELECIONE</option>
@@ -72,7 +76,7 @@
             <option value="12">DEZEMBRO</option>
           </select>
         </div>
-        <div>
+        <div class="buttons">
           <p>MÊS FINAL</p>
           <select class="monthSelect" [(ngModel)]="endMonth">
             <option value="" disabled selected>SELECIONE</option>
@@ -90,14 +94,14 @@
             <option value="12">DEZEMBRO</option>
           </select>
         </div>
-        <div>
+        <div class="buttons">
           <p>ANO INICIAL</p>
           <select class="monthSelect" [(ngModel)]="startYear">
             <option value="" disabled selected>SELECIONE</option>
             <option *ngFor="let year of years" [value]="year">{{ year }}</option>
           </select>
         </div>
-        <div>
+        <div class="buttons">
           <p>ANO FINAL</p>
           <select class="monthSelect" [(ngModel)]="endYear">
             <option value="" disabled selected>SELECIONE</option>
@@ -105,7 +109,7 @@
           </select>
         </div>
 
-        <div>
+        <div class="buttons">
           <button (click)="confirmDate()">Confirmar</button>
         </div>
       </div>

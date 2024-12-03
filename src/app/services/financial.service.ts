@@ -27,8 +27,8 @@ export class FinancialService {
 
   getFinancialsByMonth(startDate: string, endDate: string): Observable<Financial[]> {
     const params = {
-      startDate: `${startDate}-01T00:00:00Z`, // ajustando para data no formato UTC
-      endDate: `${endDate}-01T00:00:00Z`
+      startDate: `${startDate}-01T00:00:00Z`,
+      endDate: `${endDate}-31T00:00:00Z`
     };
 
     const authToken = localStorage.getItem('authToken');
@@ -44,7 +44,7 @@ export class FinancialService {
   getFinancialsByMonthCurrent(startDate: string, endDate: string): Observable<Financial[]> {
     const params = {
       startDate: `${startDate}-01T00:00:00Z`,
-      endDate: `${endDate}-01T00:00:00Z`
+      endDate: `${endDate}-31T00:00:00Z`
     };
 
     const authToken = localStorage.getItem('authToken');

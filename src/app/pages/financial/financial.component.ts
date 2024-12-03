@@ -27,6 +27,8 @@ export class FinancialComponent implements OnInit {
   selectedMonth: string = '';
   modal: boolean = false;
 
+  isLoading: boolean = true;
+
   informsTransactions: Financial[] = [];
 
   startMonth: string = '';
@@ -43,6 +45,43 @@ export class FinancialComponent implements OnInit {
       this.financials = data;
       this.filterByMonth();
     });
+
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = this.getCurrentMonth();
+
+    const previousMonthDate = new Date(currentDate);
+    previousMonthDate.setMonth(currentDate.getMonth());
+
+    const startDate = `${previousMonthDate.getFullYear()}-${(previousMonthDate.getMonth() + 1).toString().padStart(2, '0')}`;
+    const endDate = `${currentYear}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}`;
+
+    console.log('Start Date:', startDate);
+    console.log('End Date:', endDate);
+
+    this.financialService.getFinancialsByMonth(startDate, endDate).subscribe(
+      (data) => {
+        this.financials = data;
+        console.log(this.financials)
+        this.informsTransactions = this.financials
+        console.log('Transações do mês atual carregadas:', this.informsTransactions);
+        this.isLoading = false;
+      },
+      (error) => {
+        console.log('Erro ao carregar as transações do mês atual:', error);
+        this.isLoading = false;
+      }
+    );
+
+    this.financialService.getFinancialsByMonthCurrent(startDate, endDate).subscribe(
+      (data) => {
+        this.currentFinancial = data;
+        console.log('Dados financeiros do mês atual:', this.currentFinancial);
+      },
+      (error) => {
+        console.log('Erro ao carregar os dados financeiros do mês atual:', error);
+      }
+    );
   }
 
   generateYears(start: number, end: number): number[] {
