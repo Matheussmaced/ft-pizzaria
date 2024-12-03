@@ -48,29 +48,12 @@ export class SpecificDeskReportComponent {
               private http: HttpClient
             ) {}
 
-  ngOnInit(): void {
-    // Obter o ID ou número da mesa da URL
+ ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.tableId = +params['tableId'];
-      this.loadOrders(); // Carregar os pedidos ao obter o ID da mesa
+      this.loadOrders();
     });
-
     this.loadCategories();
-
-    // Carregar os dados da mesa
-    this.productService.getCategories().subscribe((data: any[]) => {
-      this.categories = data.map(category => ({
-        id: category.id,
-        name: category.category,
-        visible: false,
-        snacks: category.snacks.map((snack: Snacks) => ({
-          ...snack,
-          amount: 0
-        }))
-      }));
-    });
-
-    this.loadOrders();
   }
 
   loadCategories(): void {
@@ -87,118 +70,53 @@ export class SpecificDeskReportComponent {
     });
   }
 
-  toggleMenu(categoryIndex: number): void {
-    this.categories[categoryIndex].visible = !this.categories[categoryIndex].visible;
-  }
+  loadOrders(): void {
+    // Criando uma chave dinâmica com base no id da mesa
+    const orderKey = `currentOrder${this.tableId}`;
+    const storedOrder = localStorage.getItem(orderKey);
 
-  minusValue(orderId: string, productId: string): void {
-    this.orderService.getOrderById(orderId).subscribe({
-      next: (paginatedOrders: any) => {
-
-        // Validar se 'orders' existe e é um array
-        if (!paginatedOrders.orders || !Array.isArray(paginatedOrders.orders)) {
-          console.error("A resposta não contém um array de pedidos.");
-          return;
+    if (storedOrder) {
+      const parsedOrder = JSON.parse(storedOrder);
+      this.filteredOrders = parsedOrder.orders;
+      this.totalAmount = parsedOrder.totalAmount;
+      console.log('Pedidos carregados do localStorage:', this.filteredOrders);
+    } else {
+      this.orderService.getOrders().subscribe({
+        next: (data: PaginatedOrders) => {
+          this.filteredOrders = data.orders.filter(order => {
+            const match = order.title.match(/mesa (\d+)/i);
+            const orderTableNumber = match ? Number(match[1]) : null;
+            return orderTableNumber === this.tableId;
+          });
+          this.calculateTotal();
+          this.saveOrdersToLocalStorage();
+        },
+        error: err => {
+          console.error('Erro ao carregar pedidos:', err);
         }
+      });
+    }
+}
 
-        // Localizar o pedido pelo ID
-        const order = paginatedOrders.orders.find((o: any) => o.id === orderId);
+saveOrdersToLocalStorage(): void {
+  // Usando a chave dinâmica para salvar os pedidos por mesa
+  const orderKey = `currentOrder${this.tableId}`; // Exemplo: currentOrder1 para mesa 1
+  const orderData = {
+    title: `Venda mesa ${this.tableId}`, // Título com o ID da mesa
+    totalAmount: this.totalAmount,
+    orders: this.filteredOrders
+  };
+  localStorage.setItem(orderKey, JSON.stringify(orderData)); // Salva com a chave específica da mesa
+}
 
-        if (!order) {
-          console.error(`Pedido com ID ${orderId} não encontrado.`);
-          return;
-        }
-
-        // Localizar o item do produto dentro do pedido
-        const item = order.order_items.find((i: any) => i.product.id === productId);
-
-        if (!item || item.quantity <= 0) {
-          console.warn("Produto não encontrado ou quantidade já é 0.");
-          return;
-        }
-
-        // Atualizar a quantidade do produto
-        item.quantity -= 1;
-        item.sub_total = item.quantity * item.product.price;
-
-        // Recalcular o total do pedido
-        order.total = order.order_items.reduce((sum: number, item: any) => sum + item.sub_total, 0);
-
-        // Enviar o pedido atualizado ao backend
-        this.orderService.updateOrder(orderId, order).subscribe({
-          next: (response) => {
-            console.log("Pedido atualizado com sucesso:", response);
-            this.loadOrders(); // Atualizar a lista de pedidos
-          },
-          error: (err) => {
-            console.error("Erro ao atualizar o pedido:", err);
-          },
-        });
-      },
-      error: (err) => {
-        console.error("Erro ao buscar pedido por ID:", err);
-      },
-    });
-  }
-
-  plusValue(orderId: string, productId: string): void {
-    this.orderService.getOrderById(orderId).subscribe({
-      next: (paginatedOrders: any) => {
-        console.log(`RESPOSTA DA API NO GETORDERBYID`, paginatedOrders);
-
-        // Validar se 'orders' existe e é um array
-        if (!paginatedOrders.orders || !Array.isArray(paginatedOrders.orders)) {
-          console.error("A resposta não contém um array de pedidos.");
-          return;
-        }
-
-        // Localizar o pedido pelo ID
-        const order = paginatedOrders.orders.find((o: any) => o.id === orderId);
-
-        if (!order) {
-          console.error(`Pedido com ID ${orderId} não encontrado.`);
-          return;
-        }
-
-        // Localizar o item do produto dentro do pedido
-        const item = order.order_items.find((i: any) => i.product.id === productId);
-
-        if (!item) {
-          console.error("Produto não encontrado no pedido.");
-          return;
-        }
-
-        // Atualizar a quantidade do produto
-        item.quantity += 1;
-        item.sub_total = item.quantity * item.product.price;
-
-        // Recalcular o total do pedido
-        order.total = order.order_items.reduce((sum: number, item: any) => sum + item.sub_total, 0);
-
-        // Log do pedido atualizado
-        console.log("Pedido atualizado:", order);
-
-        // Enviar o pedido atualizado ao backend
-        this.orderService.updateOrder(orderId, order).subscribe({
-          next: (response) => {
-            console.log("Pedido atualizado com sucesso:", response);
-            this.loadOrders(); // Atualizar a lista de pedidos
-          },
-          error: (err) => {
-            console.error("Erro ao atualizar o pedido:", err);
-          },
-        });
-      },
-      error: (err) => {
-        console.error("Erro ao buscar pedido por ID:", err);
-      },
-    });
+  calculateTotal(): void {
+    this.totalAmount = this.filteredOrders.reduce((total, order) => total + order.total, 0);
   }
 
   onSubmit(): void {
     const formDataFinancieCurrent: FinanciesDTO = {
-      description: `Venda da mesa ${this.tableId}`,
-      type: "INCOME",
+      description: `Venda da mesa ${this.tableId}`, // Descrição com o ID da mesa
+      type: 'INCOME',
       value: this.totalAmount,
       transaction_date: new Date().toISOString(),
     };
@@ -206,76 +124,85 @@ export class SpecificDeskReportComponent {
     this.financialService.createTransaction(formDataFinancieCurrent).subscribe(
       (res) => {
         console.log('Transação enviada com sucesso', res);
-
-        this.deleteAllOrders();
+        this.saveOrdersToLocalStorage();  // Salva novamente os dados após a transação
+        this.deleteAllOrders();  // Limpa os pedidos da mesa
+      },
+      (err) => {
+        console.error('Erro ao enviar transação:', err);
       }
     );
-  }
+}
 
   deleteAllOrders(): void {
     for (let order of this.filteredOrders) {
       this.deleteOrder(order.id);
     }
-}
 
-deleteOrder(idOrder: string): void {
-  if (!idOrder) {
-    console.error('ID do pedido é inválido ou não fornecido.');
-    return; // Interromper a execução se o idOrder não for válido
+    const orderKey = `mesa_${this.tableId}`;
+    localStorage.removeItem(orderKey);  // Remove os dados da mesa do localStorage
   }
 
-  const token = localStorage.getItem('authToken');
-  if (!token) {
-    console.error('Token de autenticação não encontrado.');
-    alert('Erro: Não foi possível autenticar a requisição.');
-    return;
+  deleteOrder(idOrder: string): void {
+    if (!idOrder) {
+      console.error('ID do pedido é inválido ou não fornecido.');
+      return;
+    }
+
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('Token de autenticação não encontrado.');
+      alert('Erro: Não foi possível autenticar a requisição.');
+      return;
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    this.http.delete<Order>(`${environment.apiUrl}/v1/orders/${idOrder}`, { headers }).pipe(
+      catchError((error) => {
+        console.error('Erro ao deletar pedido:', error);
+        alert('Erro ao deletar o pedido. Tente novamente.');
+        return throwError(() => new Error('Erro ao realizar a requisição DELETE'));
+      })
+    ).subscribe();
   }
 
-  const userConfirmed = confirm("Tem certeza que deseja limpar a mesa?");
-  if (!userConfirmed) {
-    console.log('Ação de exclusão cancelada pelo usuário.');
-    return;
-  }
-
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-  this.http.delete<Order>(
-    `${environment.apiUrl}/v1/orders/${idOrder}`,
-    { headers }
-  ).pipe(
-    catchError((error) => {
-      console.error('Erro ao deletar produto:', error);
-      alert('Erro ao deletar o produto. Tente novamente.');
-      return throwError(() => new Error('Erro ao realizar a requisição DELETE'));
-    })
-  ).subscribe();
-}
-
-  updateOrderTotal(order: Order): void {
-    order.total = order.order_items.reduce((sum, item) => sum + item.sub_total, 0);
-  }
-
-  loadOrders(): void {
-    this.orderService.getOrders().subscribe({
-      next: (data: PaginatedOrders) => {
-        // Filtrar pedidos com base no número da mesa no título
-        this.filteredOrders = data.orders.filter(order => {
-          const match = order.title.match(/mesa (\d+)/i); // Extrair o número da mesa do título
-          const orderTableNumber = match ? Number(match[1]) : null;
-          return orderTableNumber === this.tableId;
-        });
-
-        console.log('Pedidos filtrados:', this.filteredOrders); // Para depuração
-        this.calculateTotal(); // Atualizar o total
+  plusValue(orderId: string, productId: string): void {
+    this.orderService.getOrderById(orderId).subscribe({
+      next: (paginatedOrders: any) => {
+        const order = paginatedOrders.orders.find((o: any) => o.id === orderId);
+        const item = order.order_items.find((i: any) => i.product.id === productId);
+        if (item) {
+          item.quantity += 1;
+          item.sub_total = item.quantity * item.product.price;
+          this.updateOrderTotal(order);
+          this.orderService.updateOrder(orderId, order).subscribe(() => this.saveOrdersToLocalStorage());
+        }
       },
-      error: err => {
-        console.error('Erro ao carregar pedidos:', err);
+      error: (err) => {
+        console.error('Erro ao buscar pedido por ID:', err);
       }
     });
   }
 
-  calculateTotal(): void {
-    this.totalAmount = this.filteredOrders.reduce((total, order) => total + order.total, 0);
+  minusValue(orderId: string, productId: string): void {
+    this.orderService.getOrderById(orderId).subscribe({
+      next: (paginatedOrders: any) => {
+        const order = paginatedOrders.orders.find((o: any) => o.id === orderId);
+        const item = order.order_items.find((i: any) => i.product.id === productId);
+        if (item && item.quantity > 0) {
+          item.quantity -= 1;
+          item.sub_total = item.quantity * item.product.price;
+          this.updateOrderTotal(order);
+          this.orderService.updateOrder(orderId, order).subscribe(() => this.saveOrdersToLocalStorage());
+        }
+      },
+      error: (err) => {
+        console.error('Erro ao buscar pedido por ID:', err);
+      }
+    });
+  }
+
+  updateOrderTotal(order: Order): void {
+    order.total = order.order_items.reduce((sum, item) => sum + item.sub_total, 0);
   }
 
   getProducts(order: Order) {
