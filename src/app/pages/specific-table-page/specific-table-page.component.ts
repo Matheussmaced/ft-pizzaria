@@ -36,43 +36,71 @@ export class SpecificTablePageComponent implements OnInit {
               private orderService: OrderService
              ) {}
 
-      ngOnInit(): void {
-        this.route.params.subscribe(params => {
-        this.tableId = params['tableId'];
-        console.log('Mesa selecionada:', this.tableId);
-        });
+   ngOnInit(): void {
+    // Obter os parâmetros da rota
+    this.route.params.subscribe(params => {
+      this.tableId = params['tableId'];
+      console.log('Mesa selecionada:', this.tableId);
+    });
 
-        this.productService.getCategories().subscribe((data: any[]) => {
-          this.categories = data.map(category => ({
-            id: category.id,
-            name: category.category,
-            visible: false,
-            snacks: category.snacks.map((snack: Snacks) => ({
-              ...snack,
-              amount: 0
-            }))
-       }));
-      });
+    // Carregar categorias
+    this.productService.getCategories().subscribe((data: any[]) => {
+      this.categories = data.map(category => ({
+        id: category.id,
+        name: category.category,
+        visible: false,
+        snacks: category.snacks.map((snack: Snacks) => ({
+          ...snack,
+          amount: 0 // Inicializar quantidade com 0
+        }))
+      }));
 
-     // Recuperar pedido acumulado do localStorage, se existir
+      // Após as categorias serem carregadas, tente recuperar o pedido acumulado
       const savedOrder = localStorage.getItem('currentOrder');
       if (savedOrder) {
-      this.accumulatedOrder = JSON.parse(savedOrder);
-     }
+        this.accumulatedOrder = JSON.parse(savedOrder);
+        console.log('Pedido recuperado do localStorage:', this.accumulatedOrder);
+
+        // Atualizar as quantidades de snacks com base no pedido
+        this.updateCategoryAmounts();
+      }
+    });
+  }
+
+  // Atualizar as quantidades dos produtos com base no pedido acumulado
+  updateCategoryAmounts(): void {
+    this.accumulatedOrder.order_items.forEach(item => {
+      const snack = this.findSnackByProductId(item.product_id);
+      if (snack) {
+        snack.amount = item.quantity;
+      }
+    });
+  }
+
+  // Encontrar o produto pelo id
+  findSnackByProductId(productId: string): Snacks | undefined {
+    for (let category of this.categories) {
+      const snack = category.snacks.find(snack => String(snack.id) === productId);
+      if (snack) return snack;
     }
+    return undefined;
+  }
 
   toggleMenu(categoryIndex: number): void {
     this.categories[categoryIndex].visible = !this.categories[categoryIndex].visible;
   }
 
   plusValue(categoryIndex: number, snackIndex: number): void {
-    this.categories[categoryIndex].snacks[snackIndex].amount += 1;
+    const snack = this.categories[categoryIndex].snacks[snackIndex];
+    snack.amount += 1;
+    this.updateOrderInLocalStorage(); // Atualizar o pedido no localStorage
   }
 
   minusValue(categoryIndex: number, snackIndex: number): void {
     const snack = this.categories[categoryIndex].snacks[snackIndex];
     if (snack.amount > 0) {
       snack.amount -= 1;
+      this.updateOrderInLocalStorage(); // Atualizar o pedido no localStorage
     } else {
       alert("Não é possível diminuir");
     }
@@ -104,15 +132,16 @@ export class SpecificTablePageComponent implements OnInit {
       return;
     }
 
-    // Atualizar o pedido acumulado
+    // Atualizar o pedido acumulado, substituindo a quantidade existente, sem somar
     newOrderItems.forEach(newItem => {
       const existingItem = this.accumulatedOrder.order_items.find(
         item => item.product_id === newItem.product_id
       );
 
       if (existingItem) {
-        existingItem.quantity += newItem.quantity;
-        existingItem.sub_total += newItem.sub_total;
+        // Atualiza a quantidade e subtotal corretamente
+        existingItem.quantity = newItem.quantity;
+        existingItem.sub_total = newItem.sub_total;
       } else {
         this.accumulatedOrder.order_items.push(newItem);
       }
@@ -121,8 +150,8 @@ export class SpecificTablePageComponent implements OnInit {
     this.accumulatedOrder.total += newTotal;
     this.accumulatedOrder.title = `Venda mesa ${this.tableId}`;
 
-    // Salvar pedido no localStorage
-    localStorage.setItem('currentOrder', JSON.stringify(this.accumulatedOrder));
+    // Salvar pedido atualizado no localStorage
+    this.updateOrderInLocalStorage();
     alert('Pedido adicionado com sucesso!');
   }
 
@@ -147,5 +176,10 @@ export class SpecificTablePageComponent implements OnInit {
         alert('Erro ao enviar pedido!');
       }
     });
+  }
+
+  // Função para atualizar o pedido no localStorage
+  updateOrderInLocalStorage(): void {
+    localStorage.setItem('currentOrder', JSON.stringify(this.accumulatedOrder));
   }
 }
