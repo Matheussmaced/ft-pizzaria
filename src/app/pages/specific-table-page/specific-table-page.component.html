@@ -23,7 +23,7 @@
         </span>
 
         <div class="value-and-buttons">
-          <span class="product-span">R$ {{ product.price }},00</span>
+          <span class="product-span">R$ {{ formatPrice(product.price) }}</span>
 
           <div class="buttons">
            <button class="minus" (click)="minusValue(i, j)"> - </button>

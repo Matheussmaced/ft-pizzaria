@@ -194,6 +194,10 @@ export class SpecificTablePageComponent implements OnInit {
     this.accumulatedOrder.total = this.accumulatedOrder.order_items.reduce((sum, item) => sum + item.sub_total, 0);
   }
 
+  formatPrice(price: number): string {
+    return price.toFixed(2).replace('.', ',');
+  }
+
   finalizeOrder(): void {
     const orderData = localStorage.getItem(`currentOrder_${this.tableId}`);
     if (!orderData) {
