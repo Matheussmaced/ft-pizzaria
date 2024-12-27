@@ -36,4 +36,13 @@ export class TableReportComponent {
   showMoreTables(): void {
     this.visibleTables += 7;
   }
+
+  hasPendingOrders(tableId: number): boolean {
+    const savedOrder = localStorage.getItem(`currentOrder_${tableId}`);
+    if (savedOrder) {
+      const order = JSON.parse(savedOrder);
+      return order.order_items.length > 0;
+    }
+    return false;
+  }
 }

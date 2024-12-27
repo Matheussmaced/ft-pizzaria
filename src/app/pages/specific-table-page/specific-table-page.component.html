@@ -16,22 +16,39 @@
     </div>
 
     <div *ngIf="showPizzaSizes" class="size-buttons">
-      <app-pizza-size-container
-        size="PEQUENA"
-        (click)="selectPizzaSize('PEQUENA')">
-      </app-pizza-size-container>
-      <app-pizza-size-container
-        size="MÉDIA"
-        (click)="selectPizzaSize('MÉDIA')">
-      </app-pizza-size-container>
-      <app-pizza-size-container
-        size="GRANDE"
-        (click)="selectPizzaSize('GRANDE')">
-      </app-pizza-size-container>
-      <app-pizza-size-container
-        size="FAMÍLIA"
-        (click)="selectPizzaSize('FAMÍLIA')">
-      </app-pizza-size-container>
+      <app-pizza-size-container size="PEQUENA" (click)="selectPizzaSize('P')"></app-pizza-size-container>
+      <app-pizza-size-container size="MÉDIA" (click)="selectPizzaSize('M')"></app-pizza-size-container>
+      <app-pizza-size-container size="GRANDE" (click)="selectPizzaSize('G')"></app-pizza-size-container>
+      <app-pizza-size-container size="FAMÍLIA" (click)="selectPizzaSize('FAM')"></app-pizza-size-container>
+    </div>
+
+    <div *ngFor="let category of categoriesPizza; let i = index" class="menu-pizza">
+      <div class="container-title">
+        <span>{{ category.name }}</span>
+        <lucide-icon name="circle-chevron-down" size="24" (click)="togglePizzaMenu(i)" class="icon-toggle"></lucide-icon>
+      </div>
+
+      <div *ngIf="category.visible">
+        <div *ngFor="let product of category.snacks; let j = index" class="product">
+          <span class="informations-product">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+          </span>
+
+          <div class="value-and-buttons">
+            <span class="product-span">R$ {{ formatPrice(product.price) }}</span>
+
+            <div class="buttons">
+              <button class="minus" (click)="minusValuePizza(i, j)"> - </button>
+              <span class="value">{{ product.amount }}</span>
+              <button class="plus" (click)="plusValuePizza(i, j)"> + </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showNoPizzasMessage && pizzas.length === 0 && selectedPizzaSize" class="no-pizzas">
+      <p>Nenhuma pizza encontrada para o tamanho selecionado.</p>
     </div>
   </div>
 

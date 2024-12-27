@@ -54,6 +54,17 @@ export class ProductsService {
     return this.http.get<Snacks[]>(`${environment.apiUrl}/v1/products?id=${idProduct}&type=snack`)
   }
 
+  getPizzaBySize(size: string): Observable<any[]> {
+    const authToken = localStorage.getItem('authToken');
+    let headers = new HttpHeaders();
+
+    if (authToken) {
+      headers = headers.set('Authorization', `Bearer ${authToken}`);
+    }
+
+    return this.http.get<any[]>(`${environment.apiUrl}/v1/products?type=snack&page=1&tam=${size}`, { headers })
+  }
+
   addProduct(createItemDto: CreateItemDTO): Observable<Snacks> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

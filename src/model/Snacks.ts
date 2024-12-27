@@ -6,5 +6,6 @@ export interface Snacks {
   quentatity?: number,
   unit?: string,
   amount: number,
-  category_id?: string
+  category_id?: string,
+  category?: string
 }

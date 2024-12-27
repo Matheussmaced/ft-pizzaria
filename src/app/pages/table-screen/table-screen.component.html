@@ -22,7 +22,11 @@
           <app-buttons-table
             [numberTable]="table.numberTable"
             [routerLink]="['/specific-table-screen', table.numberTable]"
-            [queryParams]="{ tableId: table.numberTable }">
+            [queryParams]="{ tableId: table.numberTable }"
+            [ngClass]="{
+              'pending-order': hasPendingOrders(table.numberTable),
+              'green-border': !hasPendingOrders(table.numberTable)
+            }">
           </app-buttons-table>
         </ng-container>
       </div>

@@ -4,9 +4,13 @@ div{
   display: flex;
   justify-content: center;
 
-  border: solid 1px $color-secondary-green-light;
+
   border-radius: 10px;
   cursor: pointer;
+
+  &.pending-order {
+    border: solid 1.5px $color-secondary-red;
+  }
 }
 
 button{

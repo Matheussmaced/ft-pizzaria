@@ -47,7 +47,15 @@
   width: 12rem;
 }
 
+.pending-order {
+  border: solid 1.5px $color-secondary-red;
+  border-radius: 10px;
+}
 
+.green-border {
+  border: solid 1px $color-secondary-green-light;
+  border-radius: 10px;
+}
 
 .buttons-container {
   margin: 4rem auto 0 auto;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HeaderPagesComponent } from "../../components/header-pages/header-pages.component";
 import { SideMenuComponent } from '../../components/side-menu/side-menu.component';
 import { CustomIconsModule } from '../../modules/custom-icons/custom-icons.module';
@@ -12,6 +12,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CreateOrderDTO } from '../../../DTO/createOrderDTO';
 import { OrderService } from '../../services/order.service';
 import { PizzaSizeContainerComponent } from '../../components/pizza-size-container/pizza-size-container.component';
+import { CategoryPizza } from '../../../model/CategoryPizza';
 
 @Component({
   selector: 'app-specific-table-page',
@@ -23,10 +24,13 @@ import { PizzaSizeContainerComponent } from '../../components/pizza-size-contain
 })
 export class SpecificTablePageComponent implements OnInit {
   categories: Category[] = [];
+  categoriesPizza: any[] = [];
+  showNoPizzasMessage: boolean = false;
   tableId!: number;
 
   showPizzaSizes: boolean = false;
   selectedPizzaSize: string = '';
+  pizzas: any[] = [];
 
   accumulatedOrder: CreateOrderDTO = {
     total: 0,
@@ -36,7 +40,8 @@ export class SpecificTablePageComponent implements OnInit {
 
   constructor(private productService: ProductsService,
               private route: ActivatedRoute,
-              private orderService: OrderService
+              private orderService: OrderService,
+              private cdr: ChangeDetectorRef
              ) {}
 
   ngOnInit(): void {
@@ -48,6 +53,12 @@ export class SpecificTablePageComponent implements OnInit {
 
     this.loadCategories();
     this.loadOrderForTable();
+
+    setTimeout(() => {
+      if (this.pizzas.length === 0 && this.selectedPizzaSize) {
+        this.showNoPizzasMessage = true; // Exibe a mensagem após 3 segundos
+      }
+    }, 3000);
 
     // Carregar categorias
     this.productService.getCategories().subscribe((data: any[]) => {
@@ -90,6 +101,27 @@ export class SpecificTablePageComponent implements OnInit {
     });
   }
 
+  loadCategoriesThePizzas(size: string): void {
+    this.productService.getPizzaBySize(size).subscribe((data: any[]) => {
+      this.categoriesPizza = data.map(category => ({
+        id: category.id,
+        name: category.category,
+        visible: false,
+        snacks: category.snacks.map((snack: Snacks) => ({
+          ...snack,
+          amount: 0,
+          description: snack.description,
+          price: snack.price,
+        }))
+      }));
+
+      this.updateCategoryAmounts();
+      console.log(this.categoriesPizza);
+
+      this.cdr.detectChanges();
+    });
+  }
+
   loadOrderForTable(): void {
     const savedOrder = localStorage.getItem(`currentOrder_${this.tableId}`);
     if (savedOrder) {
@@ -114,7 +146,6 @@ export class SpecificTablePageComponent implements OnInit {
     });
   }
 
-  // Encontrar o produto pelo id
   findSnackByProductId(productId: string): Snacks | undefined {
     for (let category of this.categories) {
       const snack = category.snacks.find(snack => String(snack.id) === productId);
@@ -127,13 +158,17 @@ export class SpecificTablePageComponent implements OnInit {
     this.categories[categoryIndex].visible = !this.categories[categoryIndex].visible;
   }
 
+  togglePizzaMenu(index: number) {
+    this.categoriesPizza[index].visible = !this.categoriesPizza[index].visible;
+  }
+
   togglePizzaSizes(): void {
     this.showPizzaSizes = !this.showPizzaSizes;
   }
 
   selectPizzaSize(size: string): void {
     this.selectedPizzaSize = size;
-    console.log('Tamanho de pizza selecionado:', this.selectedPizzaSize);
+    this.loadCategoriesThePizzas(size);
   }
 
   plusValue(categoryIndex: number, snackIndex: number): void {
@@ -157,14 +192,55 @@ export class SpecificTablePageComponent implements OnInit {
   }
 
   minusValue(categoryIndex: number, snackIndex: number): void {
-    const snack = this.categories[categoryIndex].snacks[snackIndex];  // Corrigido 'snack' para 'snacks'
+    const snack = this.categories[categoryIndex].snacks[snackIndex];
     if (snack.amount > 0) {
       snack.amount -= 1;
 
       const existingItem = this.accumulatedOrder.order_items.find(item => item.product_id === String(snack.id));
       if (existingItem) {
         if (snack.amount === 0) {
-          // Remove o item se a quantidade for 0
+          this.accumulatedOrder.order_items = this.accumulatedOrder.order_items.filter(item => item.product_id !== String(snack.id));
+        } else {
+          existingItem.quantity = snack.amount;
+          existingItem.sub_total = snack.amount * snack.price;
+        }
+      }
+
+      this.updateTotal();
+      this.updateOrderInLocalStorage();
+    } else {
+      alert("Não é possível diminuir abaixo de zero.");
+    }
+  }
+
+  plusValuePizza(categoryIndex: number, snackIndex: number): void {
+    const snack = this.categoriesPizza[categoryIndex].snacks[snackIndex];
+    snack.amount += 1;
+
+    const existingItem = this.accumulatedOrder.order_items.find(item => item.product_id === String(snack.id));
+    if (existingItem) {
+      existingItem.quantity = snack.amount;
+      existingItem.sub_total = snack.amount * snack.price;
+    } else {
+      this.accumulatedOrder.order_items.push({
+        product_id: String(snack.id),
+        quantity: snack.amount,
+        sub_total: snack.amount * snack.price
+      });
+    }
+
+    this.updateTotal();
+    this.updateOrderInLocalStorage();
+  }
+
+  minusValuePizza(categoryIndex: number, snackIndex: number): void {
+    const snack = this.categoriesPizza[categoryIndex].snacks[snackIndex];
+    if (snack.amount > 0) {
+      snack.amount -= 1;
+
+      const existingItem = this.accumulatedOrder.order_items.find(item => item.product_id === String(snack.id));
+      if (existingItem) {
+        if (snack.amount === 0) {
           this.accumulatedOrder.order_items = this.accumulatedOrder.order_items.filter(item => item.product_id !== String(snack.id));
         } else {
           existingItem.quantity = snack.amount;

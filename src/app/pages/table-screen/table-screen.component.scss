@@ -13,6 +13,16 @@
     justify-content: center;
   }
 
+  .pending-order {
+    border: solid 1.5px $color-secondary-red;
+    border-radius: 10px;
+  }
+
+  .green-border {
+    border: solid 1px $color-secondary-green-light;
+    border-radius: 10px;
+  }
+
   .header{
     display: flex;
     justify-content: center;
