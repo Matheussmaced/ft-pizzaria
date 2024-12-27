@@ -19,11 +19,20 @@ export class AddingSnacksMenuComponent implements OnInit {
   categories: Category[] = [];
   modal:boolean = false;
 
+  showSizeSelect: boolean = false;
+  pizzaSizes: { value: string; label: string }[] = [
+    { value: 'P', label: 'Pequena' },
+    { value: 'M', label: 'Média' },
+    { value: 'G', label: 'Grande' },
+    { value: 'FAM', label: 'Família' },
+  ];
+
   formData = {
     name: '',
-    categoryId: '', // Alterei para categoryId com 'Id' maiúsculo
+    categoryId: '',
     description: '',
     price: 0,
+    tam: '',
   };
 
   constructor ( private productsService: ProductsService ) {}
@@ -56,6 +65,14 @@ export class AddingSnacksMenuComponent implements OnInit {
     this.modal = false;
   }
 
+  onCategoryChange(): void {
+    const selectedCategory = this.categories.find(
+      category => String(category.id) === String(this.formData.categoryId)
+    );
+
+    this.showSizeSelect = selectedCategory?.name.toLowerCase().includes('pizza') || false;
+  }
+
   onSubmit(): void {
     const selectedCategory = this.categories.find(
       (category) => String(category.id) === String(this.formData.categoryId) // Usei categoryId aqui
@@ -71,8 +88,9 @@ export class AddingSnacksMenuComponent implements OnInit {
       name: this.formData.name,
       description: this.formData.description,
       price: this.formData.price,
-      is_snack: 1, // Fixando como lanche
-      category_id: this.formData.categoryId, // Aqui também usei categoryId
+      is_snack: 1,
+      category_id: this.formData.categoryId,
+      tam: this.formData.tam,
     };
 
     console.log('Enviando os seguintes dados para o backend:', createItemDto);
@@ -82,8 +100,8 @@ export class AddingSnacksMenuComponent implements OnInit {
         console.log('Produto adicionado com sucesso:', response);
 
         selectedCategory.snacks.push({
-          ...response, // O backend retorna o snack completo, incluindo o ID
-          amount: 0, // Garante que o campo 'amount' seja inicializado
+          ...response,
+          amount: 0,
         });
 
         alert('Produto adicionado com sucesso!');

@@ -12,6 +12,16 @@
 
           <label for="#">PREÇO</label>
           <input type="number" placeholder="Insira o preço aqui" [(ngModel)]="formData.price" name="price" />
+
+          <div *ngIf="showSizeSelect">
+            <label for="size">TAMANHO</label>
+            <select [(ngModel)]="formData.size" name="size">
+              <option value="P">P</option>
+              <option value="M">M</option>
+              <option value="G">G</option>
+              <option value="FAM">FAM</option>
+            </select>
+          </div>
         </div>
 
         <div class="buttons-container">

@@ -11,11 +11,12 @@ import { Snacks } from '../../../model/Snacks';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CreateOrderDTO } from '../../../DTO/createOrderDTO';
 import { OrderService } from '../../services/order.service';
+import { PizzaSizeContainerComponent } from '../../components/pizza-size-container/pizza-size-container.component';
 
 @Component({
   selector: 'app-specific-table-page',
   standalone: true,
-  imports: [HeaderPagesComponent, SideMenuComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, RouterLink],
+  imports: [HeaderPagesComponent, SideMenuComponent, PizzaSizeContainerComponent, CustomIconsModule, CommonModule, ButtonHeaderComponent, HttpClientModule, RouterLink],
   templateUrl: './specific-table-page.component.html',
   styleUrls: ['./specific-table-page.component.scss'],
   providers: [ProductsService]
@@ -23,6 +24,9 @@ import { OrderService } from '../../services/order.service';
 export class SpecificTablePageComponent implements OnInit {
   categories: Category[] = [];
   tableId!: number;
+
+  showPizzaSizes: boolean = false;
+  selectedPizzaSize: string = '';
 
   accumulatedOrder: CreateOrderDTO = {
     total: 0,
@@ -121,6 +125,15 @@ export class SpecificTablePageComponent implements OnInit {
 
   toggleMenu(categoryIndex: number): void {
     this.categories[categoryIndex].visible = !this.categories[categoryIndex].visible;
+  }
+
+  togglePizzaSizes(): void {
+    this.showPizzaSizes = !this.showPizzaSizes;
+  }
+
+  selectPizzaSize(size: string): void {
+    this.selectedPizzaSize = size;
+    console.log('Tamanho de pizza selecionado:', this.selectedPizzaSize);
   }
 
   plusValue(categoryIndex: number, snackIndex: number): void {

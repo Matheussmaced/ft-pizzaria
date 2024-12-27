@@ -9,6 +9,32 @@
     <app-button-header nameButton="RELATÓRIO" [routerLink]="['/specific-desk-report', tableId]"></app-button-header>
   </div>
 
+  <div class="menu">
+    <div class="container-title">
+      <span>Pizzas</span>
+      <lucide-icon name="circle-chevron-down" size="24" (click)="togglePizzaSizes()" class="icon-toggle"></lucide-icon>
+    </div>
+
+    <div *ngIf="showPizzaSizes" class="size-buttons">
+      <app-pizza-size-container
+        size="PEQUENA"
+        (click)="selectPizzaSize('PEQUENA')">
+      </app-pizza-size-container>
+      <app-pizza-size-container
+        size="MÉDIA"
+        (click)="selectPizzaSize('MÉDIA')">
+      </app-pizza-size-container>
+      <app-pizza-size-container
+        size="GRANDE"
+        (click)="selectPizzaSize('GRANDE')">
+      </app-pizza-size-container>
+      <app-pizza-size-container
+        size="FAMÍLIA"
+        (click)="selectPizzaSize('FAMÍLIA')">
+      </app-pizza-size-container>
+    </div>
+  </div>
+
   <div *ngFor="let category of categories; let i = index" class="menu">
     <div class="container-title">
       <span>{{ category.name }}</span>

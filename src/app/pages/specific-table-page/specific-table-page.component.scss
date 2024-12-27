@@ -75,6 +75,13 @@
   width: 6rem;
 }
 
+.size-buttons{
+  display: flex;
+  align-items: center;
+
+  justify-content: space-evenly;
+}
+
 .menu{
   width: 60%;
   margin: 0.8rem auto;
@@ -194,6 +201,10 @@
   .btn-final{
     display: flex;
     justify-content: center;
+  }
+
+  .size-buttons{
+    justify-content: space-around ;
   }
 
   .informations-product{

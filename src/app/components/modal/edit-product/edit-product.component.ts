@@ -22,6 +22,8 @@ export class EditProductComponent {
   @Input() productId = "";
   @Input() categodyId = "";
 
+  showSizeSelect: boolean = false;
+
   categories: Category[] = [];
   modal:boolean = false;
 
@@ -33,6 +35,7 @@ export class EditProductComponent {
     categoryId: '',
     description: '',
     price: 0,
+    size: ''
   };
 
   constructor ( private productsService: ProductsService, private cdr: ChangeDetectorRef ) {}
@@ -72,6 +75,7 @@ export class EditProductComponent {
                 categoryId: this.categodyId,
                 description: snack.description || '',
                 price: snack.price || 0,
+                size: snack.size || ''
               };
             }
           } else {
@@ -88,6 +92,13 @@ export class EditProductComponent {
       console.error('ID do produto não foi fornecido.');
       alert('Erro: ID do produto não especificado.');
     }
+  }
+
+  onCategoryChange(categoryName: string): void {
+    const pizzaKeywords = ["pizzas tradicional", "pizzas", "pizzas especiais"];
+    this.showSizeSelect = pizzaKeywords.some(keyword =>
+      categoryName.toLowerCase().includes(keyword)
+    );
   }
 
 
@@ -110,6 +121,7 @@ export class EditProductComponent {
       price: this.formData.price,
       is_snack: 1,
       category_id: this.categodyId,
+      size: this.formData.size
     };
 
     console.log('Enviando os seguintes dados para o backend:', editItemDto);

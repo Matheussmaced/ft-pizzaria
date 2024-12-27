@@ -4,4 +4,5 @@ export interface EditItemDTO {
   price?: number;
   is_snack: number;
   category_id: string;
+  size : string
 }

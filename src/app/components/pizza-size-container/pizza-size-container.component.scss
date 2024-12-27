@@ -1,0 +1,49 @@
+@import '../../../theme/variables.scss';
+
+main{
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+
+  border: solid 1px $color-white;
+  padding: 1rem 0.5rem;
+  gap: 1rem;
+
+  margin-top: 1rem;
+
+  cursor: pointer;
+
+  transition: 0.4s;
+
+  &:hover{
+    border: solid 1px $color-secondary-green-light;
+    color: $color-secondary-green-light;
+  }
+
+  span{
+    text-align: center;
+  }
+}
+
+.icon{
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  border-bottom: 1px solid $color-white;
+
+  lucide-icon{
+    margin-bottom: 0.4rem;
+  }
+}
+
+@media (max-width: 720px){
+  main{
+    width: 5.5rem;
+    padding: 0.7rem 0.3rem !important;
+
+    span{
+      font-size: 0.75rem;
+    }
+  }
+}

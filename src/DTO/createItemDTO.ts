@@ -4,4 +4,5 @@ export interface CreateItemDTO {
   price: number;
   is_snack: number;
   category_id: string;
+  tam?: string;
 }
