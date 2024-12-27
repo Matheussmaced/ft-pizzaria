@@ -47,9 +47,6 @@
         </div>
       </div>
     </div>
-    <div *ngIf="showNoPizzasMessage && pizzas.length === 0 && selectedPizzaSize" class="no-pizzas">
-      <p>Nenhuma pizza encontrada para o tamanho selecionado.</p>
-    </div>
   </div>
 
   <div *ngFor="let category of categories; let i = index" class="menu">

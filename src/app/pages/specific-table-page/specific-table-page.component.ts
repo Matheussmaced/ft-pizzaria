@@ -25,7 +25,6 @@ import { CategoryPizza } from '../../../model/CategoryPizza';
 export class SpecificTablePageComponent implements OnInit {
   categories: Category[] = [];
   categoriesPizza: any[] = [];
-  showNoPizzasMessage: boolean = false;
   tableId!: number;
 
   showPizzaSizes: boolean = false;
@@ -53,12 +52,6 @@ export class SpecificTablePageComponent implements OnInit {
 
     this.loadCategories();
     this.loadOrderForTable();
-
-    setTimeout(() => {
-      if (this.pizzas.length === 0 && this.selectedPizzaSize) {
-        this.showNoPizzasMessage = true; // Exibe a mensagem após 3 segundos
-      }
-    }, 3000);
 
     // Carregar categorias
     this.productService.getCategories().subscribe((data: any[]) => {
