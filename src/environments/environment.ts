@@ -1,4 +1,4 @@
 export const environment = {
   product: false,
-  apiUrl: "https://sistema-ft-garcon.onrender.com/api"
+  apiUrl: "https://sistema-garcon.onrender.com/api"
 }
